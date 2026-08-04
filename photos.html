@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photos — Luc Ousmane</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 100px;
+      padding: 24px var(--padding-xxxl);
+    }
+
+    .photos-cell {
+      position: relative;
+      height: 217px;
+    }
+
+    .photos-cell img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    .photos-grid-mobile { display: none; }
+
+    @media (max-width: 767px) {
+      .photos-grid { display: none; }
+
+      .photos-grid-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+        padding: 24px;
+      }
+      .photos-grid-mobile .photos-cell { height: 211px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <img class="avatar" src="assets/avatar.jpg" alt="Luc Ousmane">
+        <span class="name">Luc Ousmane</span>
+        <span class="role">Creative Designer</span>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="index.html">Projects</a>
+        <a href="about.html">Resume</a>
+        <a href="photos.html">Photography</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="#contact">
+          <img src="assets/chat-icon.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <img class="avatar-sm" src="assets/avatar.jpg" alt="Luc Ousmane">
+          <span class="name-sm">Luc Ousmane</span>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <img id="mobile-menu-icon" src="assets/plus-icon.svg" alt="">
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="index.html">Projects</a>
+          <a href="about.html">Resume</a>
+          <a href="photos.html">Photography</a>
+        </nav>
+        <a class="mobile-menu-chat" href="#contact">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <!-- Desktop grid: 5 columns -->
+    <div class="photos-grid">
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-1.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-2.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-3.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-4.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-5.jpg" alt=""></div>
+
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-6.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-7.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-8.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-9.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-10.jpg" alt=""></div>
+
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-11.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-12.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-13.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-14.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-15.jpg" alt=""></div>
+
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-16.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-17.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-18.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-19.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-20.jpg" alt=""></div>
+
+      <div class="photos-cell">
+        <img class="fade-img" src="assets/photos/desktop-21.png" alt="">
+        <img class="fade-img" src="assets/photos/desktop-22.jpg" alt="">
+      </div>
+      <div class="photos-cell">
+        <img class="fade-img" src="assets/photos/desktop-21.png" alt="">
+        <img class="fade-img" src="assets/photos/desktop-23.jpg" alt="">
+      </div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-24.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-25.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-26.jpg" alt=""></div>
+
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-27.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-28.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-29.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-30.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-31.jpg" alt=""></div>
+
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-32.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-33.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-34.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-35.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-36.jpg" alt=""></div>
+
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-37.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-38.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-39.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-40.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-41.jpg" alt=""></div>
+    </div>
+
+    <!-- Mobile grid: single column -->
+    <div class="photos-grid-mobile">
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-1.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-2.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-3.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-4.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-5.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-6.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-7.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-8.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-9.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-10.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-11.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-12.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-13.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-14.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-15.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-16.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-17.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-18.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-19.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-20.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-21.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-22.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-23.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-24.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-25.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-26.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-27.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-28.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-29.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-30.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-31.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-30.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-32.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-33.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-34.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-35.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-36.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-37.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-38.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-39.jpg" alt=""></div>
+      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-40.jpg" alt=""></div>
+    </div>
+
+    <footer>
+      <span class="clock"><span id="clock-time"></span> CET</span>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // continuous scroll-linked fade: each photo's opacity reflects how close
+    // a row is fully opaque as long as it's comfortably inside the viewport;
+    // it only starts fading once it gets within FADE_ZONE px of the top edge
+    // (about to slide under the header) or the bottom edge (not yet fully
+    // scrolled into view), reaching 0 right at the edge. Recalculated every
+    // scroll frame, so it's fully reversible in both directions.
+    const fadeEls = document.querySelectorAll('.fade-img');
+    const FADE_ZONE = 180;
+
+    function updateFade() {
+      const viewportH = window.innerHeight;
+      fadeEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+
+        let opacity = 1;
+        if (center < FADE_ZONE) {
+          opacity = Math.max(0, center / FADE_ZONE);
+        } else if (center > viewportH - FADE_ZONE) {
+          opacity = Math.max(0, (viewportH - center) / FADE_ZONE);
+        }
+        el.style.opacity = opacity;
+      });
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateFade();
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateFade();
+  </script>
+</body>
+</html>

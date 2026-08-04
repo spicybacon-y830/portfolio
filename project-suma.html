@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suma — Luc Ousmane</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .project-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+      padding: 48px;
+    }
+
+    .project-text-col {
+      position: sticky;
+      top: 128px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      /* flex-grow:0 - never grows past 565px, only shrinks on narrower
+         screens, so the extra space on wide screens all goes to the images */
+      flex: 0 1 565px;
+      min-width: 280px;
+      max-width: 565px;
+    }
+
+    .project-description {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+      text-align: justify;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .project-meta .tag {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+      color: var(--color-text-muted);
+    }
+    .project-meta .link {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 21.6px;
+      color: var(--color-text-muted);
+    }
+
+    .project-visuals-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      /* flex-grow:1 - absorbs all leftover width on large screens instead
+         of leaving empty space next to the (capped) text column */
+      flex: 1 1 565px;
+      min-width: 300px;
+    }
+    .project-visuals-col img {
+      width: 100%;
+      display: block;
+    }
+
+    /* mobile: normal stacked flow, text is not sticky */
+    .project-body-mobile { display: none; }
+
+    @media (max-width: 767px) {
+      .project-body { display: none; }
+
+      .project-body-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        padding: 24px;
+      }
+      .project-text-col-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .project-description-mobile {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 21.6px;
+        text-align: justify;
+      }
+      .project-meta-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+      }
+      .project-meta-mobile .tag,
+      .project-meta-mobile .link {
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 21.6px;
+        color: var(--color-text-muted);
+      }
+      .project-visuals-col-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .project-visuals-col-mobile img {
+        width: 100%;
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <img class="avatar" src="assets/avatar.jpg" alt="Luc Ousmane">
+        <span class="name">Luc Ousmane</span>
+        <span class="role">Creative Designer</span>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="index.html">Projects</a>
+        <a href="about.html">Resume</a>
+        <a href="photos.html">Photography</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="#contact">
+          <img src="assets/chat-icon.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <img class="avatar-sm" src="assets/avatar.jpg" alt="Luc Ousmane">
+          <span class="name-sm">Luc Ousmane</span>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <img id="mobile-menu-icon" src="assets/plus-icon.svg" alt="">
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="index.html">Projects</a>
+          <a href="about.html">Resume</a>
+          <a href="photos.html">Photography</a>
+        </nav>
+        <a class="mobile-menu-chat" href="#contact">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <!-- Desktop: two columns, left text sticky, right visuals scroll -->
+    <div class="project-body">
+      <div class="project-text-col">
+        <p class="project-description">Suma is a SaaS project created to explore how AI can transform the recruitment process. I wanted to design a tool that uses AI to generate shortlists, assess soft skills through interactive experiences, provide users with powerful AI agents and deliver data-driven insights. The goal was to create a platform that looks trustworthy, feels modern, and communicates innovation without losing its human touch.</p>
+        <div class="project-meta">
+          <span class="tag">UI/UX</span>
+          <a class="link" href="https://suma.io" target="_blank" rel="noopener">suma.io</a>
+        </div>
+      </div>
+      <div class="project-visuals-col">
+        <img src="assets/project-suma/visual-1.png" alt="">
+        <img src="assets/project-suma/visual-2.png" alt="">
+        <img src="assets/project-suma/visual-3.png" alt="">
+        <img src="assets/project-suma/visual-4.png" alt="">
+        <img src="assets/project-suma/visual-5.png" alt="">
+      </div>
+    </div>
+
+    <!-- Mobile: normal stacked flow -->
+    <div class="project-body-mobile">
+      <div class="project-text-col-mobile">
+        <p class="project-description-mobile">Suma is a SaaS project created to explore how AI can transform the recruitment process. I wanted to design a tool that uses AI to generate shortlists, assess soft skills through interactive experiences, provide users with powerful AI agents and deliver data-driven insights. The goal was to create a platform that looks trustworthy, feels modern, and communicates innovation without losing its human touch.</p>
+        <div class="project-meta-mobile">
+          <span class="tag">UI/UX</span>
+          <a class="link" href="https://suma.io" target="_blank" rel="noopener">suma.io</a>
+        </div>
+      </div>
+      <div class="project-visuals-col-mobile">
+        <img src="assets/project-suma/visual-1.png" alt="">
+        <img src="assets/project-suma/visual-2.png" alt="">
+        <img src="assets/project-suma/visual-3.png" alt="">
+        <img src="assets/project-suma/visual-4.png" alt="">
+        <img src="assets/project-suma/visual-5.png" alt="">
+      </div>
+    </div>
+
+    <footer>
+      <span class="clock"><span id="clock-time"></span> CET</span>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luc Ousmane — Creative Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ══════════ DESKTOP MARQUEE (scroll-driven) ══════════ */
+    .marquee-desktop-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      /* no justify-content:center here on purpose: the track is always wider
+         than the viewport, so centering it just pre-shifts the resting
+         position left by (trackWidth-viewportWidth)/2 - combined with the
+         scroll wrap, that pushed the visible window past the end of the
+         track's duplicated content and exposed blank background */
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .marquee-desktop-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      will-change: transform;
+    }
+
+    /* ══════════ MARQUEE CARDS (project brand covers) ══════════
+       All internal element sizes are percentages of the card's own box
+       (or use height:auto to inherit the asset's intrinsic ratio) rather
+       than fixed px - the exact same markup/classes render correctly at
+       any card size, so desktop and mobile reuse identical HTML. */
+    .marquee-card {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .marquee-card.in { opacity: 1; transform: translateY(0); }
+
+    .marquee-desktop-track .marquee-card { width: 696px; height: 447px; flex-shrink: 0; }
+
+    .marquee-card .bg-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-suma { background: #0b0b0b; }
+
+    .card-yetty { background: #d9e6fa; }
+    .yetty-blob-wrap {
+      position: absolute;
+      left: -26.78%;
+      top: 39.92%;
+      width: 75.75%;
+      height: 120.18%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .yetty-blob { width: 85.78%; height: auto; display: block; transform: rotate(10.16deg); }
+    .yetty-logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 70.78%;
+    }
+    .yetty-logo img { width: 100%; display: block; }
+
+    .card-paymium { background: #ffffff; }
+    .paymium-graphic {
+      position: absolute;
+      left: 48.206%;
+      top: 42.706%;
+      transform: translate(-50%, -50%);
+      width: 103.59%;
+      height: auto;
+    }
+    .paymium-coin {
+      position: absolute;
+      left: 40.724%;
+      top: 103.94%;
+      transform: translate(-50%, -50%);
+      width: 164.13%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .pixid-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.18); }
+    .pixid-logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 18.8%;
+      height: auto;
+    }
+
+    .card-chift { background: #042225; }
+
+    .card-primo { background: #f7f7f7; }
+
+    .card-koala { background: #e8f2f8; display: flex; align-items: center; justify-content: center; }
+    .koala-logo { width: 35.42%; height: auto; }
+
+    /* ══════════ MOBILE MARQUEE (native page scroll) ══════════ */
+    .marquee-mobile { display: none; flex-direction: column; gap: 8px; padding: 16px; }
+    .marquee-mobile .marquee-card { width: 100%; aspect-ratio: 354 / 237.86; }
+
+    /* lock native page scroll on desktop: the wheel-driven marquee owns vertical input */
+    @media (min-width: 768px) {
+      html, body { height: 100%; overflow: hidden; }
+    }
+
+    @media (max-width: 767px) {
+      .page { min-height: auto; }
+      .marquee-desktop-wrap { display: none; }
+      .marquee-mobile { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <img class="avatar" src="assets/avatar.jpg" alt="Luc Ousmane">
+        <span class="name">Luc Ousmane</span>
+        <span class="role">Creative Designer</span>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="index.html">Projects</a>
+        <a href="about.html">Resume</a>
+        <a href="photos.html">Photography</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="#contact">
+          <img src="assets/chat-icon.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <img class="avatar-sm" src="assets/avatar.jpg" alt="Luc Ousmane">
+          <span class="name-sm">Luc Ousmane</span>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <img id="mobile-menu-icon" src="assets/plus-icon.svg" alt="">
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="index.html">Projects</a>
+          <a href="about.html">Resume</a>
+          <a href="photos.html">Photography</a>
+        </nav>
+        <a class="mobile-menu-chat" href="#contact">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <!-- Desktop marquee: horizontal, driven by vertical scroll input -->
+    <div class="marquee-desktop-wrap">
+      <div class="marquee-desktop-track" id="marquee-desktop-track" data-unique-count="9">
+        <a class="marquee-card card-suma" href="project-suma.html">
+          <img class="bg-cover" src="assets/home-marquee/suma.jpg" alt="Suma">
+        </a>
+        <a class="marquee-card card-yetty" href="project-yetty.html">
+          <div class="yetty-blob-wrap"><img class="yetty-blob" src="assets/home-marquee/yetty-blob.svg" alt=""></div>
+          <div class="yetty-logo"><img src="assets/home-marquee/yetty-union.svg" alt="Yetty"></div>
+        </a>
+        <a class="marquee-card card-paymium" href="project-paymium.html">
+          <img class="paymium-graphic" src="assets/home-marquee/paymium-graphic.svg" alt="Paymium">
+          <img class="paymium-coin" src="assets/home-marquee/coin.png" alt="">
+        </a>
+        <a class="marquee-card card-pixid" href="project-pixid.html">
+          <img class="bg-cover" src="assets/home-marquee/pixid-bg.jpg" alt="Pixid">
+          <div class="pixid-overlay"></div>
+          <img class="pixid-logo" src="assets/home-marquee/pixid-logo.svg" alt="">
+        </a>
+        <a class="marquee-card card-yampa" href="project-yampa.html">
+          <img class="bg-cover" src="assets/home-marquee/yampa.jpg" alt="Yampa">
+        </a>
+        <a class="marquee-card card-chift" href="project-chift.html">
+          <img class="bg-cover" src="assets/home-marquee/chift-card.jpg" alt="Chift">
+        </a>
+        <a class="marquee-card card-primo" href="project-primo.html">
+          <img class="bg-cover" src="assets/home-marquee/primo-card.jpg" alt="Primo">
+        </a>
+        <a class="marquee-card card-koala" href="project-koala.html">
+          <img class="koala-logo" src="assets/home-marquee/koala-logo.svg" alt="Koala">
+        </a>
+        <a class="marquee-card card-grc" href="project-grc.html">
+          <img class="bg-cover" src="assets/home-marquee/grc.jpg" alt="GRC">
+        </a>
+
+        <a class="marquee-card card-suma" href="project-suma.html">
+          <img class="bg-cover" src="assets/home-marquee/suma.jpg" alt="Suma">
+        </a>
+        <a class="marquee-card card-yetty" href="project-yetty.html">
+          <div class="yetty-blob-wrap"><img class="yetty-blob" src="assets/home-marquee/yetty-blob.svg" alt=""></div>
+          <div class="yetty-logo"><img src="assets/home-marquee/yetty-union.svg" alt="Yetty"></div>
+        </a>
+        <a class="marquee-card card-paymium" href="project-paymium.html">
+          <img class="paymium-graphic" src="assets/home-marquee/paymium-graphic.svg" alt="Paymium">
+          <img class="paymium-coin" src="assets/home-marquee/coin.png" alt="">
+        </a>
+        <a class="marquee-card card-pixid" href="project-pixid.html">
+          <img class="bg-cover" src="assets/home-marquee/pixid-bg.jpg" alt="Pixid">
+          <div class="pixid-overlay"></div>
+          <img class="pixid-logo" src="assets/home-marquee/pixid-logo.svg" alt="">
+        </a>
+        <a class="marquee-card card-yampa" href="project-yampa.html">
+          <img class="bg-cover" src="assets/home-marquee/yampa.jpg" alt="Yampa">
+        </a>
+        <a class="marquee-card card-chift" href="project-chift.html">
+          <img class="bg-cover" src="assets/home-marquee/chift-card.jpg" alt="Chift">
+        </a>
+        <a class="marquee-card card-primo" href="project-primo.html">
+          <img class="bg-cover" src="assets/home-marquee/primo-card.jpg" alt="Primo">
+        </a>
+        <a class="marquee-card card-koala" href="project-koala.html">
+          <img class="koala-logo" src="assets/home-marquee/koala-logo.svg" alt="Koala">
+        </a>
+        <a class="marquee-card card-grc" href="project-grc.html">
+          <img class="bg-cover" src="assets/home-marquee/grc.jpg" alt="GRC">
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile marquee: same 9 cards as desktop, stacked in normal flow, native page scroll -->
+    <div class="marquee-mobile">
+      <a class="marquee-card card-suma" href="project-suma.html">
+        <img class="bg-cover" src="assets/home-marquee/suma.jpg" alt="Suma">
+      </a>
+      <a class="marquee-card card-yetty" href="project-yetty.html">
+        <div class="yetty-blob-wrap"><img class="yetty-blob" src="assets/home-marquee/yetty-blob.svg" alt=""></div>
+        <div class="yetty-logo"><img src="assets/home-marquee/yetty-union.svg" alt="Yetty"></div>
+      </a>
+      <a class="marquee-card card-paymium" href="project-paymium.html">
+        <img class="paymium-graphic" src="assets/home-marquee/paymium-graphic.svg" alt="Paymium">
+        <img class="paymium-coin" src="assets/home-marquee/coin.png" alt="">
+      </a>
+      <a class="marquee-card card-pixid" href="project-pixid.html">
+        <img class="bg-cover" src="assets/home-marquee/pixid-bg.jpg" alt="Pixid">
+        <div class="pixid-overlay"></div>
+        <img class="pixid-logo" src="assets/home-marquee/pixid-logo.svg" alt="">
+      </a>
+      <a class="marquee-card card-yampa" href="project-yampa.html">
+        <img class="bg-cover" src="assets/home-marquee/yampa.jpg" alt="Yampa">
+      </a>
+      <a class="marquee-card card-chift" href="project-chift.html">
+        <img class="bg-cover" src="assets/home-marquee/chift-card.jpg" alt="Chift">
+      </a>
+      <a class="marquee-card card-primo" href="project-primo.html">
+        <img class="bg-cover" src="assets/home-marquee/primo-card.jpg" alt="Primo">
+      </a>
+      <a class="marquee-card card-koala" href="project-koala.html">
+        <img class="koala-logo" src="assets/home-marquee/koala-logo.svg" alt="Koala">
+      </a>
+      <a class="marquee-card card-grc" href="project-grc.html">
+        <img class="bg-cover" src="assets/home-marquee/grc.jpg" alt="GRC">
+      </a>
+    </div>
+
+    <footer>
+      <span class="clock"><span id="clock-time"></span> CET</span>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // desktop marquee: horizontal scroll driven by vertical scroll input
+    const track = document.getElementById('marquee-desktop-track');
+    let loopWidth = 0;
+    let target = 0;
+    let current = 0;
+
+    const uniqueCount = Number(track.dataset.uniqueCount);
+
+    function measureLoopWidth() {
+      // measure the real distance to the first duplicated image rather than
+      // scrollWidth/(copies): with an odd number of gaps, dividing scrollWidth
+      // lands a few px short of the true repeat period, which put the wrap
+      // point mid-gap and flashed a sliver of background at the seam
+      const children = track.children;
+      loopWidth = children[uniqueCount].offsetLeft - children[0].offsetLeft;
+    }
+    measureLoopWidth();
+    window.addEventListener('resize', measureLoopWidth);
+
+    // start with Yampa centered in the viewport rather than Suma flush left
+    const yampaCard = track.querySelector('.card-yampa');
+    if (yampaCard) {
+      const yampaCenter = yampaCard.offsetLeft + yampaCard.offsetWidth / 2;
+      const startPosition = yampaCenter - window.innerWidth / 2;
+      current = startPosition;
+      target = startPosition;
+      track.style.transform = `translateX(${-startPosition}px)`;
+    }
+
+    const isDesktop = () => window.matchMedia('(min-width: 768px)').matches;
+
+    // cap a single wheel tick so a momentum-scroll spike can't fling the target far ahead
+    const MAX_DELTA = 120;
+    // trackpad momentum scrolling often ends with a tiny, sometimes reversed-sign
+    // "settle" blip as the gesture decays to zero - without a floor, that blip
+    // nudges target the opposite way for a frame and reads as a little bounce
+    const MIN_DELTA = 2;
+    // same slight speed reduction as the site-wide wheel scroll in script.js,
+    // kept in sync for a consistent feel across pages
+    const SCROLL_SPEED = 0.95;
+
+    // target/current are deliberately NOT wrapped into [0, loopWidth) here -
+    // they accumulate the true, unbounded scroll distance. Wrapping them per
+    // event was the cause of the "bounce": during a fast scroll burst, target
+    // could cross the wrap point several times between two animation frames,
+    // and comparing two already-wrapped values made the "shortest path" logic
+    // occasionally decide the closest way to the (aliased) target was
+    // backwards, reversing the marquee for a frame. Unbounded accumulators
+    // make target-current a plain, unambiguous distance - the wrap is only
+    // applied once, at the very end, purely for display.
+    window.addEventListener('wheel', (e) => {
+      if (isDesktop()) e.preventDefault();
+      if (Math.abs(e.deltaY) < MIN_DELTA) return;
+      const delta = Math.max(-MAX_DELTA, Math.min(MAX_DELTA, e.deltaY * SCROLL_SPEED));
+      target += delta;
+    }, { passive: false });
+
+    // frame-rate independent easing: uses elapsed time instead of a fixed
+    // per-frame step, so a stalled/throttled tab (e.g. backgrounded) catches
+    // back up smoothly on the next frame instead of jumping or stuttering
+    const EASE_PER_SECOND = 0.92;
+    let lastTimestamp = null;
+
+    function animateMarquee(timestamp) {
+      if (lastTimestamp === null) lastTimestamp = timestamp;
+      const dt = Math.min((timestamp - lastTimestamp) / 1000, 0.25); // clamp huge gaps after a stall
+      lastTimestamp = timestamp;
+
+      const diff = target - current;
+      const ease = 1 - Math.pow(1 - EASE_PER_SECOND, dt);
+      current += diff * ease;
+
+      // re-anchor both accumulators by the same whole number of loops once
+      // they grow large, so they never lose float precision over a long
+      // session - this never changes their difference, so motion is unaffected
+      if (loopWidth && Math.abs(current) > loopWidth * 1000) {
+        const loops = Math.floor(current / loopWidth) * loopWidth;
+        current -= loops;
+        target -= loops;
+      }
+
+      const displayX = loopWidth ? ((current % loopWidth) + loopWidth) % loopWidth : 0;
+      track.style.transform = `translateX(${-displayX}px)`;
+      requestAnimationFrame(animateMarquee);
+    }
+    requestAnimationFrame(animateMarquee);
+
+    // fade the cards in on arrival, staggered by their position among the
+    // 9 unique projects (desktop's duplicated second set reuses the same
+    // stagger so it doesn't read as a delayed straggler)
+    document.querySelectorAll('.marquee-card').forEach((card, i) => {
+      card.style.transitionDelay = `${(i % 9) * 60}ms`;
+    });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.marquee-card').forEach((card) => card.classList.add('in'));
+      });
+    });
+  </script>
+</body>
+</html>

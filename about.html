@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Luc Ousmane</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .about-hero-desktop, .about-hero-mobile {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .about-hero-desktop { height: 639px; }
+    .about-hero-mobile { display: none; height: 420px; }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 80px;
+      padding: var(--padding-xxxl);
+      min-height: 570px;
+    }
+
+    .about-intro-block {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 520px;
+    }
+
+    .about-intro-text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .about-intro-text p {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+    }
+
+    .about-links { display: flex; gap: 6px; flex-wrap: wrap; }
+    .about-links a, .muted { color: rgba(11, 11, 11, 0.3); }
+
+    .about-currently { font-weight: 400; font-size: 16px; line-height: 21.6px; display: flex; gap: 4px; }
+
+    .about-chat-mobile {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 21.6px;
+    }
+    .about-chat-mobile img { width: 16px; height: 16px; }
+
+    .about-experience { display: flex; flex-direction: column; gap: 8px; }
+    .about-exp-row { display: flex; flex-direction: column; }
+    .about-exp-title { display: flex; gap: 4px; font-size: 16px; line-height: 21.6px; }
+    .about-exp-title .company { font-weight: 400; }
+    .about-exp-title .role { font-weight: 300; }
+    .about-exp-date { font-weight: 300; font-size: 12px; line-height: 21.6px; color: rgba(11, 11, 11, 0.3); }
+
+    .about-resume {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+      width: fit-content;
+    }
+    .about-resume img { width: 20px; height: 20px; }
+
+    @media (max-width: 767px) {
+      .about-hero-desktop { display: none; }
+      .about-hero-mobile { display: block; }
+
+      .about-content {
+        gap: 32px;
+        padding: 24px;
+        min-height: 0;
+      }
+      .about-intro-block { gap: 24px; max-width: none; }
+      .about-intro-text p { font-size: 12px; line-height: 21.6px; }
+      .about-currently { font-size: 12px; }
+      .about-chat-mobile { display: flex; }
+      .about-exp-title { font-size: 12px; }
+      .about-exp-date { font-size: 12px; }
+      .about-resume { font-size: 12px; }
+      .about-resume img { width: 16px; height: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <img class="avatar" src="assets/avatar.jpg" alt="Luc Ousmane">
+        <span class="name">Luc Ousmane</span>
+        <span class="role">Creative Designer</span>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="index.html">Projects</a>
+        <a href="about.html">Resume</a>
+        <a href="photos.html">Photography</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="#contact">
+          <img src="assets/chat-icon.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <img class="avatar-sm" src="assets/avatar.jpg" alt="Luc Ousmane">
+          <span class="name-sm">Luc Ousmane</span>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <img id="mobile-menu-icon" src="assets/plus-icon.svg" alt="">
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="index.html">Projects</a>
+          <a href="about.html">Resume</a>
+          <a href="photos.html">Photography</a>
+        </nav>
+        <a class="mobile-menu-chat" href="#contact">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <img class="about-hero-desktop" src="assets/about-hero-desktop.jpg" alt="Luc Ousmane">
+    <img class="about-hero-mobile" src="assets/about-hero-mobile.jpg" alt="Luc Ousmane">
+
+    <div class="about-content">
+      <div class="about-intro-block">
+        <div class="about-intro-text">
+          <p>Creative designer who does UI/UX, brand and motion design.</p>
+          <p>I'm very keen when it comes to tech, finance, fashion and sports topics.</p>
+          <p class="about-links">
+            <span>Find me on</span>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <span>and</span>
+            <a href="#">X</a>
+          </p>
+        </div>
+        <p class="about-currently"><span>Currently at</span> <a href="#" class="muted">Dafolle.io</a></p>
+      </div>
+
+      <a class="about-chat-mobile" href="#contact">
+        Chat now
+        <img src="assets/arrow-right.svg" alt="">
+      </a>
+
+      <div class="about-experience">
+        <div class="about-exp-row">
+          <p class="about-exp-title"><span class="company">Dafolle</span><span class="role">UI/UX Designer</span></p>
+          <p class="about-exp-date">2026, Paris</p>
+        </div>
+        <div class="about-exp-row">
+          <p class="about-exp-title"><span class="company">KLIMB</span><span class="role">Brand &amp; UI/UX Designer</span></p>
+          <p class="about-exp-date">2025 - 2026, Paris</p>
+        </div>
+        <div class="about-exp-row">
+          <p class="about-exp-title"><span class="company">Hoyoverse</span><span class="role">UX Designer</span></p>
+          <p class="about-exp-date">2021 - 2023, Shanghai</p>
+        </div>
+      </div>
+
+      <a class="about-resume" href="#">
+        My resume
+        <img src="assets/arrow-right.svg" alt="">
+      </a>
+    </div>
+
+    <footer>
+      <span class="clock"><span id="clock-time"></span> CET</span>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

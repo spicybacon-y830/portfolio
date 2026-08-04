@@ -29,7 +29,7 @@ menuToggle.addEventListener('click', () => {
 // wheel) maxScroll is 0 so this stays out of the way entirely. Only wheel
 // input is touched; keyboard, scrollbar drag and touch scrolling stay native.
 (function () {
-  const SCROLL_SPEED = 0.95;
+  const SCROLL_SPEED = 1;
   const EASE_PER_SECOND = 0.92;
 
   let target = window.scrollY;

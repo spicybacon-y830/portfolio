@@ -23,6 +23,18 @@ menuToggle.addEventListener('click', () => {
   menuIcon.src = isOpen ? 'assets/close-icon.svg' : 'assets/plus-icon.svg';
 });
 
+// project pages: back arrow next to the project name. Falls back to its
+// href (index.html) when there's no same-site history to go back to, e.g.
+// the page was opened directly in a new tab.
+document.querySelectorAll('.project-back').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    if (window.history.length > 1 && document.referrer) {
+      e.preventDefault();
+      window.history.back();
+    }
+  });
+});
+
 // site-wide, slightly slower wheel scroll (same SCROLL_SPEED value used by
 // Home's marquee, for a consistent feel). Only kicks in where the page
 // actually has room to scroll - on Home desktop (locked, marquee owns the
@@ -58,6 +70,7 @@ menuToggle.addEventListener('click', () => {
 
   window.addEventListener('wheel', (e) => {
     if (e.ctrlKey) return; // let pinch-zoom pass through untouched
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // let horizontal trackpad swipes (back/forward navigation) pass through untouched
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     if (maxScroll <= 0) return;
 

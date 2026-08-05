@@ -41,6 +41,32 @@
       line-height: 21.6px;
     }
 
+    .project-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transform: rotate(180deg);
+      opacity: 0.5;
+      transition: opacity 0.15s ease;
+    }
+    .project-back:hover {
+      opacity: 1;
+    }
+    .project-back img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
     .project-description {
       font-weight: 400;
       font-size: 16px;
@@ -122,6 +148,28 @@
         font-weight: 400;
         font-size: 12px;
         line-height: 21.6px;
+      }
+
+      .project-heading-row-mobile {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .project-back-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        transform: rotate(180deg);
+        opacity: 0.5;
+      }
+      .project-back-mobile img {
+        width: 13px;
+        height: 13px;
+        display: block;
       }
       .project-description-mobile {
         font-weight: 400;
@@ -220,7 +268,12 @@
     <!-- Desktop: two columns, left text sticky, right visuals scroll -->
     <div class="project-body">
       <div class="project-text-col">
-        <span class="project-eyebrow">GRC</span>
+        <div class="project-heading-row">
+          <a class="project-back" href="index.html" aria-label="Retour">
+            <img src="assets/arrow-right.svg" alt="">
+          </a>
+          <span class="project-eyebrow">GRC</span>
+        </div>
         <p class="project-description">GRC (Gat&eacute;s Running Club) is a community-driven sports club built around fun and inclusivity, bringing together over a thousand members who run, swim, and play padel. It&rsquo;s less about performance than about connecting friends and newcomers through the shared joy of being active. When the club commissioned a new t-shirt collection, I drew on the places GRC members gather &mdash; local parks, urban courts, community pools &mdash; to shape the visual language. The result celebrates the club&rsquo;s spirit: energetic, social, and rooted in the joy of movement.</p>
         <div class="project-credits">
           <span class="label">Credits</span>
@@ -246,7 +299,12 @@
     <!-- Mobile: normal stacked flow -->
     <div class="project-body-mobile">
       <div class="project-text-col-mobile">
-        <span class="project-eyebrow-mobile">GRC</span>
+        <div class="project-heading-row-mobile">
+          <a class="project-back-mobile" href="index.html" aria-label="Retour">
+            <img src="assets/arrow-right.svg" alt="">
+          </a>
+          <span class="project-eyebrow-mobile">GRC</span>
+        </div>
         <p class="project-description-mobile">GRC (Gat&eacute;s Running Club) is a community-driven sports club built around fun and inclusivity, bringing together over a thousand members who run, swim, and play padel. It&rsquo;s less about performance than about connecting friends and newcomers through the shared joy of being active. When the club commissioned a new t-shirt collection, I drew on the places GRC members gather &mdash; local parks, urban courts, community pools &mdash; to shape the visual language. The result celebrates the club&rsquo;s spirit: energetic, social, and rooted in the joy of movement.</p>
         <div class="project-credits-mobile">
           <span class="label">Credits</span>

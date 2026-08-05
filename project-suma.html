@@ -32,6 +32,41 @@
       max-width: 565px;
     }
 
+    .project-eyebrow {
+      display: inline-block;
+      width: fit-content;
+      border-bottom: 0.5px solid var(--color-text);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+    }
+
+    .project-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transform: rotate(180deg);
+      opacity: 0.5;
+      transition: opacity 0.15s ease;
+    }
+    .project-back:hover {
+      opacity: 1;
+    }
+    .project-back img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
     .project-description {
       font-weight: 400;
       font-size: 16px;
@@ -88,6 +123,37 @@
         flex-direction: column;
         gap: 12px;
       }
+      .project-eyebrow-mobile {
+        display: inline-block;
+        width: fit-content;
+        border-bottom: 0.5px solid var(--color-text);
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 21.6px;
+      }
+
+      .project-heading-row-mobile {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .project-back-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        transform: rotate(180deg);
+        opacity: 0.5;
+      }
+      .project-back-mobile img {
+        width: 13px;
+        height: 13px;
+        display: block;
+      }
+
       .project-description-mobile {
         font-weight: 400;
         font-size: 12px;
@@ -167,6 +233,12 @@
     <!-- Desktop: two columns, left text sticky, right visuals scroll -->
     <div class="project-body">
       <div class="project-text-col">
+        <div class="project-heading-row">
+          <a class="project-back" href="index.html" aria-label="Retour">
+            <img src="assets/arrow-right.svg" alt="">
+          </a>
+          <span class="project-eyebrow">Suma</span>
+        </div>
         <p class="project-description">Suma is a SaaS project created to explore how AI can transform the recruitment process. I wanted to design a tool that uses AI to generate shortlists, assess soft skills through interactive experiences, provide users with powerful AI agents and deliver data-driven insights. The goal was to create a platform that looks trustworthy, feels modern, and communicates innovation without losing its human touch.</p>
         <div class="project-meta">
           <span class="tag">UI/UX</span>
@@ -185,6 +257,12 @@
     <!-- Mobile: normal stacked flow -->
     <div class="project-body-mobile">
       <div class="project-text-col-mobile">
+        <div class="project-heading-row-mobile">
+          <a class="project-back-mobile" href="index.html" aria-label="Retour">
+            <img src="assets/arrow-right.svg" alt="">
+          </a>
+          <span class="project-eyebrow-mobile">Suma</span>
+        </div>
         <p class="project-description-mobile">Suma is a SaaS project created to explore how AI can transform the recruitment process. I wanted to design a tool that uses AI to generate shortlists, assess soft skills through interactive experiences, provide users with powerful AI agents and deliver data-driven insights. The goal was to create a platform that looks trustworthy, feels modern, and communicates innovation without losing its human touch.</p>
         <div class="project-meta-mobile">
           <span class="tag">UI/UX</span>

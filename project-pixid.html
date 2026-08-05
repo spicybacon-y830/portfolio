@@ -41,6 +41,32 @@
       line-height: 21.6px;
     }
 
+    .project-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transform: rotate(180deg);
+      opacity: 0.5;
+      transition: opacity 0.15s ease;
+    }
+    .project-back:hover {
+      opacity: 1;
+    }
+    .project-back img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
     .project-description {
       font-weight: 400;
       font-size: 16px;
@@ -122,6 +148,28 @@
         font-weight: 400;
         font-size: 12px;
         line-height: 21.6px;
+      }
+
+      .project-heading-row-mobile {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .project-back-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        transform: rotate(180deg);
+        opacity: 0.5;
+      }
+      .project-back-mobile img {
+        width: 13px;
+        height: 13px;
+        display: block;
       }
       .project-description-mobile {
         font-weight: 400;
@@ -220,7 +268,12 @@
     <!-- Desktop: two columns, left text sticky, right visuals scroll -->
     <div class="project-body">
       <div class="project-text-col">
-        <span class="project-eyebrow">Pixid</span>
+        <div class="project-heading-row">
+          <a class="project-back" href="index.html" aria-label="Retour">
+            <img src="assets/arrow-right.svg" alt="">
+          </a>
+          <span class="project-eyebrow">Pixid</span>
+        </div>
         <p class="project-description">As part of the team at Dafolle, I contributed to the visual identity for PIXID, the European leader in recruitment and temp-staffing software. The challenge was to translate a complex B2B platform &mdash; one juggling enterprises, agencies, and temp workers &mdash; into brand assets that felt as clear and reassuring as the product itself. I helped create a set of visual materials &mdash; slide decks, LinkedIn banners, and social posts &mdash; that carried PIXID&rsquo;s clean, trustworthy tone across every touchpoint, giving a technical, security-first product a human and approachable face.</p>
         <div class="project-credits">
           <span class="label">Credits</span>
@@ -246,7 +299,12 @@
     <!-- Mobile: normal stacked flow -->
     <div class="project-body-mobile">
       <div class="project-text-col-mobile">
-        <span class="project-eyebrow-mobile">Pixid</span>
+        <div class="project-heading-row-mobile">
+          <a class="project-back-mobile" href="index.html" aria-label="Retour">
+            <img src="assets/arrow-right.svg" alt="">
+          </a>
+          <span class="project-eyebrow-mobile">Pixid</span>
+        </div>
         <p class="project-description-mobile">As part of the team at Dafolle, I contributed to the visual identity for PIXID, the European leader in recruitment and temp-staffing software. The challenge was to translate a complex B2B platform &mdash; one juggling enterprises, agencies, and temp workers &mdash; into brand assets that felt as clear and reassuring as the product itself. I helped create a set of visual materials &mdash; slide decks, LinkedIn banners, and social posts &mdash; that carried PIXID&rsquo;s clean, trustworthy tone across every touchpoint, giving a technical, security-first product a human and approachable face.</p>
         <div class="project-credits-mobile">
           <span class="label">Credits</span>

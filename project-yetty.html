@@ -41,6 +41,32 @@
       line-height: 21.6px;
     }
 
+    .project-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transform: rotate(180deg);
+      opacity: 0.5;
+      transition: opacity 0.15s ease;
+    }
+    .project-back:hover {
+      opacity: 1;
+    }
+    .project-back img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
     .project-description {
       font-weight: 400;
       font-size: 16px;
@@ -122,6 +148,28 @@
         font-weight: 400;
         font-size: 12px;
         line-height: 21.6px;
+      }
+
+      .project-heading-row-mobile {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .project-back-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        transform: rotate(180deg);
+        opacity: 0.5;
+      }
+      .project-back-mobile img {
+        width: 13px;
+        height: 13px;
+        display: block;
       }
       .project-description-mobile {
         font-weight: 400;
@@ -220,7 +268,12 @@
     <!-- Desktop: two columns, left text sticky, right visuals scroll -->
     <div class="project-body">
       <div class="project-text-col">
-        <span class="project-eyebrow">Yetty</span>
+        <div class="project-heading-row">
+          <a class="project-back" href="index.html" aria-label="Retour">
+            <img src="assets/arrow-right.svg" alt="">
+          </a>
+          <span class="project-eyebrow">Yetty</span>
+        </div>
         <p class="project-description">Yetty is a French SaaS that helps businesses collect unpaid invoices without straining their client relationships. As part of the design team at Dafolle, I helped build the brand&rsquo;s visual identity from the ground up. The challenge was specific: make a debt-collection product feel warm and approachable instead of cold and adversarial. Our answer was the yeti &mdash; a friendly mascot that gives the brand its name and personality, turning a tense subject (chasing payments) into something human. Thanks to AI creative tools I contributed to the logo, the mascot design, and the supporting brand assets that carry that tone across the product and marketing site. The result is an identity that feels reassuring and distinctly &ldquo;made in the Alps,&rdquo; matching the founders&rsquo; pragmatic, relationship-first approach.</p>
         <div class="project-credits">
           <span class="label">Credits</span>
@@ -247,7 +300,12 @@
     <!-- Mobile: normal stacked flow -->
     <div class="project-body-mobile">
       <div class="project-text-col-mobile">
-        <span class="project-eyebrow-mobile">Yetty</span>
+        <div class="project-heading-row-mobile">
+          <a class="project-back-mobile" href="index.html" aria-label="Retour">
+            <img src="assets/arrow-right.svg" alt="">
+          </a>
+          <span class="project-eyebrow-mobile">Yetty</span>
+        </div>
         <p class="project-description-mobile">Yetty is a French SaaS that helps businesses collect unpaid invoices without straining their client relationships. As part of the design team at Dafolle, I helped build the brand&rsquo;s visual identity from the ground up. The challenge was specific: make a debt-collection product feel warm and approachable instead of cold and adversarial. Our answer was the yeti &mdash; a friendly mascot that gives the brand its name and personality, turning a tense subject (chasing payments) into something human. Thanks to AI creative tools I contributed to the logo, the mascot design, and the supporting brand assets that carry that tone across the product and marketing site. The result is an identity that feels reassuring and distinctly &ldquo;made in the Alps,&rdquo; matching the founders&rsquo; pragmatic, relationship-first approach.</p>
         <div class="project-credits-mobile">
           <span class="label">Credits</span>

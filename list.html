@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index — Luc Ousmane</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .list-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      padding: var(--padding-xxxl);
+    }
+    .list-content a {
+      width: fit-content;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1.3;
+    }
+    .list-content a:hover { text-decoration: underline; }
+
+    @media (max-width: 767px) {
+      .list-content {
+        padding: 24px;
+        gap: 8px;
+      }
+      .list-content a { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <img class="avatar" src="assets/avatar.jpg" alt="Luc Ousmane">
+        <span class="name">Luc Ousmane</span>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="index.html">Projects</a>
+        <a href="about.html">Resume</a>
+        <a href="photos.html">Photography</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <img src="assets/chat-icon.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <img class="avatar-sm" src="assets/avatar.jpg" alt="Luc Ousmane">
+          <span class="name-sm">Luc Ousmane</span>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <img id="mobile-menu-icon" src="assets/plus-icon.svg" alt="">
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="index.html">Projects</a>
+          <a href="about.html">Resume</a>
+          <a href="photos.html">Photography</a>
+          <a href="list.html">Index</a>
+        </nav>
+        <a class="mobile-menu-chat" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <div class="list-content">
+      <a href="project-chift.html">Chift</a>
+      <a href="project-grc.html">GRC</a>
+      <a href="project-koala.html">Koala</a>
+      <a href="project-paymium.html">Paymium</a>
+      <a href="project-pixid.html">Pixid</a>
+      <a href="project-primo.html">Primo</a>
+      <a href="project-suma.html">Suma</a>
+      <a href="project-yampa.html">Yampa</a>
+      <a href="project-yetty.html">Yetty</a>
+    </div>
+
+    <footer>
+      <span class="clock"><span id="clock-time"></span> CET</span>
+      <a class="footer-index" href="list.html">Index</a>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

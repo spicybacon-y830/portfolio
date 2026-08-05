@@ -117,6 +117,7 @@ button { font: inherit; color: inherit; }
 
 /* ══════════ FOOTER ══════════ */
 footer {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -131,6 +132,18 @@ footer {
   line-height: 21.6px;
   color: var(--color-text-muted);
 }
+
+.footer-index {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 21.6px;
+  color: var(--color-text-muted);
+}
+.footer-index:hover { color: var(--color-text); }
 
 /* ══════════ SHARED BREAKPOINT ══════════ */
 @media (max-width: 767px) {
@@ -150,4 +163,5 @@ footer {
     padding: 0 24px;
   }
   .clock, .location { font-size: 12px; }
+  .footer-index { display: none; }
 }

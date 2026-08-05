@@ -14,14 +14,14 @@
   <style>
     .photos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, 200px);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 100px;
       padding: 24px var(--padding-xxxl);
     }
 
     .photos-cell {
       position: relative;
-      height: 217px;
+      aspect-ratio: 200 / 217;
     }
 
     .photos-cell img {

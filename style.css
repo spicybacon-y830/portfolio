@@ -59,10 +59,8 @@ button { font: inherit; color: inherit; }
   font-weight: 400;
   font-size: 16px;
   line-height: 21.6px;
-  color: var(--color-text-muted);
-  transition: color 0.15s ease;
+  color: var(--color-text);
 }
-.header-nav a:hover { color: var(--color-text); }
 
 .chat-link {
   display: flex;
@@ -119,10 +117,8 @@ button { font: inherit; color: inherit; }
   font-weight: 400;
   font-size: 12px;
   line-height: 21.6px;
-  color: var(--color-text-muted);
-  transition: color 0.15s ease;
+  color: var(--color-text);
 }
-.mobile-menu-nav a:hover { color: var(--color-text); }
 .mobile-menu-chat {
   display: flex; align-items: center; gap: 4px;
   font-weight: 400; font-size: 12px; line-height: 21.6px;

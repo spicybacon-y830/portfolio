@@ -290,7 +290,7 @@
     // frame-rate independent easing: uses elapsed time instead of a fixed
     // per-frame step, so a stalled/throttled tab (e.g. backgrounded) catches
     // back up smoothly on the next frame instead of jumping or stuttering
-    const EASE_PER_SECOND = 0.99;
+    const EASE_PER_SECOND = 0.998;
     let lastTimestamp = null;
 
     function animateMarquee(timestamp) {

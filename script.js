@@ -42,7 +42,7 @@ document.querySelectorAll('.project-back').forEach((link) => {
 // input is touched; keyboard, scrollbar drag and touch scrolling stay native.
 (function () {
   const SCROLL_SPEED = 1;
-  const EASE_PER_SECOND = 0.99;
+  const EASE_PER_SECOND = 0.998;
 
   let target = window.scrollY;
   let current = target;

@@ -12,6 +12,9 @@ html, body {
   background: var(--color-background);
   color: var(--color-text);
   font-family: 'Manrope', sans-serif;
+  /* match Figma's thinner grayscale text rendering on macOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   overscroll-behavior-y: none;
 }
@@ -63,7 +66,7 @@ button { font: inherit; color: inherit; }
 /* not enough room next to the centered nav on narrow desktop widths */
 @media (max-width: 999px) { .header-identity .role { display: none; } }
 .header-nav a {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   line-height: 21.6px;
   color: var(--color-text);
@@ -73,7 +76,7 @@ button { font: inherit; color: inherit; }
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   line-height: 21.6px;
 }

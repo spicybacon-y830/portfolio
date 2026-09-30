@@ -101,7 +101,23 @@ button { font: inherit; color: inherit; }
   width: 24px; height: 24px;
   background: none; border: none; padding: 0;
 }
-#mobile-menu-toggle img { width: 100%; height: 100%; display: block; }
+/* "+" drawn in CSS so the vertical bar can spin away into a "−" when open
+   (adapted from Uiverse.io by AbanoubMagdy1) */
+#mobile-menu-toggle { position: relative; cursor: pointer; }
+.menu-line {
+  position: absolute;
+  top: 50%; left: 5px;
+  width: 14px; height: 1px;
+  border-radius: 1px;
+  background: var(--color-text);
+  transform: translateY(-50%);
+  transition: transform .7s cubic-bezier(0, 1, .33, 1.2);
+}
+.menu-line-indicator { transform: translateY(-50%) rotate(90deg); }
+#mobile-menu-toggle[aria-expanded="true"] .menu-line-indicator { transform: translateY(-50%); }
+@media (prefers-reduced-motion: reduce) {
+  .menu-line { transition: none; }
+}
 
 .mobile-menu-panel {
   position: absolute;

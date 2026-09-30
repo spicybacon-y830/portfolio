@@ -15,12 +15,10 @@ setInterval(updateClock, 1000);
 
 // mobile "+" menu toggle
 const menuToggle = document.getElementById('mobile-menu-toggle');
-const menuIcon = document.getElementById('mobile-menu-icon');
 const menuPanel = document.getElementById('mobile-menu-panel');
 menuToggle.addEventListener('click', () => {
   const isOpen = menuPanel.classList.toggle('open');
   menuToggle.setAttribute('aria-expanded', String(isOpen));
-  menuIcon.src = isOpen ? 'assets/close-icon.svg' : 'assets/plus-icon.svg';
 });
 
 // project pages: back arrow next to the project name. Falls back to its

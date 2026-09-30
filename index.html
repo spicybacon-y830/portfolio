@@ -12,6 +12,164 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    /* ══════════ INTRO LOADER (first visit of the session) ══════════ */
+    .intro-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-background);
+      clip-path: inset(0 0 0 0);
+      transition: clip-path .9s cubic-bezier(.76, 0, .24, 1);
+    }
+    /* reveal: the loader is wiped away from the bottom up, led by a white wire */
+    .intro-loader.done { clip-path: inset(0 0 100% 0); pointer-events: none; }
+    .intro-wire {
+      position: fixed;
+      inset: 0;
+      z-index: 101;
+      pointer-events: none;
+      transition: transform .9s cubic-bezier(.76, 0, .24, 1);
+    }
+    .intro-wire::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 2px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(11, 11, 11, .15);
+    }
+    .intro-wire.done { transform: translateY(-100%); }
+    /* lens-scrolling word adapted from Uiverse.io by andrew-manzyk */
+    .intro-word {
+      --main-size: 4em;
+      --intro-text: var(--color-text);
+      --intro-shadow: #c4c4c4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      user-select: none;
+      position: relative;
+      font-family: 'Manrope', sans-serif;
+      font-size: var(--main-size);
+      font-weight: 500;
+      text-transform: none;
+      color: var(--intro-text);
+      width: 7.3em;
+      height: 1em;
+    }
+    .intro-word .text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      overflow: hidden;
+      position: absolute;
+    }
+    .intro-word .text:nth-child(1) {
+      clip-path: polygon(0% 0%, 11.11% 0%, 11.11% 100%, 0% 100%);
+      font-size: calc(var(--main-size) / 20); margin-left: -2.1em; opacity: 0.6;
+    }
+    .intro-word .text:nth-child(2) {
+      clip-path: polygon(11.11% 0%, 22.22% 0%, 22.22% 100%, 11.11% 100%);
+      font-size: calc(var(--main-size) / 16); margin-left: -0.98em; opacity: 0.7;
+    }
+    .intro-word .text:nth-child(3) {
+      clip-path: polygon(22.22% 0%, 33.33% 0%, 33.33% 100%, 22.22% 100%);
+      font-size: calc(var(--main-size) / 13); margin-left: -0.33em; opacity: 0.8;
+    }
+    .intro-word .text:nth-child(4) {
+      clip-path: polygon(33.33% 0%, 44.44% 0%, 44.44% 100%, 33.33% 100%);
+      font-size: calc(var(--main-size) / 11); margin-left: -0.05em; opacity: 0.9;
+    }
+    .intro-word .text:nth-child(5) {
+      clip-path: polygon(44.44% 0%, 55.55% 0%, 55.55% 100%, 44.44% 100%);
+      font-size: calc(var(--main-size) / 10); margin-left: 0em; opacity: 1;
+    }
+    .intro-word .text:nth-child(6) {
+      clip-path: polygon(55.55% 0%, 66.66% 0%, 66.66% 100%, 55.55% 100%);
+      font-size: calc(var(--main-size) / 11); margin-left: 0.05em; opacity: 0.9;
+    }
+    .intro-word .text:nth-child(7) {
+      clip-path: polygon(66.66% 0%, 77.77% 0%, 77.77% 100%, 66.66% 100%);
+      font-size: calc(var(--main-size) / 13); margin-left: 0.33em; opacity: 0.8;
+    }
+    .intro-word .text:nth-child(8) {
+      clip-path: polygon(77.77% 0%, 88.88% 0%, 88.88% 100%, 77.77% 100%);
+      font-size: calc(var(--main-size) / 16); margin-left: 0.98em; opacity: 0.7;
+    }
+    .intro-word .text:nth-child(9) {
+      clip-path: polygon(88.88% 0%, 100% 0%, 100% 100%, 88.88% 100%);
+      font-size: calc(var(--main-size) / 20); margin-left: 2.1em; opacity: 0.6;
+    }
+    .intro-word .text span {
+      animation:
+        intro-scrolling 2s linear infinite,
+        intro-shadow 2s linear infinite;
+    }
+    .intro-word .text:nth-child(1) span {
+      background: linear-gradient(to right, var(--intro-text) 4%, var(--intro-shadow) 7%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro-word .text:nth-child(2) span {
+      background: linear-gradient(to right, var(--intro-text) 9%, var(--intro-shadow) 13%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro-word .text:nth-child(3) span {
+      background: linear-gradient(to right, var(--intro-text) 15%, var(--intro-shadow) 18%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro-word .text:nth-child(4) span {
+      background: linear-gradient(to right, var(--intro-text) 20%, var(--intro-shadow) 23%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro-word .text:nth-child(6) span {
+      background: linear-gradient(to right, var(--intro-shadow) 29%, var(--intro-text) 32%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro-word .text:nth-child(7) span {
+      background: linear-gradient(to right, var(--intro-shadow) 34%, var(--intro-text) 37%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro-word .text:nth-child(8) span {
+      background: linear-gradient(to right, var(--intro-shadow) 39%, var(--intro-text) 42%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro-word .text:nth-child(9) span {
+      background: linear-gradient(to right, var(--intro-shadow) 45%, var(--intro-text) 48%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro-word .line {
+      position: relative;
+      overflow: hidden;
+      height: 0.05em;
+      width: calc(var(--main-size) / 2);
+      margin-top: 0.9em;
+      border-radius: 0.05em;
+    }
+    .intro-word .line::before,
+    .intro-word .line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--intro-text);
+      border-radius: 0.05em;
+    }
+    .intro-word .line::before { opacity: 0.3; }
+    .intro-word .line::after {
+      transform: translateX(-100%);
+      animation: intro-sweep 2s linear infinite;
+    }
+    @keyframes intro-sweep { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+    @keyframes intro-scrolling { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+    @keyframes intro-shadow { from { background-position: -98% 0; } to { background-position: 102% 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .intro-word .text span, .intro-word .line::after { animation: none; }
+    }
+
     /* ══════════ DESKTOP MARQUEE (scroll-driven) ══════════ */
     .marquee-desktop-wrap {
       flex: 1;
@@ -75,6 +233,34 @@
   </style>
 </head>
 <body>
+  <div class="intro-loader" id="intro-loader" aria-hidden="true">
+    <div class="intro-word"><div class="text"><span>Loading</span></div><div class="text"><span>Loading</span></div><div class="text"><span>Loading</span></div><div class="text"><span>Loading</span></div><div class="text"><span>Loading</span></div><div class="text"><span>Loading</span></div><div class="text"><span>Loading</span></div><div class="text"><span>Loading</span></div><div class="text"><span>Loading</span></div><div class="line"></div></div>
+  </div>
+  <div class="intro-wire" id="intro-wire" aria-hidden="true"></div>
+  <script>
+    // intro loader: shown once per session until the page has loaded, then
+    // revealed from the bottom up at the end of a 2s pass of the animation
+    (() => {
+      const loader = document.getElementById('intro-loader');
+      const wire = document.getElementById('intro-wire');
+      const cleanup = () => { loader.remove(); wire.remove(); };
+      let seen = false;
+      try { seen = sessionStorage.getItem('introSeen') === '1'; sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+      if (seen) { cleanup(); return; }
+      const PASS = 2000;
+      const start = performance.now();
+      window.addEventListener('load', () => {
+        const elapsed = performance.now() - start;
+        const wait = Math.max(1, Math.ceil(elapsed / PASS)) * PASS - elapsed;
+        setTimeout(() => {
+          if (matchMedia('(prefers-reduced-motion: reduce)').matches) { cleanup(); return; }
+          loader.classList.add('done');
+          wire.classList.add('done');
+          wire.addEventListener('transitionend', cleanup, { once: true });
+        }, wait);
+      }, { once: true });
+    })();
+  </script>
   <div class="page">
     <!-- Desktop header -->
     <header class="header-desktop">

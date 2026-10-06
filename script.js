@@ -1,5 +1,5 @@
 // theme switch (footer): toggles dark mode on <html> and remembers it.
-// The icon swap is pure CSS (style.css, THEME SWITCH)
+// The icon swap and the reveal are CSS (style.css, THEME SWITCH)
 (function () {
   const root = document.documentElement;
   const button = document.getElementById('theme-switch');
@@ -16,12 +16,22 @@
   // loads in dark mode never spins its switch
   requestAnimationFrame(() => requestAnimationFrame(() => button.classList.add('settled')));
 
-  button.addEventListener('click', () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  function setTheme(next) {
     if (next === 'dark') root.dataset.theme = 'dark';
     else delete root.dataset.theme;
     try { localStorage.setItem('theme', next); } catch (e) {}
     sync();
+  }
+
+  // "reveal": the new theme grows as a circle from the centre of the switch
+  // (--x / --y, read by the ::view-transition-new(root) keyframes)
+  button.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    if (!document.startViewTransition) { setTheme(next); return; }
+    const { left, top, width, height } = button.getBoundingClientRect();
+    root.style.setProperty('--x', `${left + width / 2}px`);
+    root.style.setProperty('--y', `${top + height / 2}px`);
+    document.startViewTransition(() => setTheme(next));
   });
 })();
 

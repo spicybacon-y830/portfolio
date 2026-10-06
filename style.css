@@ -268,6 +268,21 @@ footer {
   .theme-switch.settled .theme-icon { transition: opacity .1s linear !important; }
 }
 
+/* "reveal" page transition: the new theme is clipped to a circle that grows
+   from the switch (--x / --y set in script.js) to cover the viewport */
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) {
+  animation: theme-reveal .65s cubic-bezier(.65, 0, .35, 1);
+  mix-blend-mode: normal;
+}
+@keyframes theme-reveal {
+  from { clip-path: circle(0 at var(--x) var(--y)); }
+  to { clip-path: circle(150% at var(--x) var(--y)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+
 /* ══════════ LINK BUTTON ══════════ */
 /* shadcn "link" button pattern: chevron + label, underline on hover, the
    chevron nudges in the direction it points. Used for "Go back" on project

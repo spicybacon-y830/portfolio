@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
   <title>Luc Ousmane — Creative Designer</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
@@ -41,8 +42,8 @@
       position: absolute;
       left: 0; right: 0; bottom: 0;
       height: 2px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(11, 11, 11, .15);
+      background: var(--intro-wire);
+      box-shadow: 0 0 10px var(--intro-wire-glow);
     }
     .intro-loader.done { transform: translateY(-100%); pointer-events: none; }
     .intro-loader.done .intro-loader-inner { transform: translateY(100%); }
@@ -50,7 +51,7 @@
     .intro-word {
       --main-size: 4em;
       --intro-text: var(--color-text);
-      --intro-shadow: #c4c4c4;
+      --intro-shadow: var(--intro-shadow-color);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -410,7 +411,10 @@
     </div>
 
     <footer>
-      <span class="clock"><span id="clock-time"></span> CET</span>
+      <button class="theme-switch" id="theme-switch" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <span class="theme-switch-icons" aria-hidden="true"><svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg><svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
+        <span class="theme-switch-label">Switch theme</span>
+      </button>
       <a class="footer-index" href="list">Index</a>
       <span class="location">Marseille, France</span>
     </footer>

@@ -206,35 +206,30 @@ footer {
 .footer-index:hover { color: var(--color-text); }
 
 /* ══════════ THEME SWITCH ══════════ */
-/* shadcn secondary sm button. The sun and moon are stacked; the hidden one
-   sits scaled down, blurred and turned 30deg, so a swap reads as a single
+/* icon only, no background, muted like the rest of the footer. The sun
+   and moon are stacked; the hidden one sits scaled down, blurred and turned 30deg, so a swap reads as a single
    clockwise turn into dark and back out of it. Transitions only kick in
    once the page has settled (.settled), so loading in dark never spins. */
 .theme-switch {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  height: 32px;
-  padding: 0 12px;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
   border: none;
-  border-radius: 6px;
-  background: var(--color-secondary);
-  color: var(--color-text);
-  font-family: 'Manrope', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  white-space: nowrap;
-  transition: background-color .15s ease;
+  background: none;
+  color: var(--color-text-muted);
+  transition: color .15s ease;
 }
-.theme-switch:hover { background: var(--color-secondary-hover); }
-.theme-switch:focus-visible { outline: 2px solid var(--color-text-muted); outline-offset: 2px; }
-.theme-switch-icons { position: relative; width: 16px; height: 16px; flex-shrink: 0; }
+.theme-switch:hover { color: var(--color-text); }
+.theme-switch:focus-visible { outline: 1px solid var(--color-text-muted); outline-offset: 2px; border-radius: 4px; }
+.theme-switch-icons { position: relative; width: 20px; height: 20px; flex-shrink: 0; }
 .theme-icon {
   position: absolute;
   inset: 0;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 .theme-icon-moon { opacity: 0; transform: scale(.7) rotate(-30deg); filter: blur(2px); }
 :root[data-theme="dark"] .theme-icon-sun { opacity: 0; transform: scale(.7) rotate(30deg); filter: blur(2px); }
@@ -307,7 +302,6 @@ footer {
     padding: 0 24px;
   }
   .location { font-size: 12px; }
-  .theme-switch { height: 28px; padding: 0 10px; font-size: 12px; }
   .footer-index { display: none; }
   .link-button { font-size: 12px; }
   .back-button { margin-bottom: 4px; }

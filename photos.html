@@ -81,18 +81,28 @@
     }
     .lightbox.open .lightbox-img { transform: none; }
 
-    .lightbox-close, .lightbox-counter {
+    .lightbox-counter {
       position: absolute;
       font-weight: 300;
       font-size: 16px;
       line-height: 21.6px;
     }
+    /* same thin cross as the site's close icon, drawn in currentColor so it
+       can dim on hover */
     .lightbox-close {
+      position: absolute;
+      top: 28px;
+      right: var(--padding-xxl);
+      display: flex;
+      width: 24px;
+      height: 24px;
       background: none;
       border: none;
       padding: 0;
+      color: var(--color-text);
+      transition: color .15s ease;
     }
-    .lightbox-close { top: 29px; right: var(--padding-xxl); }
+    .lightbox-close svg { width: 100%; height: 100%; display: block; }
     .lightbox-counter {
       bottom: 29px;
       left: var(--padding-xxl);
@@ -104,7 +114,7 @@
 
     @media (max-width: 767px) {
       .lightbox { padding: 70px 24px; }
-      .lightbox-close, .lightbox-counter { font-size: 12px; }
+      .lightbox-counter { font-size: 12px; }
       .lightbox-close { top: 24px; right: 24px; }
       .lightbox-counter { bottom: 24px; left: 24px; }
       .lightbox-nav { bottom: 25px; right: 24px; gap: 24px; }
@@ -245,7 +255,7 @@
 
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo" aria-hidden="true">
       <img class="lightbox-img" id="lightbox-img" alt="">
-      <button class="lightbox-close" id="lightbox-close" type="button">Close</button>
+      <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.05 16.95 16.95 7.05M7.05 7.05l9.9 9.9"/></svg></button>
       <span class="lightbox-counter" id="lightbox-counter"></span>
       <div class="lightbox-nav">
         <button class="link-button" id="lightbox-prev" type="button">

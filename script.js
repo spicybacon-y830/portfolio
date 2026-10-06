@@ -21,10 +21,10 @@ menuToggle.addEventListener('click', () => {
   menuToggle.setAttribute('aria-expanded', String(isOpen));
 });
 
-// project pages: back arrow next to the project name. Falls back to its
+// project pages: "Go back" button above the project name. Falls back to its
 // href (index.html) when there's no same-site history to go back to, e.g.
 // the page was opened directly in a new tab.
-document.querySelectorAll('.project-back').forEach((link) => {
+document.querySelectorAll('.back-button').forEach((link) => {
   link.addEventListener('click', (e) => {
     if (window.history.length > 1 && document.referrer) {
       e.preventDefault();

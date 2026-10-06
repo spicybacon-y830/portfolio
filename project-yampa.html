@@ -47,25 +47,6 @@
       gap: 8px;
     }
 
-    .project-back {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      transform: rotate(180deg);
-      opacity: 0.5;
-      transition: opacity 0.15s ease;
-    }
-    .project-back:hover {
-      opacity: 1;
-    }
-    .project-back img {
-      width: 16px;
-      height: 16px;
-      display: block;
-    }
 
     .project-description {
       font-weight: 400;
@@ -156,21 +137,6 @@
         gap: 6px;
       }
 
-      .project-back-mobile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-        transform: rotate(180deg);
-        opacity: 0.5;
-      }
-      .project-back-mobile img {
-        width: 13px;
-        height: 13px;
-        display: block;
-      }
       .project-description-mobile {
         font-weight: 400;
         font-size: 12px;
@@ -270,10 +236,11 @@
     <!-- Desktop: two columns, left text sticky, right visuals scroll -->
     <div class="project-body">
       <div class="project-text-col">
+        <a class="back-button" href="/">
+          <svg class="back-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          Go back
+        </a>
         <div class="project-heading-row">
-          <a class="project-back" href="/" aria-label="Retour">
-            <img src="assets/arrow-right.svg" alt="">
-          </a>
           <span class="project-eyebrow">Yampa</span>
         </div>
         <p class="project-description">I contributed to a redesign of Yampa&rsquo;s homepage &mdash; the landing experience for an enterprise AI platform that runs autonomous customer-relations agents across chat, email, voice, and SMS. The challenge was making something genuinely complex feel clear and trustworthy: Yampa sells autonomy, but enterprise buyers need to feel in control. I helped shape a homepage that leads with confidence rather than jargon, structures a dense product story into a scannable flow, and lets proof &mdash; real client results, security and compliance credentials &mdash; carry the trust. The result reads the way the product wants to feel: capable, in control, and ready for serious teams.</p>
@@ -303,10 +270,11 @@
     <!-- Mobile: normal stacked flow -->
     <div class="project-body-mobile">
       <div class="project-text-col-mobile">
+        <a class="back-button" href="/">
+          <svg class="back-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          Go back
+        </a>
         <div class="project-heading-row-mobile">
-          <a class="project-back-mobile" href="/" aria-label="Retour">
-            <img src="assets/arrow-right.svg" alt="">
-          </a>
           <span class="project-eyebrow-mobile">Yampa</span>
         </div>
         <p class="project-description-mobile">I contributed to a redesign of Yampa&rsquo;s homepage &mdash; the landing experience for an enterprise AI platform that runs autonomous customer-relations agents across chat, email, voice, and SMS. The challenge was making something genuinely complex feel clear and trustworthy: Yampa sells autonomy, but enterprise buyers need to feel in control. I helped shape a homepage that leads with confidence rather than jargon, structures a dense product story into a scannable flow, and lets proof &mdash; real client results, security and compliance credentials &mdash; carry the trust. The result reads the way the product wants to feel: capable, in control, and ready for serious teams.</p>

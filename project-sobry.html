@@ -47,25 +47,6 @@
       gap: 8px;
     }
 
-    .project-back {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      transform: rotate(180deg);
-      opacity: 0.5;
-      transition: opacity 0.15s ease;
-    }
-    .project-back:hover {
-      opacity: 1;
-    }
-    .project-back img {
-      width: 16px;
-      height: 16px;
-      display: block;
-    }
 
     .project-description {
       font-weight: 400;
@@ -156,21 +137,6 @@
         gap: 6px;
       }
 
-      .project-back-mobile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-        transform: rotate(180deg);
-        opacity: 0.5;
-      }
-      .project-back-mobile img {
-        width: 13px;
-        height: 13px;
-        display: block;
-      }
       .project-description-mobile {
         font-weight: 400;
         font-size: 12px;
@@ -270,10 +236,11 @@
     <!-- Desktop: two columns, left text sticky, right visuals scroll -->
     <div class="project-body">
       <div class="project-text-col">
+        <a class="back-button" href="/">
+          <svg class="back-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          Go back
+        </a>
         <div class="project-heading-row">
-          <a class="project-back" href="/" aria-label="Retour">
-            <img src="assets/arrow-right.svg" alt="">
-          </a>
           <span class="project-eyebrow">Sobry</span>
         </div>
         <p class="project-description">Sobry aspires to lead an energetic revolution, embodying modernity, pragmatism, and liberation. The brand aims to break conventions without falling into startup clich&eacute;s, establishing trust in a sector where credibility is paramount. The design direction must balance boldness with seriousness, innovation with realism, and disruption with clarity. The goal is to craft a visual identity that captivates and instills confidence in Sobry&rsquo;s target personas. This identity should convey the brand&rsquo;s seriousness, highlight its value proposition, and reflect a crucial equilibrium between audacity, seriousness, and sectoral innovation. The ultimate aim is to create an identity that harmonizes with their product.</p>
@@ -302,10 +269,11 @@
     <!-- Mobile: normal stacked flow -->
     <div class="project-body-mobile">
       <div class="project-text-col-mobile">
+        <a class="back-button" href="/">
+          <svg class="back-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          Go back
+        </a>
         <div class="project-heading-row-mobile">
-          <a class="project-back-mobile" href="/" aria-label="Retour">
-            <img src="assets/arrow-right.svg" alt="">
-          </a>
           <span class="project-eyebrow-mobile">Sobry</span>
         </div>
         <p class="project-description-mobile">Sobry aspires to lead an energetic revolution, embodying modernity, pragmatism, and liberation. The brand aims to break conventions without falling into startup clich&eacute;s, establishing trust in a sector where credibility is paramount. The design direction must balance boldness with seriousness, innovation with realism, and disruption with clarity. The goal is to craft a visual identity that captivates and instills confidence in Sobry&rsquo;s target personas. This identity should convey the brand&rsquo;s seriousness, highlight its value proposition, and reflect a crucial equilibrium between audacity, seriousness, and sectoral innovation. The ultimate aim is to create an identity that harmonizes with their product.</p>

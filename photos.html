@@ -67,9 +67,12 @@
     }
     html.lightbox-open { overflow: hidden; }
 
+    /* fills the padded box and letterboxes via object-fit, so the displayed
+       size depends only on the viewport - swapping the small thumbnail for
+       the full-size file never changes it */
     .lightbox-img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
@@ -308,17 +311,30 @@
     let current = -1;
     let lastFocus = null;
 
+    const fullCache = new Map();
+    const fullReady = new Set();
+    function loadFull(index) {
+      const i = (index + cells.length) % cells.length;
+      const src = cells[i].querySelector('img').dataset.full;
+      if (!fullCache.has(src)) {
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = src;
+        fullCache.set(src, img.decode().then(() => { fullReady.add(src); return src; }, () => src));
+      }
+      return fullCache.get(src);
+    }
+
     function show(index) {
       current = (index + cells.length) % cells.length;
       const thumb = cells[current].querySelector('img');
       const full = thumb.dataset.full;
-      lightboxImg.src = thumb.currentSrc || thumb.src;
-      if (full !== thumb.getAttribute('src')) {
-        const loader = new Image();
-        const shown = current;
-        loader.onload = () => { if (current === shown) lightboxImg.src = full; };
-        loader.src = full;
-      }
+      const shown = current;
+      lightboxImg.src = fullReady.has(full) ? full : (thumb.currentSrc || thumb.src);
+      loadFull(current).then((src) => { if (current === shown) lightboxImg.src = src; });
+      // warm up the neighbours so Previous / Next swap straight to full size
+      loadFull(current + 1);
+      loadFull(current - 1);
       counter.textContent = `${current + 1} / ${cells.length}`;
     }
 

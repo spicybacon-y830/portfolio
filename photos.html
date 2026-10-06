@@ -36,6 +36,16 @@
       pointer-events: none;
     }
 
+    .fade-img {
+      opacity: 0;
+      transform: translateY(36px) scale(.9);
+      transition: opacity 1s cubic-bezier(.25, 1, .5, 1), transform 1s cubic-bezier(.25, 1, .5, 1);
+    }
+    .fade-img.revealed { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-img { transform: none; transition: opacity .4s ease; }
+    }
+
     @media (max-width: 767px) {
       .photos-grid {
         display: flex;
@@ -132,7 +142,6 @@
       <div class="header-col header-identity">
         <img class="avatar" src="assets/avatar.jpg" alt="Luc Ousmane">
         <span class="name">Luc Ousmane</span>
-        <span class="role">Creative Designer</span>
       </div>
       <nav class="header-col header-nav">
         <a href="/">Work</a>
@@ -278,44 +287,27 @@
 
   <script src="script.js"></script>
   <script>
-    // continuous scroll-linked fade: each photo's opacity reflects how close
-    // a row is fully opaque as long as it's comfortably inside the viewport;
-    // it only starts fading once it gets within FADE_ZONE px of the top edge
-    // (about to slide under the header) or the bottom edge (not yet fully
-    // scrolled into view), reaching 0 right at the edge. Recalculated every
-    // scroll frame, so it's fully reversible in both directions.
-    const fadeEls = document.querySelectorAll('.fade-img');
-    const FADE_ZONE = 180;
+    // reveal on scroll: each photo fades in while scaling up from 90% and
+    // rising 36px, once, the first time it enters the viewport (it doesn't
+    // fade back out). Photos revealed in the same frame (a row) cascade
+    // left to right.
+    const revealEls = document.querySelectorAll('.fade-img');
+    const REVEAL_STAGGER = 70;
 
-    function updateFade() {
-      const viewportH = window.innerHeight;
-      fadeEls.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-
-        let opacity = 1;
-        if (center < FADE_ZONE) {
-          opacity = Math.max(0, center / FADE_ZONE);
-        } else if (center > viewportH - FADE_ZONE) {
-          opacity = Math.max(0, (viewportH - center) / FADE_ZONE);
-        }
-        el.style.opacity = opacity;
-      });
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .forEach((entry, i) => {
+            entry.target.style.transitionDelay = `${i * REVEAL_STAGGER}ms`;
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          });
+      }, { rootMargin: '0px 0px -12% 0px' });
+      revealEls.forEach((el) => revealObserver.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('revealed'));
     }
-
-    let ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        updateFade();
-        ticking = false;
-      });
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    updateFade();
 
     // lightbox: click a photo to view it large. Shows the already-loaded
     // thumbnail straight away and swaps in the full-size file once it's

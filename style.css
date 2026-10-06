@@ -63,8 +63,6 @@ button { font: inherit; color: inherit; }
 
 .name { font-weight: 400; font-size: 16px; line-height: 21.6px; }
 .role { font-weight: 300; font-size: 16px; line-height: 21.6px; color: var(--color-text-muted); white-space: nowrap; }
-/* not enough room next to the centered nav on narrow desktop widths */
-@media (max-width: 999px) { .header-identity .role { display: none; } }
 .header-nav a {
   font-weight: 300;
   font-size: 16px;

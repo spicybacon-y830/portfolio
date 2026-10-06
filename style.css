@@ -181,15 +181,18 @@ footer {
 }
 .footer-index:hover { color: var(--color-text); }
 
-/* ══════════ BACK BUTTON ══════════ */
-/* shadcn "link" button pattern: chevron + label, underline on hover,
-   chevron nudges left */
-.back-button {
+/* ══════════ LINK BUTTON ══════════ */
+/* shadcn "link" button pattern: chevron + label, underline on hover, the
+   chevron nudges in the direction it points. Used for "Go back" on project
+   pages and Previous / Next in the Photos lightbox. */
+.link-button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   width: fit-content;
-  margin-bottom: 8px;
+  background: none;
+  border: none;
+  padding: 0;
   font-family: 'Manrope', sans-serif;
   font-weight: 500;
   font-size: 14px;
@@ -197,17 +200,20 @@ footer {
   color: var(--color-text);
   text-underline-offset: 4px;
 }
-.back-button:hover { text-decoration: underline; }
-.back-button-icon {
+.link-button:hover { text-decoration: underline; }
+.link-button-icon {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
   transition: transform .2s ease;
 }
-.back-button:hover .back-button-icon { transform: translateX(-4px); }
+.link-button:hover .link-button-icon { transform: translateX(-4px); }
+.link-button:hover .link-button-icon-end { transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce) {
-  .back-button-icon { transition: none; }
+  .link-button-icon { transition: none; }
 }
+
+.back-button { margin-bottom: 8px; }
 
 /* ══════════ SHARED BREAKPOINT ══════════ */
 @media (max-width: 767px) {
@@ -228,5 +234,6 @@ footer {
   }
   .clock, .location { font-size: 12px; }
   .footer-index { display: none; }
-  .back-button { font-size: 12px; margin-bottom: 4px; }
+  .link-button { font-size: 12px; }
+  .back-button { margin-bottom: 4px; }
 }

@@ -68,6 +68,7 @@ document.querySelectorAll('.project-back').forEach((link) => {
 
   window.addEventListener('wheel', (e) => {
     if (e.ctrlKey) return; // let pinch-zoom pass through untouched
+    if (document.documentElement.classList.contains('lightbox-open')) return; // Photos lightbox open: page stays put
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // let horizontal trackpad swipes (back/forward navigation) pass through untouched
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     if (maxScroll <= 0) return;

@@ -22,6 +22,9 @@
     .photos-cell {
       position: relative;
       aspect-ratio: 200 / 217;
+      background: none;
+      border: none;
+      padding: 0;
     }
 
     .photos-cell img {
@@ -33,18 +36,79 @@
       pointer-events: none;
     }
 
-    .photos-grid-mobile { display: none; }
-
     @media (max-width: 767px) {
-      .photos-grid { display: none; }
-
-      .photos-grid-mobile {
+      .photos-grid {
         display: flex;
         flex-direction: column;
         gap: 100px;
         padding: 24px;
       }
-      .photos-grid-mobile .photos-cell { height: 211px; }
+      .photos-cell { height: 211px; aspect-ratio: auto; }
+    }
+
+    /* ══════════ LIGHTBOX ══════════ */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px var(--padding-xxxl);
+      background: var(--color-background);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .3s ease, visibility 0s linear .3s;
+    }
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity .3s ease, visibility 0s;
+    }
+    html.lightbox-open { overflow: hidden; }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      transform: scale(.98);
+      transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+    }
+    .lightbox.open .lightbox-img { transform: none; }
+
+    .lightbox-close, .lightbox-counter, .lightbox-nav {
+      position: absolute;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 21.6px;
+    }
+    .lightbox-close, .lightbox-nav button {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .lightbox-close { top: 29px; right: var(--padding-xxl); }
+    .lightbox-counter {
+      bottom: 29px;
+      left: var(--padding-xxl);
+      color: var(--color-text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .lightbox-nav { bottom: 29px; right: var(--padding-xxl); display: flex; gap: 32px; }
+    .lightbox-close:hover, .lightbox-nav button:hover { color: var(--color-text-muted); }
+
+    @media (max-width: 767px) {
+      .lightbox { padding: 70px 24px; }
+      .lightbox-close, .lightbox-counter, .lightbox-nav { font-size: 12px; }
+      .lightbox-close { top: 24px; right: 24px; }
+      .lightbox-counter { bottom: 24px; left: 24px; }
+      .lightbox-nav { bottom: 24px; right: 24px; gap: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lightbox, .lightbox.open, .lightbox-img { transition: none; }
     }
   </style>
 </head>
@@ -95,106 +159,95 @@
       </div>
     </div>
 
-    <!-- Desktop grid: 5 columns -->
+    <!-- 5 columns on desktop, single column on mobile -->
     <div class="photos-grid">
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-1.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-2.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-3.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-4.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-5.jpg" alt=""></div>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 1"><img class="fade-img" src="assets/photos/photo-1.jpg" data-full="assets/photos/full/photo-1.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 2"><img class="fade-img" src="assets/photos/photo-2.jpg" data-full="assets/photos/full/photo-2.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 3"><img class="fade-img" src="assets/photos/photo-3.jpg" data-full="assets/photos/full/photo-3.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 4"><img class="fade-img" src="assets/photos/photo-4.jpg" data-full="assets/photos/full/photo-4.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 5"><img class="fade-img" src="assets/photos/photo-5.jpg" data-full="assets/photos/full/photo-5.jpg" alt="" loading="lazy"></button>
 
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-6.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-7.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-8.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-9.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-10.jpg" alt=""></div>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 6"><img class="fade-img" src="assets/photos/photo-6.jpg" data-full="assets/photos/full/photo-6.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 7"><img class="fade-img" src="assets/photos/photo-7.jpg" data-full="assets/photos/full/photo-7.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 8"><img class="fade-img" src="assets/photos/photo-8.jpg" data-full="assets/photos/full/photo-8.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 9"><img class="fade-img" src="assets/photos/photo-9.jpg" data-full="assets/photos/full/photo-9.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 10"><img class="fade-img" src="assets/photos/photo-10.jpg" data-full="assets/photos/full/photo-10.jpg" alt="" loading="lazy"></button>
 
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-11.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-12.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-13.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-14.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-15.jpg" alt=""></div>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 11"><img class="fade-img" src="assets/photos/photo-11.jpg" data-full="assets/photos/full/photo-11.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 12"><img class="fade-img" src="assets/photos/photo-12.jpg" data-full="assets/photos/full/photo-12.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 13"><img class="fade-img" src="assets/photos/photo-13.jpg" data-full="assets/photos/full/photo-13.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 14"><img class="fade-img" src="assets/photos/photo-14.jpg" data-full="assets/photos/full/photo-14.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 15"><img class="fade-img" src="assets/photos/photo-15.jpg" data-full="assets/photos/full/photo-15.jpg" alt="" loading="lazy"></button>
 
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-16.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-17.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-18.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-19.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-20.jpg" alt=""></div>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 16"><img class="fade-img" src="assets/photos/photo-16.jpg" data-full="assets/photos/full/photo-16.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 17"><img class="fade-img" src="assets/photos/photo-17.jpg" data-full="assets/photos/full/photo-17.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 18"><img class="fade-img" src="assets/photos/photo-18.jpg" data-full="assets/photos/full/photo-18.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 19"><img class="fade-img" src="assets/photos/photo-19.jpg" data-full="assets/photos/full/photo-19.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 20"><img class="fade-img" src="assets/photos/photo-20.jpg" data-full="assets/photos/full/photo-20.jpg" alt="" loading="lazy"></button>
 
-      <div class="photos-cell">
-        <img class="fade-img" src="assets/photos/desktop-21.png" alt="">
-        <img class="fade-img" src="assets/photos/desktop-22.jpg" alt="">
-      </div>
-      <div class="photos-cell">
-        <img class="fade-img" src="assets/photos/desktop-21.png" alt="">
-        <img class="fade-img" src="assets/photos/desktop-23.jpg" alt="">
-      </div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-24.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-25.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-26.jpg" alt=""></div>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 21"><img class="fade-img" src="assets/photos/photo-21.jpg" data-full="assets/photos/full/photo-21.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 22"><img class="fade-img" src="assets/photos/photo-22.jpg" data-full="assets/photos/full/photo-22.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 23"><img class="fade-img" src="assets/photos/photo-23.jpg" data-full="assets/photos/full/photo-23.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 24"><img class="fade-img" src="assets/photos/photo-24.jpg" data-full="assets/photos/full/photo-24.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 25"><img class="fade-img" src="assets/photos/photo-25.jpg" data-full="assets/photos/full/photo-25.jpg" alt="" loading="lazy"></button>
 
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-27.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-28.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-29.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-30.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-31.jpg" alt=""></div>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 26"><img class="fade-img" src="assets/photos/desktop-1.jpg" data-full="assets/photos/full/desktop-1.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 27"><img class="fade-img" src="assets/photos/desktop-2.jpg" data-full="assets/photos/full/desktop-2.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 28"><img class="fade-img" src="assets/photos/desktop-3.jpg" data-full="assets/photos/desktop-3.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 29"><img class="fade-img" src="assets/photos/desktop-4.jpg" data-full="assets/photos/desktop-4.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 30"><img class="fade-img" src="assets/photos/desktop-5.jpg" data-full="assets/photos/desktop-5.jpg" alt="" loading="lazy"></button>
 
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-32.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-33.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-34.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-35.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-36.jpg" alt=""></div>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 31"><img class="fade-img" src="assets/photos/desktop-6.jpg" data-full="assets/photos/desktop-6.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 32"><img class="fade-img" src="assets/photos/desktop-7.jpg" data-full="assets/photos/desktop-7.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 33"><img class="fade-img" src="assets/photos/desktop-8.jpg" data-full="assets/photos/desktop-8.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 34"><img class="fade-img" src="assets/photos/desktop-9.jpg" data-full="assets/photos/desktop-9.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 35"><img class="fade-img" src="assets/photos/desktop-10.jpg" data-full="assets/photos/desktop-10.jpg" alt="" loading="lazy"></button>
 
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-37.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-38.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-39.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-40.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/desktop-41.jpg" alt=""></div>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 36"><img class="fade-img" src="assets/photos/desktop-11.jpg" data-full="assets/photos/desktop-11.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 37"><img class="fade-img" src="assets/photos/desktop-12.jpg" data-full="assets/photos/desktop-12.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 38"><img class="fade-img" src="assets/photos/desktop-13.jpg" data-full="assets/photos/desktop-13.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 39"><img class="fade-img" src="assets/photos/desktop-14.jpg" data-full="assets/photos/desktop-14.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 40"><img class="fade-img" src="assets/photos/desktop-15.jpg" data-full="assets/photos/desktop-15.jpg" alt="" loading="lazy"></button>
+
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 41"><img class="fade-img" src="assets/photos/desktop-16.jpg" data-full="assets/photos/desktop-16.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 42"><img class="fade-img" src="assets/photos/desktop-17.jpg" data-full="assets/photos/desktop-17.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 43"><img class="fade-img" src="assets/photos/desktop-18.jpg" data-full="assets/photos/desktop-18.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 44"><img class="fade-img" src="assets/photos/desktop-19.jpg" data-full="assets/photos/desktop-19.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 45"><img class="fade-img" src="assets/photos/desktop-20.jpg" data-full="assets/photos/desktop-20.jpg" alt="" loading="lazy"></button>
+
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 46"><img class="fade-img" src="assets/photos/desktop-22.jpg" data-full="assets/photos/desktop-22.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 47"><img class="fade-img" src="assets/photos/desktop-23.jpg" data-full="assets/photos/desktop-23.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 48"><img class="fade-img" src="assets/photos/desktop-24.jpg" data-full="assets/photos/desktop-24.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 49"><img class="fade-img" src="assets/photos/desktop-25.jpg" data-full="assets/photos/desktop-25.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 50"><img class="fade-img" src="assets/photos/desktop-26.jpg" data-full="assets/photos/desktop-26.jpg" alt="" loading="lazy"></button>
+
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 51"><img class="fade-img" src="assets/photos/desktop-27.jpg" data-full="assets/photos/desktop-27.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 52"><img class="fade-img" src="assets/photos/desktop-28.jpg" data-full="assets/photos/desktop-28.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 53"><img class="fade-img" src="assets/photos/desktop-29.jpg" data-full="assets/photos/desktop-29.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 54"><img class="fade-img" src="assets/photos/desktop-30.jpg" data-full="assets/photos/desktop-30.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 55"><img class="fade-img" src="assets/photos/desktop-31.jpg" data-full="assets/photos/desktop-31.jpg" alt="" loading="lazy"></button>
+
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 56"><img class="fade-img" src="assets/photos/desktop-32.jpg" data-full="assets/photos/desktop-32.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 57"><img class="fade-img" src="assets/photos/desktop-33.jpg" data-full="assets/photos/desktop-33.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 58"><img class="fade-img" src="assets/photos/desktop-34.jpg" data-full="assets/photos/desktop-34.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 59"><img class="fade-img" src="assets/photos/desktop-35.jpg" data-full="assets/photos/desktop-35.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 60"><img class="fade-img" src="assets/photos/desktop-36.jpg" data-full="assets/photos/desktop-36.jpg" alt="" loading="lazy"></button>
+
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 61"><img class="fade-img" src="assets/photos/desktop-37.jpg" data-full="assets/photos/desktop-37.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 62"><img class="fade-img" src="assets/photos/desktop-38.jpg" data-full="assets/photos/desktop-38.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 63"><img class="fade-img" src="assets/photos/desktop-39.jpg" data-full="assets/photos/desktop-39.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 64"><img class="fade-img" src="assets/photos/desktop-40.jpg" data-full="assets/photos/desktop-40.jpg" alt="" loading="lazy"></button>
+      <button class="photos-cell" type="button" aria-label="Agrandir la photo 65"><img class="fade-img" src="assets/photos/desktop-41.jpg" data-full="assets/photos/desktop-41.jpg" alt="" loading="lazy"></button>
     </div>
 
-    <!-- Mobile grid: single column -->
-    <div class="photos-grid-mobile">
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-1.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-2.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-3.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-4.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-5.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-6.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-7.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-8.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-9.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-10.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-11.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-12.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-13.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-14.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-15.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-16.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-17.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-18.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-19.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-20.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-21.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-22.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-23.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-24.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-25.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-26.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-27.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-28.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-29.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-30.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-31.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-30.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-32.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-33.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-34.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-35.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-36.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-37.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-38.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-39.jpg" alt=""></div>
-      <div class="photos-cell"><img class="fade-img" src="assets/photos/mobile-40.jpg" alt=""></div>
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo" aria-hidden="true">
+      <img class="lightbox-img" id="lightbox-img" alt="">
+      <button class="lightbox-close" id="lightbox-close" type="button">Close</button>
+      <span class="lightbox-counter" id="lightbox-counter"></span>
+      <div class="lightbox-nav">
+        <button id="lightbox-prev" type="button">Previous</button>
+        <button id="lightbox-next" type="button">Next</button>
+      </div>
     </div>
 
     <footer>
@@ -244,6 +297,72 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     updateFade();
+
+    // lightbox: click a photo to view it large. Shows the already-loaded
+    // thumbnail straight away and swaps in the full-size file once it's
+    // downloaded. Arrow keys / swipe to browse, Escape or click to close.
+    const cells = [...document.querySelectorAll('.photos-cell')];
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const counter = document.getElementById('lightbox-counter');
+    let current = -1;
+    let lastFocus = null;
+
+    function show(index) {
+      current = (index + cells.length) % cells.length;
+      const thumb = cells[current].querySelector('img');
+      const full = thumb.dataset.full;
+      lightboxImg.src = thumb.currentSrc || thumb.src;
+      if (full !== thumb.getAttribute('src')) {
+        const loader = new Image();
+        const shown = current;
+        loader.onload = () => { if (current === shown) lightboxImg.src = full; };
+        loader.src = full;
+      }
+      counter.textContent = `${current + 1} / ${cells.length}`;
+    }
+
+    function openLightbox(index) {
+      lastFocus = document.activeElement;
+      show(index);
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('lightbox-open');
+      document.getElementById('lightbox-close').focus({ preventScroll: true });
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('lightbox-open');
+      current = -1;
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    }
+
+    cells.forEach((cell, i) => cell.addEventListener('click', () => openLightbox(i)));
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', () => show(current - 1));
+    document.getElementById('lightbox-next').addEventListener('click', () => show(current + 1));
+    // clicking the backdrop or the photo itself closes it
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target === lightboxImg) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (current < 0) return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') show(current - 1);
+      else if (e.key === 'ArrowRight') show(current + 1);
+    });
+
+    let touchX = null;
+    lightbox.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+    });
   </script>
 </body>
 </html>

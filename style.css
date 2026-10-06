@@ -192,12 +192,11 @@ footer {
   border: none;
   padding: 0;
   font-family: 'Manrope', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 21.6px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
   color: var(--color-text);
   text-underline-offset: 4px;
-  text-decoration-thickness: 0.5px;
 }
 .link-button:hover { text-decoration: underline; }
 .link-button-icon {

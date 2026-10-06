@@ -231,24 +231,42 @@ footer {
   width: 20px;
   height: 20px;
 }
-.theme-icon-moon { opacity: 0; transform: scale(.7) rotate(-30deg); filter: blur(2px); }
-:root[data-theme="dark"] .theme-icon-sun { opacity: 0; transform: scale(.7) rotate(30deg); filter: blur(2px); }
-:root[data-theme="dark"] .theme-icon-moon { opacity: 1; transform: none; filter: none; }
-.theme-switch.settled .theme-icon {
+/* hidden state = exit: quick tween out (standard ease) */
+.theme-icon-moon,
+:root[data-theme="dark"] .theme-icon-sun {
+  opacity: 0;
+  filter: blur(4px);
+  transition: none;
+}
+.theme-icon-moon { transform: scale(.7) rotate(-30deg); }
+:root[data-theme="dark"] .theme-icon-sun { transform: scale(.7) rotate(30deg); }
+/* shown state = enter: rotation and scale ride a snappy spring, opacity and
+   blur tween so the blur never overshoots below zero */
+.theme-icon-sun,
+:root[data-theme="dark"] .theme-icon-moon {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+  transition: none;
+}
+.theme-switch.settled .theme-icon-moon,
+:root[data-theme="dark"] .theme-switch.settled .theme-icon-sun {
   transition:
-    transform .45s cubic-bezier(.34, 1.56, .64, 1),
+    transform .15s cubic-bezier(.4, 0, .2, 1),
+    opacity .15s cubic-bezier(.4, 0, .2, 1),
+    filter .15s cubic-bezier(.4, 0, .2, 1);
+}
+.theme-switch.settled .theme-icon-sun,
+:root[data-theme="dark"] .theme-switch.settled .theme-icon-moon {
+  transition:
+    transform .4s cubic-bezier(.3, 1.4, .6, 1),
     opacity .15s cubic-bezier(0, 0, .2, 1),
     filter .15s cubic-bezier(0, 0, .2, 1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .theme-switch.settled .theme-icon { transition: opacity .1s linear; }
   .theme-icon-moon, :root[data-theme="dark"] .theme-icon-sun { transform: none; filter: none; }
+  .theme-switch.settled .theme-icon { transition: opacity .1s linear !important; }
 }
-
-/* "reveal": the new theme grows as a circle out of the switch (View
-   Transitions API, driven from script.js) */
-::view-transition-old(root),
-::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 
 /* ══════════ LINK BUTTON ══════════ */
 /* shadcn "link" button pattern: chevron + label, underline on hover, the

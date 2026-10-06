@@ -1,6 +1,5 @@
-// theme switch (footer): toggles dark mode on <html>, remembers it, and
-// reveals the new theme as a circle growing out of the button where the
-// View Transitions API is available
+// theme switch (footer): toggles dark mode on <html> and remembers it.
+// The icon swap is pure CSS (style.css, THEME SWITCH)
 (function () {
   const root = document.documentElement;
   const button = document.getElementById('theme-switch');
@@ -12,33 +11,17 @@
     button.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} mode`);
   }
 
-  function apply(theme) {
-    if (theme === 'dark') root.dataset.theme = 'dark';
-    else delete root.dataset.theme;
-    try { localStorage.setItem('theme', theme); } catch (e) {}
-    sync();
-  }
-
   sync();
-  // only animate icon swaps after the first painted frames
+  // only animate icon swaps after the first painted frames, so a page that
+  // loads in dark mode never spins its switch
   requestAnimationFrame(() => requestAnimationFrame(() => button.classList.add('settled')));
 
   button.addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!document.startViewTransition || reduced) { apply(next); return; }
-
-    const rect = button.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-
-    document.startViewTransition(() => apply(next)).ready.then(() => {
-      root.animate(
-        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-        { duration: 650, easing: 'cubic-bezier(.65, 0, .35, 1)', pseudoElement: '::view-transition-new(root)' }
-      );
-    });
+    if (next === 'dark') root.dataset.theme = 'dark';
+    else delete root.dataset.theme;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    sync();
   });
 })();
 

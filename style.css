@@ -96,15 +96,44 @@ button { font: inherit; color: inherit; }
   color: var(--color-text);
 }
 
+/* ReUI "sliding icon button" (c-button-53), without the fill: on hover the
+   label slides left and an arrow slides in from the right. The negative
+   margin cancels the pill's side padding so the label still lines up with
+   the page gutter at rest. */
 .chat-link {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  height: 36px;
+  margin-right: -24px;
+  padding: 0 24px;
+  border-radius: 9999px;
+  overflow: hidden;
   font-weight: 300;
   font-size: 16px;
   line-height: 21.6px;
 }
-.chat-link img { width: 20px; height: 20px; }
+.chat-link-label {
+  display: inline-flex;
+  align-items: center;
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+}
+.chat-link-icon {
+  position: absolute;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+  transform: translateX(32px);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1), opacity .3s cubic-bezier(.4, 0, .2, 1);
+}
+.chat-link:hover .chat-link-label { transform: translateX(-8px); }
+.chat-link:hover .chat-link-icon { opacity: 1; transform: none; }
+.chat-link:focus-visible { outline: 1px solid var(--color-text-muted); outline-offset: -1px; }
+@media (prefers-reduced-motion: reduce) {
+  .chat-link-label, .chat-link-icon { transition: opacity .15s linear; }
+  .chat-link:hover .chat-link-label { transform: none; }
+}
 
 /* ══════════ MOBILE HEADER ══════════ */
 .mobile-header-wrap { display: none; position: relative; width: 100%; }

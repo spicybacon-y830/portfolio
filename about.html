@@ -50,7 +50,21 @@
     .social-button svg { width: 16px; height: 16px; }
     .about-exp-row { display: flex; flex-direction: column; }
     .about-exp-title { display: flex; gap: 4px; font-size: 16px; line-height: 21.6px; }
-    .about-exp-title .company { font-weight: 400; }
+    .about-exp-title .company { position: relative; font-weight: 400; }
+    /* same hover underline as the nav and the Index page links */
+    .about-exp-title .company::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .about-exp-title .company:hover::after { transform: scaleX(1); }
     .about-exp-title .role { font-weight: 300; font-size: inherit; line-height: inherit; color: inherit; }
     .about-exp-date { font-weight: 300; font-size: 12px; line-height: 21.6px; color: var(--color-text-faint); }
 
@@ -122,15 +136,15 @@
     <div class="about-content">
       <div class="about-experience">
         <div class="about-exp-row">
-          <p class="about-exp-title"><span class="company">Dafolle</span><span class="role">UI/UX Designer</span></p>
+          <p class="about-exp-title"><a class="company" href="https://www.dafolle.io/" target="_blank" rel="noopener">Dafolle</a><span class="role">UI/UX Designer</span></p>
           <p class="about-exp-date">2026, Paris</p>
         </div>
         <div class="about-exp-row">
-          <p class="about-exp-title"><span class="company">KLIMB</span><span class="role">Brand &amp; UI/UX Designer</span></p>
+          <p class="about-exp-title"><a class="company" href="https://www.goklimb.com/" target="_blank" rel="noopener">KLIMB</a><span class="role">Brand &amp; UI/UX Designer</span></p>
           <p class="about-exp-date">2025 - 2026, Paris</p>
         </div>
         <div class="about-exp-row">
-          <p class="about-exp-title"><span class="company">Hoyoverse</span><span class="role">UX Designer</span></p>
+          <p class="about-exp-title"><a class="company" href="https://www.hoyoverse.com/fr-fr/" target="_blank" rel="noopener">Hoyoverse</a><span class="role">UX Designer</span></p>
           <p class="about-exp-date">2021 - 2023, Shanghai</p>
         </div>
         <div class="about-socials">

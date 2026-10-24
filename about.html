@@ -49,7 +49,17 @@
     .social-button:focus-visible { outline: 2px solid var(--color-text-muted); outline-offset: 2px; }
     .social-button svg { width: 16px; height: 16px; }
     .about-exp-row { display: flex; flex-direction: column; }
-    .about-exp-title { display: flex; gap: 4px; font-size: 16px; line-height: 21.6px; }
+    .about-exp-title { display: flex; align-items: center; gap: 4px; font-size: 16px; line-height: 21.6px; }
+    .about-exp-title .company-logo {
+      width: 18px;
+      height: 18px;
+      margin-right: 4px;
+      border-radius: 4px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    /* transparent logo: give it the same tile shape as the others */
+    .about-exp-title .company-logo-outline { box-shadow: inset 0 0 0 1px var(--color-border); padding: 1px; }
     .about-exp-title .company { position: relative; font-weight: 400; }
     /* same hover underline as the nav and the Index page links */
     .about-exp-title .company::after {
@@ -79,6 +89,7 @@
       }
 
       .about-exp-title { font-size: 12px; }
+      .about-exp-title .company-logo { width: 14px; height: 14px; border-radius: 3px; }
       .about-exp-date { font-size: 12px; }
 
     }
@@ -136,15 +147,15 @@
     <div class="about-content">
       <div class="about-experience">
         <div class="about-exp-row">
-          <p class="about-exp-title"><a class="company" href="https://www.dafolle.io/" target="_blank" rel="noopener">Dafolle</a><span class="role">UI/UX Designer</span></p>
+          <p class="about-exp-title"><img class="company-logo" src="assets/logos/dafolle.png" alt=""><a class="company" href="https://www.dafolle.io/" target="_blank" rel="noopener">Dafolle</a><span class="role">UI/UX Designer</span></p>
           <p class="about-exp-date">2026, Paris</p>
         </div>
         <div class="about-exp-row">
-          <p class="about-exp-title"><a class="company" href="https://www.goklimb.com/" target="_blank" rel="noopener">KLIMB</a><span class="role">Brand &amp; UI/UX Designer</span></p>
+          <p class="about-exp-title"><img class="company-logo" src="assets/logos/klimb.png" alt=""><a class="company" href="https://www.goklimb.com/" target="_blank" rel="noopener">KLIMB</a><span class="role">Brand &amp; UI/UX Designer</span></p>
           <p class="about-exp-date">2025 - 2026, Paris</p>
         </div>
         <div class="about-exp-row">
-          <p class="about-exp-title"><a class="company" href="https://www.hoyoverse.com/fr-fr/" target="_blank" rel="noopener">Hoyoverse</a><span class="role">UX Designer</span></p>
+          <p class="about-exp-title"><img class="company-logo company-logo-outline" src="assets/logos/hoyoverse.png" alt=""><a class="company" href="https://www.hoyoverse.com/fr-fr/" target="_blank" rel="noopener">Hoyoverse</a><span class="role">UX Designer</span></p>
           <p class="about-exp-date">2021 - 2023, Shanghai</p>
         </div>
         <div class="about-socials">

@@ -17,8 +17,10 @@
   var EURO0 = PLAY0 + 2680;
   var EURO_DUR = 1160;
   var TIP0 = PLAY0 + 3280;
-  var TIP_DUR = 520;
+  var TIP_DUR = 500;
   var KWH0 = PLAY0 + 3280;
+  var NUM_IN = 500;
+  var NUM_SLIDE = 3;
   var KWH_DUR = 920;
   var BUILD_END = KWH0 + KWH_DUR;
   var HOLD_DUR = 3500;
@@ -56,6 +58,11 @@
   function fmt(value, digits) {
     return value.toFixed(digits).replace(".", ",");
   }
+  function fadeNumber(el, t, start) {
+    var a = easeOut(span(t, start, NUM_IN));
+    el.style.opacity = String(a);
+    el.style.transform = "translateY(calc(" + ((1 - a) * NUM_SLIDE) + "px * var(--s)))";
+  }
   function indicatorAt(path) {
     var len = path.getTotalLength();
     var best = 0;
@@ -81,12 +88,15 @@
     }
     var price = easeOut(span(t, PRICE0, PRICE_DUR));
     ui.price.textContent = fmt(0.309 * price, 3) + "€";
+    fadeNumber(ui.price, t, PRICE0);
+    fadeNumber(ui.priceUnit, t, PRICE0);
 
     var lineP = easeInOut(span(t, LINE0, LINE_DUR));
     ui.line.style.strokeDashoffset = String(ui.len * (1 - lineP));
 
     var euro = easeOut(span(t, EURO0, EURO_DUR));
     ui.euro.textContent = fmt(77.87 * euro, 2) + "€";
+    fadeNumber(ui.euro, t, EURO0);
 
     var reach = ui.frac <= 0 ? 1 : clamp((lineP - (ui.frac - 0.015)) / 0.07, 0, 1);
     var appear = easeOut(reach);
@@ -96,9 +106,11 @@
 
     var tipIn = easeOut(span(t, TIP0, TIP_DUR));
     ui.tip.style.opacity = String(tipIn);
-    ui.tip.style.transform = "translateY(calc(" + ((1 - tipIn) * 4) + "px * var(--s)))";
+    ui.tip.style.transform = "translateY(calc(" + ((1 - tipIn) * NUM_SLIDE) + "px * var(--s)))";
 
     ui.kwh.textContent = fmt(447.89 * easeOut(span(t, KWH0, KWH_DUR)), 2);
+    /* The value sits inside the tooltip, which fades and slides on the same
+       500 ms ease. Fading the glyphs again would compound the opacity. */
   }
 
   function fit(root, stage) {
@@ -143,6 +155,7 @@
     var ui = {
       bars: root.querySelectorAll(".sv2-bar"),
       price: root.querySelector("[data-sv2-price]"),
+      priceUnit: root.querySelector(".sv2-unit"),
       euro: root.querySelector("[data-sv2-euro]"),
       kwh: root.querySelector("[data-sv2-kwh]"),
       line: line,

@@ -1,25 +1,30 @@
 /* Looping rebuild of the second Sobry mockup.
    One clock per copy (desktop + mobile). Pauses off-screen and when the
-   tab is hidden. prefers-reduced-motion holds the finished frame. */
+   tab is hidden. prefers-reduced-motion holds the finished frame.
+   Cycle: fade in the empty state, play the build, hold, fade the whole
+   drawing out, then reset while fully transparent and fade in again. */
 (function () {
   var STAGE_W = 565.5 * 4;
-  var CYCLE = 6400;
-  var BAR0 = 240;
+  var FADE = 700;
+  var PLAY0 = FADE;
+  var BAR0 = PLAY0 + 240;
   var BAR_DUR = 720;
   var BAR_STAGGER = 95;
-  var PRICE0 = 240;
+  var PRICE0 = PLAY0 + 240;
   var PRICE_DUR = 1180;
-  var LINE0 = 1520;
+  var LINE0 = PLAY0 + 1520;
   var LINE_DUR = 1760;
-  var EURO0 = 2680;
+  var EURO0 = PLAY0 + 2680;
   var EURO_DUR = 1160;
-  var TIP0 = 3280;
+  var TIP0 = PLAY0 + 3280;
   var TIP_DUR = 520;
-  var KWH0 = 3280;
+  var KWH0 = PLAY0 + 3280;
   var KWH_DUR = 920;
-  var HOLD = 4700;
-  var RESET0 = 5300;
-  var RESET_DUR = 400;
+  var BUILD_END = KWH0 + KWH_DUR;
+  var HOLD_DUR = 3500;
+  var FADE_OUT0 = BUILD_END + HOLD_DUR;
+  var CYCLE = FADE_OUT0 + FADE;
+  var HOLD = BUILD_END + 400;
 
   var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   var tpl = document.getElementById("sobry-v2-tpl");
@@ -34,11 +39,13 @@
   function easeOut(t) {
     return 1 - Math.pow(1 - t, 3);
   }
-  function easeIn(t) {
-    return t * t * t;
-  }
   function easeInOut(t) {
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+  function stageOpacity(t) {
+    if (t < FADE) return easeInOut(t / FADE);
+    if (t < FADE_OUT0) return 1;
+    return 1 - easeInOut((t - FADE_OUT0) / FADE);
   }
   function span(t, start, dur) {
     return clamp((t - start) / dur, 0, 1);
@@ -46,11 +53,6 @@
   function fmt(value, digits) {
     return value.toFixed(digits).replace(".", ",");
   }
-  function collapse(t) {
-    if (t < RESET0) return 1;
-    return 1 - easeIn(span(t, RESET0, RESET_DUR));
-  }
-
   function indicatorAt(path) {
     var len = path.getTotalLength();
     var best = 0;
@@ -68,19 +70,19 @@
   }
 
   function paint(ui, t) {
-    var c = collapse(t);
     var i;
+    ui.group.style.opacity = String(stageOpacity(t));
     for (i = 0; i < ui.bars.length; i++) {
-      var grown = easeOut(span(t, BAR0 + i * BAR_STAGGER, BAR_DUR)) * c;
+      var grown = easeOut(span(t, BAR0 + i * BAR_STAGGER, BAR_DUR));
       ui.bars[i].style.transform = "scaleY(" + grown + ")";
     }
-    var price = easeOut(span(t, PRICE0, PRICE_DUR)) * c;
+    var price = easeOut(span(t, PRICE0, PRICE_DUR));
     ui.price.textContent = fmt(0.309 * price, 3) + "€";
 
-    var lineP = easeInOut(span(t, LINE0, LINE_DUR)) * c;
+    var lineP = easeInOut(span(t, LINE0, LINE_DUR));
     ui.line.style.strokeDashoffset = String(ui.len * (1 - lineP));
 
-    var euro = easeOut(span(t, EURO0, EURO_DUR)) * c;
+    var euro = easeOut(span(t, EURO0, EURO_DUR));
     ui.euro.textContent = fmt(77.87 * euro, 2) + "€";
 
     var reach = ui.frac <= 0 ? 1 : clamp((lineP - (ui.frac - 0.015)) / 0.07, 0, 1);
@@ -90,16 +92,10 @@
     ui.ring.style.transform = "scale(" + (0.62 + 0.38 * appear) + ")";
 
     var tipIn = easeOut(span(t, TIP0, TIP_DUR));
-    var tipOut = 1;
-    if (t >= RESET0 + RESET_DUR) tipOut = 0;
-    else if (t >= RESET0) tipOut = 1 - easeIn(span(t, RESET0, 200));
-    ui.tip.style.opacity = String(tipIn * tipOut);
+    ui.tip.style.opacity = String(tipIn);
     ui.tip.style.transform = "translateY(calc(" + ((1 - tipIn) * 4) + "px * var(--s)))";
 
-    var kwh = easeOut(span(t, KWH0, KWH_DUR));
-    if (t >= RESET0 + RESET_DUR) kwh = 0;
-    else if (t >= RESET0) kwh = 1;
-    ui.kwh.textContent = fmt(447.89 * kwh, 2);
+    ui.kwh.textContent = fmt(447.89 * easeOut(span(t, KWH0, KWH_DUR)), 2);
   }
 
   function fit(root, stage) {
@@ -149,6 +145,7 @@
       line: line,
       len: measured.len,
       frac: measured.frac,
+      group: root.querySelector(".sv2-group"),
       indicator: root.querySelector(".sv2-indicator"),
       stem: root.querySelector(".sv2-stem-scale"),
       ring: root.querySelector(".sv2-ring"),

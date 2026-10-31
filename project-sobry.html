@@ -10,8 +10,9 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/project-sobry/visual-2.css">
   <style>
     .project-body {
       display: flex;
@@ -257,7 +258,9 @@
       </div>
       <div class="project-visuals-col">
         <img src="assets/project-sobry/visual-1.gif" alt="">
-        <img src="assets/project-sobry/visual-2.jpg" alt="">
+        <div class="sobry-v2" data-sobry-v2 role="img" aria-label="Maquettes Sobry : prix du jour à 0,309 € le kWh à 16 h, et consommation en temps réel à 77,87 €.">
+          <img class="sobry-v2__fallback" src="assets/project-sobry/visual-2.jpg" alt="">
+        </div>
         <img src="assets/project-sobry/visual-3.jpg" alt="">
         <img src="assets/project-sobry/visual-4.jpg" alt="">
         <img src="assets/project-sobry/visual-5.jpg" alt="">
@@ -290,7 +293,9 @@
       </div>
       <div class="project-visuals-col-mobile">
         <img src="assets/project-sobry/visual-1.gif" alt="">
-        <img src="assets/project-sobry/visual-2.jpg" alt="">
+        <div class="sobry-v2" data-sobry-v2 role="img" aria-label="Maquettes Sobry : prix du jour à 0,309 € le kWh à 16 h, et consommation en temps réel à 77,87 €.">
+          <img class="sobry-v2__fallback" src="assets/project-sobry/visual-2.jpg" alt="">
+        </div>
         <img src="assets/project-sobry/visual-3.jpg" alt="">
         <img src="assets/project-sobry/visual-4.jpg" alt="">
         <img src="assets/project-sobry/visual-5.jpg" alt="">
@@ -308,6 +313,120 @@
     </footer>
   </div>
 
+  <template id="sobry-v2-tpl">
+    <div class="sobry-v2__stage">
+      <div class="sv2-group">
+        <article class="sv2-card sv2-card1">
+          <img class="sv2-photo" src="assets/project-sobry/card1-photo.webp" alt="" width="1400" height="1400" decoding="async">
+          <div class="sv2-price">
+            <div class="sv2-price-head">
+              <div class="sv2-price-title">
+                <span class="sv2-kicker sv2-trim">Prix du jour</span>
+                <span class="sv2-live">
+                  <span class="sv2-dot" aria-hidden="true"></span>
+                  <span class="sv2-live-label sv2-trim">En direct</span>
+                </span>
+              </div>
+              <div class="sv2-toggle">
+                <span class="sv2-toggle-on sv2-trim">TTC</span>
+                <span class="sv2-trim">HT</span>
+              </div>
+            </div>
+            <div class="sv2-price-row">
+              <span class="sv2-price-val">
+                <span class="sv2-price-num sv2-trim" data-sv2-price>0,309€</span>
+                <span class="sv2-unit sv2-trim">kWh à 16h</span>
+              </span>
+            </div>
+            <div class="sv2-select">
+              <span class="sv2-pill sv2-trim">60mn</span>
+              <svg class="sv2-chevron" viewBox="0 0 4.30311 4.30311" aria-hidden="true">
+                <path d="M1.07529 1.61377L2.15107 2.68954L3.22684 1.61377" fill="none" stroke="#2D1B06" stroke-width="0.358592" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="sv2-chartbox">
+              <div class="sv2-ylabels">
+                <span>0.50</span><span>0,40</span><span>0.30</span><span>0,20</span><span>0.10</span><span>0</span>
+              </div>
+              <div class="sv2-plot">
+                <div class="sv2-bars">
+                  <span class="sv2-bar is-wide h1"></span>
+                  <span class="sv2-bar h2"></span>
+                  <span class="sv2-bar h3"></span>
+                  <span class="sv2-bar h4"></span>
+                  <span class="sv2-bar h5"></span>
+                  <span class="sv2-bar h6"></span>
+                </div>
+                <div class="sv2-x">
+                  <span>6h</span><span>8h</span><span>10h</span><span>12h</span><span>14h</span>
+                </div>
+              </div>
+            </div>
+            <div class="sv2-legend">
+              <span class="sv2-swatch" aria-hidden="true"></span>
+              <span class="sv2-legend-label sv2-trim">Heures en dessous de 0,20€/kWh TTC.</span>
+            </div>
+          </div>
+          <div class="sv2-card1-copy">
+            <p class="sv2-trim">La révolution électrique<br>sereine et libératrice</p>
+            <span class="sv2-wordmark sv2-trim">Sobry</span>
+          </div>
+        </article>
+        <article class="sv2-card">
+          <img class="sv2-wash" src="assets/project-sobry/card2-bg.webp" alt="" width="1100" height="1421" decoding="async">
+          <div class="sv2-card2-copy">
+            <span class="sv2-wordmark sv2-trim">Sobry</span>
+            <p class="sv2-trim">La révolution électrique<br>sereine et libératrice</p>
+          </div>
+          <div class="sv2-panel">
+            <div class="sv2-panel-inner">
+              <div class="sv2-consume-title">
+                <p class="sv2-consume-kicker">Consommation en temps réel</p>
+                <p class="sv2-euro" data-sv2-euro>77,87€</p>
+              </div>
+              <div class="sv2-chart">
+                <svg class="sv2-graph" viewBox="0 0 413.5 258.807" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="sv2stem" x1="148.995" y1="49.755" x2="148.995" y2="113.225" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#F6BA6F"/>
+                      <stop offset="1" stop-color="#F6BA6F" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path class="sv2-line" d="M2.15265 113.494C2.15265 113.494 48.1421 61.5882 55.9415 61.8572C63.7409 62.1261 69.3887 74.7665 72.6161 74.7665C75.8434 74.7665 93.5937 75.3584 100.317 74.7665C107.041 74.1746 115.647 53.7889 122.371 52.4441C129.094 51.0994 167.016 53.7889 171.05 52.4441C175.084 51.0994 221.342 0.806837 221.342 0.806837"/>
+                  <g class="sv2-indicator">
+                    <g class="sv2-stem-scale">
+                      <line class="sv2-stem" x1="148.995" y1="54.058" x2="148.995" y2="113.225" stroke="url(#sv2stem)" stroke-width="1.61367"/>
+                    </g>
+                    <circle class="sv2-ring" cx="148.995" cy="51.906" r="2.151" fill="#ffffff" stroke="#F6BA6F" stroke-width="1.614"/>
+                  </g>
+                </svg>
+                <div class="sv2-yaxis">
+                  <div class="sv2-curr">
+                    <span>100€</span><span>90€</span><span>80€</span><span>70€</span><span>60€</span>
+                  </div>
+                  <div class="sv2-grids" aria-hidden="true">
+                    <svg class="sv2-gridline" viewBox="0 0 202.784 0.268944" preserveAspectRatio="none"><path d="M0.134472 0.134472H2.81324M202.65 0.134472H199.971M7.09928 0.134472H12.4568M16.7428 0.134472H22.1004M26.3864 0.134472H31.744M36.03 0.134472H41.3875M45.6736 0.134472H51.0311M55.3171 0.134472H60.6747M64.9607 0.134472H70.3183M74.6043 0.134472H79.9618M84.2479 0.134472H89.6054M93.8914 0.134472H99.249M103.535 0.134472H108.893M113.179 0.134472H118.536M122.822 0.134472H128.18M132.466 0.134472H137.823M142.109 0.134472H147.467M151.753 0.134472H157.11M161.396 0.134472H166.754M171.04 0.134472H176.398M180.684 0.134472H186.041M190.327 0.134472H195.685" fill="none" stroke="#FAFAFA" stroke-width="0.268944" stroke-linecap="round"/></svg>
+                    <svg class="sv2-gridline" viewBox="0 0 202.784 0.268944" preserveAspectRatio="none"><path d="M0.134472 0.134472H2.81324M202.65 0.134472H199.971M7.09928 0.134472H12.4568M16.7428 0.134472H22.1004M26.3864 0.134472H31.744M36.03 0.134472H41.3875M45.6736 0.134472H51.0311M55.3171 0.134472H60.6747M64.9607 0.134472H70.3183M74.6043 0.134472H79.9618M84.2479 0.134472H89.6054M93.8914 0.134472H99.249M103.535 0.134472H108.893M113.179 0.134472H118.536M122.822 0.134472H128.18M132.466 0.134472H137.823M142.109 0.134472H147.467M151.753 0.134472H157.11M161.396 0.134472H166.754M171.04 0.134472H176.398M180.684 0.134472H186.041M190.327 0.134472H195.685" fill="none" stroke="#FAFAFA" stroke-width="0.268944" stroke-linecap="round"/></svg>
+                    <svg class="sv2-gridline" viewBox="0 0 202.784 0.268944" preserveAspectRatio="none"><path d="M0.134472 0.134472H2.81324M202.65 0.134472H199.971M7.09928 0.134472H12.4568M16.7428 0.134472H22.1004M26.3864 0.134472H31.744M36.03 0.134472H41.3875M45.6736 0.134472H51.0311M55.3171 0.134472H60.6747M64.9607 0.134472H70.3183M74.6043 0.134472H79.9618M84.2479 0.134472H89.6054M93.8914 0.134472H99.249M103.535 0.134472H108.893M113.179 0.134472H118.536M122.822 0.134472H128.18M132.466 0.134472H137.823M142.109 0.134472H147.467M151.753 0.134472H157.11M161.396 0.134472H166.754M171.04 0.134472H176.398M180.684 0.134472H186.041M190.327 0.134472H195.685" fill="none" stroke="#FAFAFA" stroke-width="0.268944" stroke-linecap="round"/></svg>
+                    <svg class="sv2-gridline" viewBox="0 0 202.784 0.268944" preserveAspectRatio="none"><path d="M0.134472 0.134472H2.81324M202.65 0.134472H199.971M7.09928 0.134472H12.4568M16.7428 0.134472H22.1004M26.3864 0.134472H31.744M36.03 0.134472H41.3875M45.6736 0.134472H51.0311M55.3171 0.134472H60.6747M64.9607 0.134472H70.3183M74.6043 0.134472H79.9618M84.2479 0.134472H89.6054M93.8914 0.134472H99.249M103.535 0.134472H108.893M113.179 0.134472H118.536M122.822 0.134472H128.18M132.466 0.134472H137.823M142.109 0.134472H147.467M151.753 0.134472H157.11M161.396 0.134472H166.754M171.04 0.134472H176.398M180.684 0.134472H186.041M190.327 0.134472H195.685" fill="none" stroke="#FAFAFA" stroke-width="0.268944" stroke-linecap="round"/></svg>
+                  </div>
+                </div>
+                <div class="sv2-tip">
+                  <p class="sv2-tip-date">27 Sept. 14h06</p>
+                  <div class="sv2-tip-row">
+                    <span class="sv2-kwh" data-sv2-kwh>447,89</span>
+                    <span class="sv2-kwh-unit">kWh</span>
+                    <span class="sv2-badge">+3.4%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </template>
   <script src="script.js"></script>
+  <script src="assets/project-sobry/visual-2.js"></script>
 </body>
 </html>

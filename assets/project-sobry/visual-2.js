@@ -23,7 +23,9 @@
   var BUILD_END = KWH0 + KWH_DUR;
   var HOLD_DUR = 3500;
   var FADE_OUT0 = BUILD_END + HOLD_DUR;
-  var CYCLE = FADE_OUT0 + FADE;
+  var FADE_OUT_END = FADE_OUT0 + FADE;
+  var GAP = 220;
+  var CYCLE = FADE_OUT_END + GAP;
   var HOLD = BUILD_END + 400;
 
   var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -45,7 +47,8 @@
   function stageOpacity(t) {
     if (t < FADE) return easeInOut(t / FADE);
     if (t < FADE_OUT0) return 1;
-    return 1 - easeInOut((t - FADE_OUT0) / FADE);
+    if (t < FADE_OUT_END) return 1 - easeInOut((t - FADE_OUT0) / FADE);
+    return 0;
   }
   function span(t, start, dur) {
     return clamp((t - start) / dur, 0, 1);

@@ -226,7 +226,9 @@ button { font: inherit; color: inherit; }
 .mobile-menu-chat img { width: 16px; height: 16px; }
 
 /* ══════════ FOOTER ══════════ */
-footer {
+/* direct child only: article pages have their own <footer class="writing-notes">,
+   and this rule's padding was indenting that block */
+.page > footer {
   position: relative;
   display: flex;
   align-items: center;
@@ -382,7 +384,7 @@ footer {
     background: var(--color-background);
   }
 
-  footer {
+  .page > footer {
     height: 70px;
     padding: 0 24px;
   }
@@ -578,7 +580,10 @@ footer {
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  margin-top: 40px;
+  margin: 40px 0 0;
+  padding: 0;
+  height: auto;
+  text-align: left;
 }
 .writing-notes::before {
   content: "";

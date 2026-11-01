@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-  <title>Moins de friction sur les ads vidéo — Luc Ousmane</title>
+  <title>Less friction on video ads — Luc Ousmane</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -66,26 +66,27 @@
         <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
         Writings
       </a>
-      <article class="writing" lang="fr">
+      <article class="writing" lang="en">
         <header class="writing-header">
-          <h1>Moins de friction sur les ads vidéo</h1>
-          <time datetime="2026-10-30">30 octobre 2026</time>
+          <h1>Less friction on video ads</h1>
+          <time datetime="2026-10-30">30 October 2026</time>
         </header>
         <div class="writing-body">
-          <p>En ce moment je teste pas mal de choses et je suis sur beaucoup de sujets d’ads vidéos. 👀</p>
-          <p>C’est pas le truc le plus plaisant à faire, c’est souvent itératif et il faut souvent penser déclinaisons (9:16, 4.5, 1:1…). Fin c’est relou quoi !</p>
-          <p>Donc j’ai décidé de rendre ce processus un peu moins frictionnel et surtout de faire en sorte que tout soit niquel, sans forcément que j’ai à repasser dessus à chaque fois. ✨</p>
+          <p>I’ve been testing a lot of things lately, and a lot of it is video ads. 👀 Not one hero film. A run of them. Different subjects, same kind of job, landing one after another.</p>
+          <p>Making them is not the most pleasant work I do. The idea is usually the easy part. What follows is iterative, and you have to keep the variants in your head the whole time: 9:16, 4:5, 1:1, and the rest of the crops a placement will ask for. You design it once, then you design it again so it still holds when the frame changes. Type reflows. A line that worked in a square gets cut off in a story. The logo finds a new place to sit. You fix it, and the next ratio asks for the same fix. It’s a pain. That’s the short version.</p>
+          <p>I got tired of that loop, so I decided to make the process a bit less frictional, and to get the ads out clean enough that I don’t have to go back over them every time. ✨ The goal wasn’t to stop looking. It was to stop correcting the same small things on every pass: the graphic style, the wording, the little errors that show up when each ad is built as if the last one never happened.</p>
 
-          <h2>Brand et marketing</h2>
-          <p>La première étape a été de faire comprendre à Claude comment je construis mes ads aussi bien d’un point de vue brand que marketing.</p>
-          <p>Donc je lui ai envoyé une centaine d’ads dans un fichier Figma qu’il a systémisé et tokenifié.</p>
-          <p>Pourquoi ? Pour éviter de constamment avoir à lui fournir un exemple, de la documentation, à corriger les petites erreurs, le style graphique ou le wording.</p>
+          <h2>Brand and marketing</h2>
+          <p>The friction lives between one good ad and the run of ads that follows it. Brand and marketing both have to survive that gap. An ad can look like the brand and still say something the marketing doesn’t mean, or say the right thing in a frame that no longer looks like the others. If I’m going to hand the making to Claude, it has to understand how I build these, from both sides. Not from a single example I remember to attach when the output is already wrong. From the way the work actually is.</p>
+          <p>That’s the first step. I sent Claude about a hundred ads, in a Figma file, and it systematized them and tokenized them.</p>
+          <p>A hundred ads is a lot of the same decisions, made over and over. That’s the useful part. The ratios, the type, the way a headline sits, the things I keep fixing by hand: they’re already in the file. Systematizing it means those decisions stop being a speech I give at the start of every brief. Tokenizing it means they stay put, instead of drifting the moment a new format shows up. I did this so I would stop having to constantly provide an example, or the documentation, and then correct the small errors, the graphic style, or the wording. If Claude still needs the system explained on every brief, I haven’t removed the friction. I’ve just moved it into the chat.</p>
 
-          <h2>Le process</h2>
-          <p>J’ai mon Claude sur le Terminal de mon Mac, j’ai branché le MCP de Figma, Jitter ainsi que celui de Magnific pour la génération de visuel vidéo. Lorsque je reçois un brief le process est simple :</p>
-          <p>Brief converti en .md &gt; envoyé dans mon Terminal &gt; Claude appelle les MCP (Figma, Jitter et Magnific) -&gt; génération des ads</p>
-          <p>Ni plus ni moins. Fini les frictions et les prises de têtes itératives.</p>
-          <p>Un système qui tourne en local sur mon MacBook Air M4. ✨</p>
+          <h2>Brief, Terminal, MCPs</h2>
+          <p>The setup after that is plain. I run Claude in the Terminal on my Mac. I connected three MCPs: Figma, Jitter, and Magnific. Magnific is in there for generating the video visuals. Figma is where those ads were systematized. Jitter is connected with them. That’s the whole stack.</p>
+          <p>When a brief comes in, the process is short.</p>
+          <p>I turn the brief into a markdown file. I send that file into the Terminal. Claude calls the MCPs: Figma, Jitter, and Magnific. The ads get generated.</p>
+          <p>Brief, markdown, Terminal, MCPs, ads. Nothing more than that, and nothing less. The iterative headaches, the ones where I restate the rule and then check whether it stuck, are what this is there to finish with.</p>
+          <p>It runs locally, on my MacBook Air M4. ✨ The brief is a file on the machine. The Terminal is where Claude is. The MCPs are what it calls. I’m not sending the work somewhere else and then pulling it back to repair it.</p>
 
           <figure class="writing-figure">
             <div class="writing-media">
@@ -93,15 +94,20 @@
                 <source src="assets/writings/ads-video/video.mp4" type="video/mp4">
               </video>
             </div>
-            <figcaption id="ads-video-caption">Vidéo publiée sur X.</figcaption>
+            <figcaption id="ads-video-caption">Video posted on X.</figcaption>
           </figure>
 
-          <p>Est-ce que je déteste toujours faire des ads ? Oui. Est-ce que c’est toujours désagréable ? Non. ✌🏿</p>
+          <h2>What changed</h2>
+          <p>What changed is how much I have to pass over the result. I still have to know what the ad needs to say. A brief that doesn’t know that will not be saved by a file of old ads. What I don’t do on every pass now is rebuild the brand logic and the marketing logic from an example, then chase the small errors through 9:16, 4:5, and 1:1. That chase was the friction. The systematized, tokenized file is what Claude has instead of my corrections.</p>
+
+          <h2>Still not my favorite</h2>
+          <p>I still don’t enjoy the job of making ads. The formats are still the formats. A brief is still a brief. The process is what feels different. It used to be unpleasant because so much of it was iteration with no new decision in it. That part isn’t the unpleasant part anymore.</p>
+          <p>Do I still hate making ads? Yes. Is it still unpleasant? No. ✌️</p>
         </div>
         <footer class="writing-notes">
-          <p>Post original sur X, 30 octobre 2026.</p>
+          <p>Original post on X, 30 October 2026.</p>
           <a class="link-button link-button-external" href="https://x.com/suuptae/status/2116151323427065863" target="_blank" rel="noopener">
-            Voir sur X
+            See on X
             <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
           </a>
         </footer>

@@ -106,3 +106,12 @@ document.querySelectorAll('.back-button').forEach((link) => {
     }
   }, { passive: false });
 })();
+
+// article videos loop muted; keep them on the poster when motion is reduced
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.writing-media video').forEach((video) => {
+    video.autoplay = false;
+    video.removeAttribute('autoplay');
+    video.pause();
+  });
+}

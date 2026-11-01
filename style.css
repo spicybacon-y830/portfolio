@@ -97,6 +97,8 @@ button { font: inherit; color: inherit; }
   line-height: 21.6px;
   color: var(--color-text);
   position: relative;
+  /* "About Me" would wrap once Writings is in the row */
+  white-space: nowrap;
 }
 /* same hover underline as the links on the Index page (list.html) */
 .header-nav a::after {
@@ -388,4 +390,235 @@ footer {
   .footer-index { display: none; }
   .link-button { font-size: 12px; }
   .back-button { margin-bottom: 4px; }
+}
+
+/* ══════════ WRITINGS ══════════ */
+/* Index and articles follow benji.org's writing list and article column,
+   set in the site's type, color tokens and spacing. */
+.writings-page,
+.writing-page {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 582px;
+  margin: 0 auto;
+  padding: 48px 0 96px;
+}
+
+.writings-label {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.6px;
+  color: var(--color-text-muted);
+}
+
+.writings-list { --year-col: 108px; --row-pad: 11px; }
+.writings-year { border-bottom: 1px solid var(--color-border); }
+.writings-year ul { list-style: none; }
+.writings-row {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: var(--row-pad) 0 var(--row-pad) var(--year-col);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.6px;
+  color: var(--color-text);
+  transition: opacity .14s ease;
+}
+.writings-row::after {
+  content: "";
+  position: absolute;
+  left: var(--year-col);
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-border);
+}
+.writings-year li:last-child .writings-row::after { content: none; }
+.writings-year-mark {
+  position: absolute;
+  left: 0;
+  top: var(--row-pad);
+  font-weight: 300;
+  color: var(--color-text-muted);
+}
+.writings-title { flex: 1; min-width: 0; }
+.writings-date {
+  flex-shrink: 0;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+}
+.writings-title::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 8px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  vertical-align: 0.12em;
+  opacity: 0;
+  transform: translateX(4px) rotate(45deg);
+  transition: opacity .14s ease, transform .22s cubic-bezier(.175, .885, .32, 1.1);
+}
+
+/* other rows fade to .3 while the row under the pointer stays solid */
+@media (min-width: 768px) {
+  .writings-list:hover .writings-row { opacity: .3; }
+  .writings-list:hover .writings-row:hover { opacity: 1; }
+  .writings-row:hover .writings-title::after {
+    opacity: 1;
+    transform: translateX(0) rotate(45deg);
+  }
+}
+.writings-row:focus-visible {
+  outline: 1px solid var(--color-text-muted);
+  outline-offset: -1px;
+}
+
+@keyframes writings-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.writings-label,
+.writings-row {
+  animation: writings-in .5s ease backwards;
+}
+.writings-label { animation-delay: 0s; }
+.writings-list li:nth-child(1) .writings-row { animation-delay: .05s; }
+.writings-list li:nth-child(2) .writings-row { animation-delay: .1s; }
+.writings-list li:nth-child(3) .writings-row { animation-delay: .15s; }
+.writings-list li:nth-child(4) .writings-row { animation-delay: .2s; }
+.writings-list li:nth-child(5) .writings-row { animation-delay: .25s; }
+.writings-list li:nth-child(6) .writings-row { animation-delay: .3s; }
+.writings-list li:nth-child(7) .writings-row { animation-delay: .35s; }
+.writings-list li:nth-child(8) .writings-row { animation-delay: .4s; }
+
+.writing-page .back-button { margin-bottom: 28px; }
+.writing-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 8px;
+}
+.writing-header h1 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21.6px;
+}
+.writing-header time {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 21.6px;
+  color: var(--color-text-muted);
+}
+.writing-body p {
+  padding-top: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.6px;
+  text-wrap: pretty;
+}
+.writing-body h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21.6px;
+}
+.writing-body h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+.writing-body h2 + p { padding-top: 12px; }
+
+.writing-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 40px 0 0;
+  padding-bottom: 8px;
+}
+.writing-media {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+}
+.writing-media video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.writing-figure figcaption {
+  max-width: 36em;
+  padding: 4px 32px 0;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+  letter-spacing: 0.01px;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.writing-notes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 40px;
+}
+.writing-notes::before {
+  content: "";
+  width: 50px;
+  height: 1px;
+  background: var(--color-border);
+}
+.writing-notes p {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 767px) {
+  .writings-page,
+  .writing-page {
+    max-width: none;
+    padding: 16px 24px 64px;
+  }
+  .writings-list { --year-col: 48px; }
+  .writings-label,
+  .writings-row,
+  .writing-header h1,
+  .writing-header time,
+  .writing-body p,
+  .writing-body h2 { font-size: 12px; }
+  .writings-title::after { display: none; }
+  .writing-page .back-button { margin-bottom: 16px; }
+  .writing-figure figcaption {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 10px;
+    line-height: 14px;
+  }
+  .writing-notes p { font-size: 10px; line-height: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .writings-label,
+  .writings-row { animation: none; }
+  .writings-title::after { transition: none; }
 }

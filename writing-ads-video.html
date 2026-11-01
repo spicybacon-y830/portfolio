@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <title>Moins de friction sur les ads vidéo — Luc Ousmane</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <img class="avatar" src="assets/avatar.jpg" alt="Luc Ousmane">
+        <span class="name">Luc Ousmane</span>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="/">Work</a>
+        <a href="about">About Me</a>
+        <a href="photos">Photography</a>
+        <a href="writings">Writings</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <span class="chat-link-label">Chat with me</span>
+          <svg class="chat-link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <img class="avatar-sm" src="assets/avatar.jpg" alt="Luc Ousmane">
+          <span class="name-sm">Luc Ousmane</span>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <span class="menu-line"></span><span class="menu-line menu-line-indicator"></span>
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="/">Work</a>
+          <a href="about">About Me</a>
+          <a href="photos">Photography</a>
+          <a href="writings">Writings</a>
+          <a href="list">Index</a>
+        </nav>
+        <a class="mobile-menu-chat" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <main class="writing-page">
+      <a class="link-button back-button" href="writings">
+        <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        Writings
+      </a>
+      <article class="writing" lang="fr">
+        <header class="writing-header">
+          <h1>Moins de friction sur les ads vidéo</h1>
+          <time datetime="2026-10-30">30 octobre 2026</time>
+        </header>
+        <div class="writing-body">
+          <p>En ce moment je teste pas mal de choses et je suis sur beaucoup de sujets d’ads vidéos. 👀</p>
+          <p>C’est pas le truc le plus plaisant à faire, c’est souvent itératif et il faut souvent penser déclinaisons (9:16, 4.5, 1:1…). Fin c’est relou quoi !</p>
+          <p>Donc j’ai décidé de rendre ce processus un peu moins frictionnel et surtout de faire en sorte que tout soit niquel, sans forcément que j’ai à repasser dessus à chaque fois. ✨</p>
+
+          <h2>Brand et marketing</h2>
+          <p>La première étape a été de faire comprendre à Claude comment je construis mes ads aussi bien d’un point de vue brand que marketing.</p>
+          <p>Donc je lui ai envoyé une centaine d’ads dans un fichier Figma qu’il a systémisé et tokenifié.</p>
+          <p>Pourquoi ? Pour éviter de constamment avoir à lui fournir un exemple, de la documentation, à corriger les petites erreurs, le style graphique ou le wording.</p>
+
+          <h2>Le process</h2>
+          <p>J’ai mon Claude sur le Terminal de mon Mac, j’ai branché le MCP de Figma, Jitter ainsi que celui de Magnific pour la génération de visuel vidéo. Lorsque je reçois un brief le process est simple :</p>
+          <p>Brief converti en .md &gt; envoyé dans mon Terminal &gt; Claude appelle les MCP (Figma, Jitter et Magnific) -&gt; génération des ads</p>
+          <p>Ni plus ni moins. Fini les frictions et les prises de têtes itératives.</p>
+          <p>Un système qui tourne en local sur mon MacBook Air M4. ✨</p>
+
+          <figure class="writing-figure">
+            <div class="writing-media">
+              <video autoplay muted loop playsinline preload="metadata" width="1560" height="1080" poster="assets/writings/ads-video/poster.jpg" aria-labelledby="ads-video-caption">
+                <source src="assets/writings/ads-video/video.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption id="ads-video-caption">Vidéo publiée sur X.</figcaption>
+          </figure>
+
+          <p>Est-ce que je déteste toujours faire des ads ? Oui. Est-ce que c’est toujours désagréable ? Non. ✌🏿</p>
+        </div>
+        <footer class="writing-notes">
+          <p>Post original sur X, 30 octobre 2026.</p>
+          <a class="link-button link-button-external" href="https://x.com/suuptae/status/2116151323427065863" target="_blank" rel="noopener">
+            Voir sur X
+            <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </footer>
+      </article>
+    </main>
+
+    <footer>
+      <button class="theme-switch" id="theme-switch" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <span class="theme-switch-icons" aria-hidden="true"><svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg><svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
+      </button>
+      <a class="footer-index" href="list">Index</a>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

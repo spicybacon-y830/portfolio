@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="assets/project-sobry/visual-2.css">
+  <link rel="stylesheet" href="assets/project-sobry/visual-4.css?v=1">
   <style>
     .project-body {
       display: flex;
@@ -262,7 +263,9 @@
           <img class="sobry-v2__fallback" src="assets/project-sobry/visual-2.jpg" alt="">
         </div>
         <img src="assets/project-sobry/visual-3.jpg" alt="">
-        <img src="assets/project-sobry/visual-4.jpg" alt="">
+        <div class="sobry-v4" data-sobry-v4 role="img" aria-label="Maquettes Sobry : consommation en temps réel à 77,87 €, et factures régularisées.">
+          <img class="sobry-v4__fallback" src="assets/project-sobry/visual-4.jpg" alt="">
+        </div>
         <img src="assets/project-sobry/visual-5.jpg" alt="">
         <img src="assets/project-sobry/visual-6.jpg" alt="">
         <img src="assets/project-sobry/visual-7.jpg" alt="">
@@ -297,7 +300,9 @@
           <img class="sobry-v2__fallback" src="assets/project-sobry/visual-2.jpg" alt="">
         </div>
         <img src="assets/project-sobry/visual-3.jpg" alt="">
-        <img src="assets/project-sobry/visual-4.jpg" alt="">
+        <div class="sobry-v4" data-sobry-v4 role="img" aria-label="Maquettes Sobry : consommation en temps réel à 77,87 €, et factures régularisées.">
+          <img class="sobry-v4__fallback" src="assets/project-sobry/visual-4.jpg" alt="">
+        </div>
         <img src="assets/project-sobry/visual-5.jpg" alt="">
         <img src="assets/project-sobry/visual-6.jpg" alt="">
         <img src="assets/project-sobry/visual-7.jpg" alt="">
@@ -426,7 +431,85 @@
       </div>
     </div>
   </template>
+  <template id="sobry-v4-tpl">
+    <div class="sobry-v4__stage">
+      <div class="sv4-scene" aria-hidden="true">
+        <div class="sv4-clip">
+          <div class="sv2-panel">
+            <div class="sv2-panel-inner">
+              <div class="sv2-consume-title">
+                <p class="sv2-consume-kicker">Consommation en temps réel</p>
+                <p class="sv2-euro" data-sv2-euro>77,87€</p>
+              </div>
+              <div class="sv2-chart">
+                <svg class="sv2-graph" viewBox="0 0 413.5 258.807" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="sv2stem" x1="148.995" y1="49.755" x2="148.995" y2="113.225" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#F6BA6F"/>
+                      <stop offset="1" stop-color="#F6BA6F" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path class="sv2-line" d="M2.15265 113.494C2.15265 113.494 48.1421 61.5882 55.9415 61.8572C63.7409 62.1261 69.3887 74.7665 72.6161 74.7665C75.8434 74.7665 93.5937 75.3584 100.317 74.7665C107.041 74.1746 115.647 53.7889 122.371 52.4441C129.094 51.0994 167.016 53.7889 171.05 52.4441C175.084 51.0994 221.342 0.806837 221.342 0.806837"/>
+                  <g class="sv2-indicator">
+                    <g class="sv2-stem-scale">
+                      <line class="sv2-stem" x1="148.995" y1="54.058" x2="148.995" y2="113.225" stroke="url(#sv2stem)" stroke-width="1.61367"/>
+                    </g>
+                    <circle class="sv2-ring" cx="148.995" cy="51.906" r="2.151" fill="#ffffff" stroke="#F6BA6F" stroke-width="1.614"/>
+                  </g>
+                </svg>
+                <div class="sv2-yaxis">
+                  <div class="sv2-curr">
+                    <span>100€</span><span>90€</span><span>80€</span><span>70€</span><span>60€</span>
+                  </div>
+                  <div class="sv2-grids" aria-hidden="true">
+                    <svg class="sv2-gridline" viewBox="0 0 202.784 0.268944" preserveAspectRatio="none"><path d="M0.134472 0.134472H2.81324M202.65 0.134472H199.971M7.09928 0.134472H12.4568M16.7428 0.134472H22.1004M26.3864 0.134472H31.744M36.03 0.134472H41.3875M45.6736 0.134472H51.0311M55.3171 0.134472H60.6747M64.9607 0.134472H70.3183M74.6043 0.134472H79.9618M84.2479 0.134472H89.6054M93.8914 0.134472H99.249M103.535 0.134472H108.893M113.179 0.134472H118.536M122.822 0.134472H128.18M132.466 0.134472H137.823M142.109 0.134472H147.467M151.753 0.134472H157.11M161.396 0.134472H166.754M171.04 0.134472H176.398M180.684 0.134472H186.041M190.327 0.134472H195.685" fill="none" stroke="#FAFAFA" stroke-width="0.268944" stroke-linecap="round"/></svg>
+                    <svg class="sv2-gridline" viewBox="0 0 202.784 0.268944" preserveAspectRatio="none"><path d="M0.134472 0.134472H2.81324M202.65 0.134472H199.971M7.09928 0.134472H12.4568M16.7428 0.134472H22.1004M26.3864 0.134472H31.744M36.03 0.134472H41.3875M45.6736 0.134472H51.0311M55.3171 0.134472H60.6747M64.9607 0.134472H70.3183M74.6043 0.134472H79.9618M84.2479 0.134472H89.6054M93.8914 0.134472H99.249M103.535 0.134472H108.893M113.179 0.134472H118.536M122.822 0.134472H128.18M132.466 0.134472H137.823M142.109 0.134472H147.467M151.753 0.134472H157.11M161.396 0.134472H166.754M171.04 0.134472H176.398M180.684 0.134472H186.041M190.327 0.134472H195.685" fill="none" stroke="#FAFAFA" stroke-width="0.268944" stroke-linecap="round"/></svg>
+                    <svg class="sv2-gridline" viewBox="0 0 202.784 0.268944" preserveAspectRatio="none"><path d="M0.134472 0.134472H2.81324M202.65 0.134472H199.971M7.09928 0.134472H12.4568M16.7428 0.134472H22.1004M26.3864 0.134472H31.744M36.03 0.134472H41.3875M45.6736 0.134472H51.0311M55.3171 0.134472H60.6747M64.9607 0.134472H70.3183M74.6043 0.134472H79.9618M84.2479 0.134472H89.6054M93.8914 0.134472H99.249M103.535 0.134472H108.893M113.179 0.134472H118.536M122.822 0.134472H128.18M132.466 0.134472H137.823M142.109 0.134472H147.467M151.753 0.134472H157.11M161.396 0.134472H166.754M171.04 0.134472H176.398M180.684 0.134472H186.041M190.327 0.134472H195.685" fill="none" stroke="#FAFAFA" stroke-width="0.268944" stroke-linecap="round"/></svg>
+                    <svg class="sv2-gridline" viewBox="0 0 202.784 0.268944" preserveAspectRatio="none"><path d="M0.134472 0.134472H2.81324M202.65 0.134472H199.971M7.09928 0.134472H12.4568M16.7428 0.134472H22.1004M26.3864 0.134472H31.744M36.03 0.134472H41.3875M45.6736 0.134472H51.0311M55.3171 0.134472H60.6747M64.9607 0.134472H70.3183M74.6043 0.134472H79.9618M84.2479 0.134472H89.6054M93.8914 0.134472H99.249M103.535 0.134472H108.893M113.179 0.134472H118.536M122.822 0.134472H128.18M132.466 0.134472H137.823M142.109 0.134472H147.467M151.753 0.134472H157.11M161.396 0.134472H166.754M171.04 0.134472H176.398M180.684 0.134472H186.041M190.327 0.134472H195.685" fill="none" stroke="#FAFAFA" stroke-width="0.268944" stroke-linecap="round"/></svg>
+                  </div>
+                </div>
+                <div class="sv2-tip">
+                  <p class="sv2-tip-date">27 Sept. 14h06</p>
+                  <div class="sv2-tip-row">
+                    <span class="sv2-kwh" data-sv2-kwh>447,89</span>
+                    <span class="sv2-kwh-unit">kWh</span>
+                    <span class="sv2-badge">+3.4%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+        <div class="sv4-card sv4-invoice">
+          <p class="sv4-title">Documents</p>
+          <div class="sv4-rows">
+            <div class="sv4-row">
+              <p class="sv4-label">Dernière facture</p>
+              <div class="sv4-line"><span class="sv4-date">Facture du 01 Août 2026</span><span class="sv4-actions"><span class="sv4-pill">Régularisée</span><svg class="sv4-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sv4-card sv4-docs">
+          <p class="sv4-title">Documents</p>
+          <div class="sv4-rows">
+            <div class="sv4-row">
+              <p class="sv4-label">Dernière facture</p>
+              <div class="sv4-line"><span class="sv4-date">Facture du 01 Janvier 2026</span><span class="sv4-actions"><span class="sv4-pill">Régularisée</span><svg class="sv4-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span></div>
+            </div>
+            <div class="sv4-row">
+              <div class="sv4-line"><span class="sv4-date">Facture du 01 Février 2026</span><span class="sv4-actions"><span class="sv4-pill">Régularisée</span><svg class="sv4-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span></div>
+            </div>
+            <div class="sv4-row">
+              <div class="sv4-line"><span class="sv4-date">Facture du 01 Mars 2026</span><span class="sv4-actions"><span class="sv4-pill">Régularisée</span><svg class="sv4-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
   <script src="script.js"></script>
   <script src="assets/project-sobry/visual-2.js?v=3"></script>
+  <script src="assets/project-sobry/visual-4.js?v=1"></script>
 </body>
 </html>

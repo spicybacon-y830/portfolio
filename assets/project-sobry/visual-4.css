@@ -1,0 +1,278 @@
+/* Fourth Sobry mockup (Figma 249:2684). Same stage as visual 2:
+   drawn at Figma sizes × --s, then scaled to the column.
+   The consumption card is visual 2's panel with --s scaled by
+   13.48139/15.061 so its type, chart and tooltip land on this frame,
+   then clipped to the left stack. */
+
+.sobry-v4 {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1696 / 1131;
+  overflow: hidden;
+  background: #fff;
+  color: #2d1b06;
+  color-scheme: light;
+  isolation: isolate;
+}
+
+.sobry-v4__fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sobry-v4.is-ready .sobry-v4__fallback {
+  display: none;
+}
+
+.sobry-v4__stage {
+  --s: 4;
+  --sv4: 4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(565.5px * var(--s));
+  height: calc(377.18px * var(--s));
+  background: #fff;
+  transform-origin: 0 0;
+  visibility: hidden;
+  font-family: Manrope, sans-serif;
+  color: #2d1b06;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  user-select: none;
+}
+
+.sobry-v4.is-ready .sobry-v4__stage {
+  visibility: visible;
+}
+
+.sv4-scene {
+  position: absolute;
+  inset: 0;
+}
+
+/* Left stack. Extra room above the frame so the panel shadow is not
+   sliced off; the right and bottom edges stay on the Figma clip. */
+.sv4-clip {
+  position: absolute;
+  left: calc(30.4503px * var(--s));
+  top: calc(55.1212px * var(--s));
+  width: calc(229.3014px * var(--s));
+  height: calc(242.9375px * var(--s));
+  overflow: hidden;
+}
+
+/* 4 × 13.48139/15.061 — visual 2's panel, at this frame's scale.
+   The reference card's white plate sits a couple of design px outside
+   the panel's layout box; padding plus a negative margin grows the
+   plate without moving the type or the chart. */
+.sobry-v4 .sv2-panel {
+  --s: 3.58046344;
+  left: calc(30.7801px * var(--sv4));
+  top: calc(37.8185px * var(--sv4));
+  margin-top: calc(-3.93px * var(--sv4));
+  margin-left: calc(-3.27px * var(--sv4));
+  padding-top: calc(3.93px * var(--sv4));
+  padding-left: calc(3.27px * var(--sv4));
+  box-shadow:
+    0 0 0 calc(2.152px * var(--s)) rgba(255, 255, 255, 0.7),
+    0 calc(3px * var(--sv4)) calc(10px * var(--sv4)) rgba(45, 27, 6, 0.05),
+    0 0 calc(22px * var(--sv4)) rgba(45, 27, 6, 0.055);
+}
+
+/* The reference sets these proportional; tabular figures run wide. */
+.sobry-v4 .sv2-euro,
+.sobry-v4 .sv2-kwh {
+  font-variant-numeric: proportional-nums;
+}
+
+/* Euro glyphs sit a touch high inside the shared line box. */
+.sobry-v4 .sv2-euro {
+  position: relative;
+  top: calc(1.33px * var(--sv4));
+}
+
+.sobry-v4 .sv2-yaxis {
+  top: calc(-1px * var(--sv4));
+}
+
+.sv4-card {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #2d1b06;
+}
+
+.sv4-invoice {
+  left: calc(46.2087px * var(--s));
+  top: calc(201.744px * var(--s));
+  width: calc(176.7995px * var(--s));
+  height: calc(77.0059px * var(--s));
+  padding: calc(10.3639px * var(--s));
+  gap: calc(10.139px * var(--s));
+  border-radius: calc(11px * var(--s));
+  box-shadow:
+    0 calc(6px * var(--s)) calc(20px * var(--s)) rgba(45, 27, 6, 0.06),
+    0 calc(1px * var(--s)) calc(3px * var(--s)) rgba(45, 27, 6, 0.04);
+  z-index: 2;
+  will-change: opacity, transform;
+}
+
+.sv4-docs {
+  left: calc(291.7517px * var(--s));
+  top: calc(92.7797px * var(--s));
+  width: calc(243.2979px * var(--s));
+  height: calc(191.6206px * var(--s));
+  padding: calc(20.9289px * var(--s));
+  gap: calc(13.9526px * var(--s));
+  border-radius: calc(11px * var(--s));
+  box-shadow:
+    0 calc(8px * var(--s)) calc(28px * var(--s)) rgba(45, 27, 6, 0.055),
+    0 calc(1px * var(--s)) calc(4px * var(--s)) rgba(45, 27, 6, 0.04);
+  z-index: 1;
+}
+
+.sv4-title,
+.sv4-label,
+.sv4-date,
+.sv4-pill {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.sv4-title,
+.sv4-label {
+  font-weight: 700;
+}
+
+.sv4-docs .sv4-title {
+  font-size: calc(12.23px * var(--s));
+  line-height: calc(16px * var(--s));
+  height: calc(16px * var(--s));
+}
+
+.sv4-docs .sv4-label,
+.sv4-docs .sv4-line {
+  font-size: calc(6.13px * var(--s));
+  line-height: calc(16px * var(--s));
+  height: calc(16px * var(--s));
+}
+
+.sv4-docs .sv4-date {
+  font-weight: 500;
+  font-size: calc(6.81px * var(--s));
+  line-height: calc(16px * var(--s));
+}
+
+.sv4-invoice .sv4-title {
+  font-size: calc(8.85px * var(--s));
+  line-height: calc(12px * var(--s));
+  height: calc(12px * var(--s));
+}
+
+.sv4-invoice .sv4-label,
+.sv4-invoice .sv4-line {
+  font-size: calc(5.08px * var(--s));
+  line-height: calc(12px * var(--s));
+  height: calc(12px * var(--s));
+}
+
+.sv4-invoice .sv4-date {
+  font-weight: 500;
+  font-size: calc(5.15px * var(--s));
+  line-height: calc(12px * var(--s));
+}
+
+.sv4-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.sv4-docs .sv4-rows { gap: calc(6.9763px * var(--s)); }
+.sv4-invoice .sv4-rows { gap: 0; }
+
+.sv4-row {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #f7f7f7;
+}
+
+.sv4-docs .sv4-row {
+  padding: calc(6.9763px * var(--s));
+  border-radius: calc(6px * var(--s));
+}
+
+.sv4-invoice .sv4-row {
+  padding: calc(5.0695px * var(--s));
+  border-radius: calc(4.5px * var(--s));
+}
+
+.sv4-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(4px * var(--s));
+}
+
+.sv4-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sv4-docs .sv4-actions { gap: calc(3.4881px * var(--s)); }
+.sv4-invoice .sv4-actions { gap: calc(2.5348px * var(--s)); }
+
+.sv4-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: #e0f0e5;
+  color: #377e36;
+  font-weight: 600;
+}
+
+.sv4-docs .sv4-pill {
+  height: calc(16px * var(--s));
+  padding: 0 calc(6.9763px * var(--s));
+  font-size: calc(6.93px * var(--s));
+  line-height: 1;
+}
+
+.sv4-invoice .sv4-pill {
+  height: calc(12px * var(--s));
+  padding: 0 calc(5.0695px * var(--s));
+  font-size: calc(5.2px * var(--s));
+  line-height: 1;
+}
+
+.sv4-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.sv4-docs .sv4-icon {
+  width: calc(10.4644px * var(--s));
+  height: calc(10.4644px * var(--s));
+}
+
+.sv4-invoice .sv4-icon {
+  width: calc(7.6043px * var(--s));
+  height: calc(7.6043px * var(--s));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sv4-invoice { opacity: 1; transform: none; }
+  .sobry-v4 .sv2-tip { opacity: 1; transform: none; }
+}

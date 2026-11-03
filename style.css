@@ -207,24 +207,31 @@ button { font: inherit; color: inherit; }
   .menu-line { transition: none; }
 }
 
+/* Height follows content (grid 0fr → 1fr) so extra nav links never clip
+   "Chat with me". Inner wrapper is created in script.js. */
 .mobile-menu-panel {
   position: absolute;
   top: 100%; left: 0; right: 0;
   background: var(--color-background);
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  display: grid;
+  grid-template-rows: 0fr;
   padding: 0 24px;
-  max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height .25s ease, opacity .2s ease, padding .25s ease;
+  transition: grid-template-rows .3s ease, opacity .2s ease, padding .25s ease;
   z-index: 20;
 }
 .mobile-menu-panel.open {
-  max-height: 280px;
+  grid-template-rows: 1fr;
   opacity: 1;
   padding: 8px 24px 24px;
+}
+.mobile-menu-panel-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-height: 0;
+  overflow: hidden;
 }
 .mobile-menu-nav { display: flex; flex-direction: column; gap: 16px; }
 .mobile-menu-nav a {
@@ -238,6 +245,9 @@ button { font: inherit; color: inherit; }
   font-weight: 400; font-size: 12px; line-height: 21.6px;
 }
 .mobile-menu-chat img { width: 16px; height: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-panel { transition: opacity .15s linear; }
+}
 
 /* ══════════ FOOTER ══════════ */
 /* direct child only: article pages have their own <footer class="writing-notes">,

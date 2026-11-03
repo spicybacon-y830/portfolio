@@ -35,13 +35,23 @@
   });
 })();
 
-// mobile "+" menu toggle
+// mobile "+" menu toggle — panel height follows content (see style.css
+// .mobile-menu-panel grid 0fr/1fr). Wrap children once so the open state
+// never needs a hard-coded max-height when links are added.
 const menuToggle = document.getElementById('mobile-menu-toggle');
 const menuPanel = document.getElementById('mobile-menu-panel');
-menuToggle.addEventListener('click', () => {
-  const isOpen = menuPanel.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
-});
+if (menuToggle && menuPanel) {
+  if (!menuPanel.querySelector(':scope > .mobile-menu-panel-inner')) {
+    const inner = document.createElement('div');
+    inner.className = 'mobile-menu-panel-inner';
+    while (menuPanel.firstChild) inner.appendChild(menuPanel.firstChild);
+    menuPanel.appendChild(inner);
+  }
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menuPanel.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+}
 
 // project pages: "Go back" button above the project name. Falls back to its
 // href (index.html) when there's no same-site history to go back to, e.g.

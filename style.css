@@ -523,6 +523,72 @@ button { font: inherit; color: inherit; }
   gap: 4px;
   padding-bottom: 8px;
 }
+/* leave room under the sticky header when jumping to a section */
+.writing-header h1,
+.writing-body h2,
+.writing-body h3 {
+  scroll-margin-top: 96px;
+}
+
+/* Writings article index — quiet sticky column on the left (benji.org-style).
+   Injected by script.js from the article's h2/h3. Hidden when the gutter is
+   too narrow so the centred article column stays untouched. */
+.writing-toc {
+  display: none;
+}
+@media (min-width: 1100px) {
+  .writing-toc {
+    display: block;
+    position: fixed;
+    top: 120px;
+    left: max(24px, calc((100vw - 582px) / 2 - 176px));
+    width: 148px;
+    max-height: calc(100vh - 160px);
+    overflow: auto;
+    opacity: 0;
+    transition: opacity .4s ease;
+    z-index: 15;
+    overscroll-behavior: contain;
+  }
+  .writing-toc[data-ready="true"] { opacity: 1; }
+  .writing-toc-title,
+  .writing-toc a {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text-faint);
+    transition: color .15s ease, opacity .4s ease;
+  }
+  .writing-toc-title {
+    padding: 0 0 12px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .writing-toc[data-scrolled] .writing-toc-title {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .writing-toc-title:hover,
+  .writing-toc a:hover,
+  .writing-toc a[data-active="true"],
+  .writing-toc li[data-active="true"] > a {
+    color: var(--color-text);
+  }
+  .writing-toc-title[data-active="true"] { color: var(--color-text); }
+  .writing-toc ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .writing-toc li[data-level="h3"] a { padding-left: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .writing-toc,
+  .writing-toc-title,
+  .writing-toc a { transition: none; }
+}
 .writing-header h1 {
   font-size: 16px;
   font-weight: 500;

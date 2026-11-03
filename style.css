@@ -412,8 +412,7 @@ button { font: inherit; color: inherit; }
 /* Index and articles follow benji.org's writing list and article column,
    set in the site's type, color tokens and spacing. */
 .writings-page,
-.writing-page,
-.pricing-page {
+.writing-page {
   flex: 1 0 auto;
   width: 100%;
   max-width: 582px;
@@ -681,8 +680,7 @@ button { font: inherit; color: inherit; }
 
 @media (max-width: 767px) {
   .writings-page,
-  .writing-page,
-  .pricing-page {
+  .writing-page {
     max-width: none;
     padding: 16px 24px 64px;
   }
@@ -692,13 +690,7 @@ button { font: inherit; color: inherit; }
   .writing-header h1,
   .writing-header time,
   .writing-body p,
-  .writing-body h2,
-  .pricing-label,
-  .pricing-vat,
-  .pricing-offer h2,
-  .pricing-amount,
-  .pricing-desc,
-  .pricing-cta { font-size: 12px; }
+  .writing-body h2 { font-size: 12px; }
   .writings-title::after { display: none; }
   .writing-page .back-button { margin-bottom: 16px; }
   .writing-figure figcaption {
@@ -707,58 +699,55 @@ button { font: inherit; color: inherit; }
     font-size: 10px;
     line-height: 14px;
   }
-  .writing-notes p,
-  .pricing-note { font-size: 10px; line-height: 14px; }
-  .pricing-list { margin-top: 24px; }
-  .pricing-offer { padding: 20px 0; gap: 8px; }
-  .pricing-cta { margin-top: 28px; }
+  .writing-notes p { font-size: 10px; line-height: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .writings-label,
-  .writings-row,
-  .pricing-label,
-  .pricing-vat,
-  .pricing-offer,
-  .pricing-cta,
-  .pricing-note { animation: none; }
+  .writings-row { animation: none; }
   .writings-title::after { transition: none; }
 }
 
 /* ══════════ PRICING ══════════ */
-/* Same column and type as Writings — three offers as a quiet list, not cards. */
-.pricing-label {
-  padding-bottom: 8px;
+/* Intro → three-offer grid → VAT + CTA. No orphan dividers, Writings rhythm. */
+.pricing-page {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px var(--padding-xxl) 96px;
+}
+.pricing-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--color-border);
+}
+.pricing-intro h1 {
   font-size: 16px;
   font-weight: 400;
   line-height: 21.6px;
   color: var(--color-text-muted);
 }
-.pricing-vat {
-  margin-top: 12px;
+.pricing-intro p {
+  max-width: 36em;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 21.6px;
-  color: var(--color-text-muted);
+  text-wrap: pretty;
 }
 .pricing-list {
-  display: flex;
-  flex-direction: column;
-  margin-top: 32px;
-  border-top: 1px solid var(--color-border);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 40px;
 }
 .pricing-offer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--color-border);
-}
-.pricing-offer-header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  min-width: 0;
 }
 .pricing-offer h2 {
   font-size: 16px;
@@ -766,32 +755,55 @@ button { font: inherit; color: inherit; }
   line-height: 21.6px;
 }
 .pricing-amount {
-  font-size: 16px;
+  margin-top: 8px;
+  font-size: 28px;
   font-weight: 400;
-  line-height: 21.6px;
+  line-height: 1.2;
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.pricing-tax {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-muted);
 }
 .pricing-unit {
+  font-size: 14px;
   font-weight: 300;
+  line-height: 1.4;
   color: var(--color-text-muted);
 }
-.pricing-desc {
-  font-size: 16px;
+.pricing-desc,
+.pricing-for {
+  font-size: 14px;
   font-weight: 300;
-  line-height: 21.6px;
+  line-height: 1.45;
   color: var(--color-text-muted);
   text-wrap: pretty;
 }
-.pricing-cta {
+.pricing-desc { margin-top: 8px; }
+.pricing-for { color: var(--color-text-faint); }
+.pricing-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+.pricing-vat {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+.pricing-cta {
   font-size: 16px;
   font-weight: 400;
   line-height: 21.6px;
   text-wrap: pretty;
 }
-.pricing-cta a {
-  position: relative;
-}
+.pricing-cta a { position: relative; }
 .pricing-cta a::after {
   content: '';
   position: absolute;
@@ -805,24 +817,36 @@ button { font: inherit; color: inherit; }
   transition: transform 0.3s ease;
 }
 .pricing-cta a:hover::after { transform: scaleX(1); }
-.pricing-note {
-  margin-top: 16px;
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 16px;
-  color: var(--color-text-faint);
+
+@media (max-width: 899px) {
+  .pricing-list {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 0;
+  }
+  .pricing-offer {
+    gap: 6px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .pricing-offer:last-child { border-bottom: none; }
+  .pricing-amount { margin-top: 4px; font-size: 24px; }
+  .pricing-foot { margin-top: 8px; }
 }
-.pricing-label,
-.pricing-vat,
-.pricing-offer,
-.pricing-cta,
-.pricing-note {
-  animation: writings-in .5s ease backwards;
+
+@media (max-width: 767px) {
+  .pricing-page { padding: 16px 24px 64px; }
+  .pricing-intro { gap: 6px; padding-bottom: 16px; }
+  .pricing-intro h1,
+  .pricing-intro p,
+  .pricing-offer h2,
+  .pricing-cta { font-size: 12px; line-height: 16px; }
+  .pricing-amount { font-size: 20px; }
+  .pricing-tax,
+  .pricing-unit,
+  .pricing-desc,
+  .pricing-for,
+  .pricing-vat { font-size: 12px; }
+  .pricing-offer { padding: 20px 0; }
+  .pricing-foot { gap: 12px; padding-top: 20px; }
 }
-.pricing-label { animation-delay: 0s; }
-.pricing-vat { animation-delay: .04s; }
-.pricing-offer:nth-child(1) { animation-delay: .08s; }
-.pricing-offer:nth-child(2) { animation-delay: .14s; }
-.pricing-offer:nth-child(3) { animation-delay: .2s; }
-.pricing-cta { animation-delay: .26s; }
-.pricing-note { animation-delay: .3s; }

@@ -78,7 +78,21 @@ button { font: inherit; color: inherit; }
 
 .header-col { display: flex; align-items: center; flex: 1 0 0; }
 .header-identity { gap: 8px; }
-.header-nav { gap: 32px; justify-content: center; }
+/* Avatar + name → home. Keeps the old look: no nav underline, same type. */
+.header-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+}
+.header-home:focus-visible {
+  outline: 1px solid var(--color-text-muted);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+/* 24px keeps five nav items (…Writings, Pricing) from colliding with the
+   identity / chat columns on mid-size desktops; was 32px with four items. */
+.header-nav { gap: 24px; justify-content: center; }
 .header-chat { justify-content: flex-end; }
 
 .avatar {
@@ -508,6 +522,72 @@ button { font: inherit; color: inherit; }
   gap: 4px;
   padding-bottom: 8px;
 }
+/* leave room under the sticky header when jumping to a section */
+.writing-header h1,
+.writing-body h2,
+.writing-body h3 {
+  scroll-margin-top: 96px;
+}
+
+/* Writings article index — quiet sticky column on the left (benji.org-style).
+   Injected by script.js from the article's h2/h3. Hidden when the gutter is
+   too narrow so the centred article column stays untouched. */
+.writing-toc {
+  display: none;
+}
+@media (min-width: 1100px) {
+  .writing-toc {
+    display: block;
+    position: fixed;
+    top: 120px;
+    left: max(24px, calc((100vw - 582px) / 2 - 176px));
+    width: 148px;
+    max-height: calc(100vh - 160px);
+    overflow: auto;
+    opacity: 0;
+    transition: opacity .4s ease;
+    z-index: 15;
+    overscroll-behavior: contain;
+  }
+  .writing-toc[data-ready="true"] { opacity: 1; }
+  .writing-toc-title,
+  .writing-toc a {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text-faint);
+    transition: color .15s ease, opacity .4s ease;
+  }
+  .writing-toc-title {
+    padding: 0 0 12px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .writing-toc[data-scrolled] .writing-toc-title {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .writing-toc-title:hover,
+  .writing-toc a:hover,
+  .writing-toc a[data-active="true"],
+  .writing-toc li[data-active="true"] > a {
+    color: var(--color-text);
+  }
+  .writing-toc-title[data-active="true"] { color: var(--color-text); }
+  .writing-toc ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .writing-toc li[data-level="h3"] a { padding-left: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .writing-toc,
+  .writing-toc-title,
+  .writing-toc a { transition: none; }
+}
 .writing-header h1 {
   font-size: 16px;
   font-weight: 500;
@@ -626,4 +706,147 @@ button { font: inherit; color: inherit; }
   .writings-label,
   .writings-row { animation: none; }
   .writings-title::after { transition: none; }
+}
+
+/* ══════════ PRICING ══════════ */
+/* Intro → three-offer grid → VAT + CTA. No orphan dividers, Writings rhythm. */
+.pricing-page {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px var(--padding-xxl) 96px;
+}
+.pricing-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+.pricing-intro h1 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.6px;
+  color: var(--color-text-muted);
+}
+.pricing-intro p {
+  max-width: 36em;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.6px;
+  text-wrap: pretty;
+}
+.pricing-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+}
+.pricing-offer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.pricing-offer h2 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21.6px;
+}
+.pricing-amount {
+  margin-top: 8px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.pricing-tax {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+}
+.pricing-unit {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+.pricing-desc,
+.pricing-for {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+.pricing-desc { margin-top: 8px; }
+.pricing-for { color: var(--color-text-faint); }
+.pricing-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+.pricing-vat {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+.pricing-cta {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.6px;
+  text-wrap: pretty;
+}
+.pricing-cta a { position: relative; }
+.pricing-cta a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.pricing-cta a:hover::after { transform: scaleX(1); }
+
+@media (max-width: 899px) {
+  .pricing-list {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 0;
+  }
+  .pricing-offer {
+    gap: 6px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .pricing-offer:last-child { border-bottom: none; }
+  .pricing-amount { margin-top: 4px; font-size: 24px; }
+  .pricing-foot { margin-top: 8px; }
+}
+
+@media (max-width: 767px) {
+  .pricing-page { padding: 16px 24px 64px; }
+  .pricing-intro { gap: 6px; padding-bottom: 16px; }
+  .pricing-intro h1,
+  .pricing-intro p,
+  .pricing-offer h2,
+  .pricing-cta { font-size: 12px; line-height: 16px; }
+  .pricing-amount { font-size: 20px; }
+  .pricing-tax,
+  .pricing-unit,
+  .pricing-desc,
+  .pricing-for,
+  .pricing-vat { font-size: 12px; }
+  .pricing-offer { padding: 20px 0; }
+  .pricing-foot { gap: 12px; padding-top: 20px; }
 }

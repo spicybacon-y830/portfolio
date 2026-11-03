@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <title>Pricing — Luc Ousmane</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <a class="header-home" href="/" aria-label="Home">
+          <img class="avatar" src="assets/avatar.jpg" alt="">
+          <span class="name">Luc Ousmane</span>
+        </a>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="/">Work</a>
+        <a href="about">About Me</a>
+        <a href="photos">Photography</a>
+        <a href="writings">Writings</a>
+        <a href="pricing">Pricing</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <span class="chat-link-label">Chat with me</span>
+          <svg class="chat-link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <a class="header-home" href="/" aria-label="Home">
+            <img class="avatar-sm" src="assets/avatar.jpg" alt="">
+            <span class="name-sm">Luc Ousmane</span>
+          </a>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <span class="menu-line"></span><span class="menu-line menu-line-indicator"></span>
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="/">Work</a>
+          <a href="about">About Me</a>
+          <a href="photos">Photography</a>
+          <a href="writings">Writings</a>
+          <a href="pricing">Pricing</a>
+          <a href="list">Index</a>
+        </nav>
+        <a class="mobile-menu-chat" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <main class="pricing-page">
+      <header class="pricing-intro">
+        <h1>Pricing</h1>
+        <p>Design for brand, product, and systems — by the day, by the month, or as a fixed project.</p>
+      </header>
+
+      <div class="pricing-list">
+        <article class="pricing-offer">
+          <h2>Day rate</h2>
+          <p class="pricing-amount">450&nbsp;€ <span class="pricing-tax">HT</span></p>
+          <p class="pricing-unit">per day</p>
+          <p class="pricing-desc">Workshops, audits, and short design missions with a clear brief.</p>
+          <p class="pricing-for">For punctual needs when you need a designer for a day or two.</p>
+        </article>
+
+        <article class="pricing-offer">
+          <h2>Monthly — design partner</h2>
+          <p class="pricing-amount">3&nbsp;200&nbsp;€ <span class="pricing-tax">HT</span></p>
+          <p class="pricing-unit">per month · ~8 days</p>
+          <p class="pricing-desc">About 2 days a week. Priority slot, async follow-up. Branding, product, design systems, AI. Three-month minimum.</p>
+          <p class="pricing-for">For teams that want a steady design partner (~11% off the day rate).</p>
+        </article>
+
+        <article class="pricing-offer">
+          <h2>One-time project</h2>
+          <p class="pricing-amount">From 4&nbsp;000&nbsp;€ <span class="pricing-tax">HT</span></p>
+          <p class="pricing-unit">fixed price</p>
+          <p class="pricing-desc">Brand identity or website, about 2–3 weeks. Defined scope, two revision rounds.</p>
+          <p class="pricing-for">For a clear deliverable with a start and an end.</p>
+        </article>
+      </div>
+
+      <div class="pricing-foot">
+        <p class="pricing-vat">All prices excl. VAT (HT).</p>
+        <p class="pricing-cta">
+          Have a project in mind?
+          <a href="mailto:ousmaneluc58@gmail.com">Email me</a>
+          or
+          <a href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">chat with me</a>.
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <button class="theme-switch" id="theme-switch" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <span class="theme-switch-icons" aria-hidden="true"><svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg><svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
+      </button>
+      <a class="footer-index" href="list">Index</a>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

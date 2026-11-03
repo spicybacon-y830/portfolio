@@ -78,6 +78,18 @@ button { font: inherit; color: inherit; }
 
 .header-col { display: flex; align-items: center; flex: 1 0 0; }
 .header-identity { gap: 8px; }
+/* Avatar + name → home. Keeps the old look: no nav underline, same type. */
+.header-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+}
+.header-home:focus-visible {
+  outline: 1px solid var(--color-text-muted);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
 /* 24px keeps five nav items (…Writings, Pricing) from colliding with the
    identity / chat columns on mid-size desktops; was 32px with four items. */
 .header-nav { gap: 24px; justify-content: center; }

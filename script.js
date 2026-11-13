@@ -140,7 +140,7 @@ document.querySelectorAll('.back-button').forEach((link) => {
 // Incard pieces that fade in from black carry data-still so the held frame
 // is the ad, not the empty opening.
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('.writing-media video, .incard-grid video').forEach((video) => {
+  document.querySelectorAll('.writing-media video, .incard-frame video').forEach((video) => {
     video.autoplay = false;
     video.removeAttribute('autoplay');
     video.pause();

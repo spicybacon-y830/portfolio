@@ -102,21 +102,32 @@
       min-width: 300px;
     }
 
-    /* 9:16 paid-social tiles. One grid is shared by desktop and mobile so the
-       motion files are not fetched twice. */
-    .incard-grid {
+    /* Same plate as the other project visuals: 1697×1132. Three 9:16
+       pieces sit inside, centered, so the column still stacks like Paymium. */
+    .incard-frame {
+      width: 100%;
+      aspect-ratio: 1697 / 1132;
+      box-sizing: border-box;
+      background: #0a0a0a;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: center;
+      gap: 2%;
+      padding: 0 3.2%;
+      overflow: hidden;
     }
-    .incard-grid img,
-    .incard-grid video {
+    :root[data-theme="dark"] .incard-frame {
+      box-shadow: inset 0 0 0 1px rgba(250, 250, 250, 0.08);
+    }
+    .incard-frame img,
+    .incard-frame video {
       width: 100%;
       height: auto;
       aspect-ratio: 9 / 16;
       object-fit: cover;
       display: block;
-      background: #0a0a0a;
+      border-radius: 8px;
+      background: #000;
     }
 
     .project-body-mobile { display: none; }
@@ -286,29 +297,19 @@
           </div>
         </div>
         <div class="project-visuals-col">
-          <!-- Motion first, then statics by concept: IBAN, cashback, dashboard, frozen card, receipt, spreadsheet, Black Friday. -->
-          <div class="incard-grid">
-            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-frozen-card-1-poster.jpg" aria-label="Incard motion ad. Card frozen mid-campaign? Never again.">
-              <source src="assets/project-incard/incard-frozen-card-1.mp4" type="video/mp4">
-            </video>
+          <!-- Motion, then statics. Each plate is 1697×1132, three 9:16 pieces, no empty slot. -->
+          <div class="incard-frame">
             <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-frozen-card-6-poster.jpg" aria-label="Incard motion ad. Never get frozen, card in ice.">
               <source src="assets/project-incard/incard-frozen-card-6.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-frozen-card-1-poster.jpg" aria-label="Incard motion ad. Card frozen mid-campaign? Never again.">
+              <source src="assets/project-incard/incard-frozen-card-1.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-frozen-card-2-poster.jpg" aria-label="Incard motion ad. Never get frozen.">
               <source src="assets/project-incard/incard-frozen-card-2.mp4" type="video/mp4">
             </video>
-            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-receipt-1-poster.jpg" aria-label="Incard motion ad. Running Black Friday ads?">
-              <source src="assets/project-incard/incard-receipt-1.mp4" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-receipt-1-light-poster.jpg" data-still="2" aria-label="Incard motion ad. Running Black Friday ads? Light version.">
-              <source src="assets/project-incard/incard-receipt-1-light.mp4" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-spreadsheet-2-poster.jpg" aria-label="Incard motion ad. Less spreadsheet. More clarity.">
-              <source src="assets/project-incard/incard-spreadsheet-2.mp4" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-spreadsheet-3-poster.jpg" aria-label="Incard motion ad. Less spreadsheet. More clarity, on a phone.">
-              <source src="assets/project-incard/incard-spreadsheet-3.mp4" type="video/mp4">
-            </video>
+          </div>
+          <div class="incard-frame">
             <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-dashboard-1-poster.jpg" data-still="1.5" aria-label="Incard motion ad. Every payment out. One screen.">
               <source src="assets/project-incard/incard-dashboard-1.mp4" type="video/mp4">
             </video>
@@ -318,22 +319,32 @@
             <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-dashboard-4-poster.jpg" data-still="3" aria-label="Incard motion ad. Every account, one dashboard, on a laptop.">
               <source src="assets/project-incard/incard-dashboard-4.mp4" type="video/mp4">
             </video>
+          </div>
+          <div class="incard-frame">
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-spreadsheet-2-poster.jpg" aria-label="Incard motion ad. Less spreadsheet. More clarity.">
+              <source src="assets/project-incard/incard-spreadsheet-2.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-receipt-1-poster.jpg" aria-label="Incard motion ad. Running Black Friday ads?">
+              <source src="assets/project-incard/incard-receipt-1.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-spreadsheet-3-poster.jpg" aria-label="Incard motion ad. Less spreadsheet. More clarity, on a phone.">
+              <source src="assets/project-incard/incard-spreadsheet-3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="incard-frame">
             <img src="assets/project-incard/incard-iban-2.jpg" width="1080" height="1920" alt="Incard ad. One account. Local IBANs, with US, EU and UK flags." loading="lazy" decoding="async">
             <img src="assets/project-incard/incard-iban-1.jpg" width="1080" height="1920" alt="Incard ad. One account. Local IBANs, currency coins." loading="lazy" decoding="async">
             <img src="assets/project-incard/incard-iban-6.jpg" width="1080" height="1920" alt="Incard ad. One account. Local IBANs, phone balance." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-iban-7.jpg" width="1080" height="1920" alt="Incard ad. One account. Local IBANs, on the Visa card." loading="lazy" decoding="async">
+          </div>
+          <div class="incard-frame">
             <img src="assets/project-incard/incard-cashback-1.jpg" width="1080" height="1920" alt="Incard ad. 2%. Get paid to spend." loading="lazy" decoding="async">
             <img src="assets/project-incard/incard-cashback-ads-1.jpg" width="1080" height="1920" alt="Incard ad. Every ad click pays back." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-dashboard-2.jpg" width="1080" height="1920" alt="Incard ad. Every account, one dashboard. Connected banks." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-dashboard-5.jpg" width="1080" height="1920" alt="Incard ad. Every account, one dashboard. Balances." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-frozen-card-4.jpg" width="1080" height="1920" alt="Incard ad. Card frozen mid-campaign? Never again. Card held in ice." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-frozen-card-3.jpg" width="1080" height="1920" alt="Incard ad. Should have used Incard." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-cashback-2.jpg" width="1080" height="1920" alt="Incard ad. 2%. Get paid to spend, card leaving a wallet." loading="lazy" decoding="async">
+          </div>
+          <div class="incard-frame">
+            <img src="assets/project-incard/incard-receipt-2.jpg" width="1080" height="1920" alt="Incard ad. Every ad click pays back, receipt in a wallet." loading="lazy" decoding="async">
             <img src="assets/project-incard/incard-receipt-3.jpg" width="1080" height="1920" alt="Incard ad. Running Black Friday ads? Card over a receipt." loading="lazy" decoding="async">
             <img src="assets/project-incard/incard-receipt-4.jpg" width="1080" height="1920" alt="Incard ad. Running Black Friday ads? 2% cashback." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-spreadsheet-1.jpg" width="1080" height="1920" alt="Incard ad. It's time to upgrade." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-spreadsheet-4.jpg" width="1080" height="1920" alt="Incard ad. Less spreadsheet. More clarity." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-blackfriday-2.jpg" width="1080" height="1920" alt="Incard ad. Running black friday ads? Hand holding the card." loading="lazy" decoding="async">
-            <img src="assets/project-incard/incard-blackfriday-1.jpg" width="1080" height="1920" alt="Incard ad. Running black friday ads? Stack of cards." loading="lazy" decoding="async">
           </div>
         </div>
       </div>

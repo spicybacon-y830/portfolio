@@ -136,12 +136,22 @@ document.querySelectorAll('.back-button').forEach((link) => {
   }, { passive: false });
 })();
 
-// article videos loop muted; keep them on the poster when motion is reduced
+// article and project videos loop muted; keep a still when motion is reduced.
+// Incard pieces that fade in from black carry data-still so the held frame
+// is the ad, not the empty opening.
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('.writing-media video').forEach((video) => {
+  document.querySelectorAll('.writing-media video, .incard-grid video').forEach((video) => {
     video.autoplay = false;
     video.removeAttribute('autoplay');
     video.pause();
+    const still = Number(video.dataset.still);
+    if (!(still > 0)) return;
+    const hold = () => {
+      if (Math.abs(video.currentTime - still) > 0.05) video.currentTime = still;
+      video.pause();
+    };
+    if (video.readyState >= 1) hold();
+    else video.addEventListener('loadedmetadata', hold, { once: true });
   });
 }
 

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <title>Incard — Luc Ousmane</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .project-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+      padding: 48px;
+    }
+
+    .project-text-col {
+      position: sticky;
+      top: 128px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      /* flex-grow:0 - never grows past 565px, only shrinks on narrower
+         screens, so the extra space on wide screens all goes to the images */
+      flex: 0 1 565px;
+      min-width: 280px;
+      max-width: 565px;
+    }
+
+    .project-eyebrow {
+      display: inline-block;
+      width: fit-content;
+      border-bottom: 0.5px solid var(--color-text);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+    }
+
+    .project-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+
+    .project-description {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+      text-align: justify;
+    }
+
+    .project-credits {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .project-credits .label {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+    }
+    .project-credits .names {
+      display: flex;
+      gap: 16px;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 21.6px;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .project-meta .tag {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21.6px;
+      color: var(--color-text-muted);
+    }
+    .project-meta .link {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 21.6px;
+      color: var(--color-text-muted);
+    }
+
+    .project-visuals-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      /* flex-grow:1 - absorbs all leftover width on large screens instead
+         of leaving empty space next to the (capped) text column */
+      flex: 1 1 565px;
+      min-width: 300px;
+    }
+
+    /* 9:16 paid-social tiles. One grid is shared by desktop and mobile so the
+       motion files are not fetched twice. */
+    .incard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .incard-grid img,
+    .incard-grid video {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      display: block;
+      background: #0a0a0a;
+    }
+
+    .project-body-mobile { display: none; }
+
+    @media (max-width: 767px) {
+      .project-stage {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        padding: 24px;
+      }
+
+      .project-body {
+        display: block;
+        order: 2;
+        padding: 0;
+        gap: 0;
+      }
+      .project-text-col { display: none; }
+      .project-visuals-col {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .project-body-mobile {
+        display: flex;
+        flex-direction: column;
+        order: 1;
+        gap: 12px;
+        padding: 0;
+      }
+      .project-text-col-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .project-eyebrow-mobile {
+        display: inline-block;
+        width: fit-content;
+        border-bottom: 0.5px solid var(--color-text);
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 21.6px;
+      }
+
+      .project-heading-row-mobile {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .project-description-mobile {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 21.6px;
+        text-align: justify;
+      }
+      .project-credits-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+      }
+      .project-credits-mobile .label {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 21.6px;
+      }
+      .project-credits-mobile .names {
+        display: flex;
+        gap: 12px;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 21.6px;
+      }
+      .project-meta-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+      }
+      .project-meta-mobile .tag,
+      .project-meta-mobile .link {
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 21.6px;
+        color: var(--color-text-muted);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <a class="header-home" href="/" aria-label="Home">
+          <img class="avatar" src="assets/avatar.jpg" alt="">
+          <span class="name">Luc Ousmane</span>
+        </a>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="/">Work</a>
+        <a href="about">About Me</a>
+        <a href="photos">Photography</a>
+        <a href="writings">Writings</a>
+        <a href="pricing">Pricing</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <span class="chat-link-label">Chat with me</span>
+          <svg class="chat-link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <a class="header-home" href="/" aria-label="Home">
+            <img class="avatar-sm" src="assets/avatar.jpg" alt="">
+            <span class="name-sm">Luc Ousmane</span>
+          </a>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <span class="menu-line"></span><span class="menu-line menu-line-indicator"></span>
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="/">Work</a>
+          <a href="about">About Me</a>
+          <a href="photos">Photography</a>
+          <a href="writings">Writings</a>
+          <a href="pricing">Pricing</a>
+          <a href="list">Index</a>
+        </nav>
+        <a class="mobile-menu-chat" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <div class="project-stage">
+      <!-- Desktop: two columns, left text sticky, right visuals scroll -->
+      <div class="project-body">
+        <div class="project-text-col">
+          <a class="link-button back-button" href="/">
+            <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            Go back
+          </a>
+          <div class="project-heading-row">
+            <span class="project-eyebrow">Incard</span>
+          </div>
+          <p class="project-description">Incard is a UK/EU business-finance platform for modern operators &mdash; e-commerce brands, agencies, AI startups and creators &mdash; with multi-currency accounts, corporate cards and uncapped cashback on ad spend. I worked on their paid social creative: motion design and static ads for performance campaigns, built as systems across 9:16, 4:5 and 1:1. Each concept turns one product promise into a hook &mdash; local IBANs in GBP, USD and EUR, one dashboard for every account, 2% cashback on every ad click, a card that never gets frozen mid-campaign &mdash; in a dark, premium, photographic look built around the black Incard Visa card.</p>
+          <div class="project-credits">
+            <span class="label">Credits</span>
+            <span class="names">
+              <span>Luc Ousmane</span>
+            </span>
+          </div>
+          <div class="project-meta">
+            <span class="tag">Motion Design &amp; Static Ads</span>
+            <a class="link" href="https://www.incard.com" target="_blank" rel="noopener">incard.com</a>
+          </div>
+        </div>
+        <div class="project-visuals-col">
+          <!-- Motion first, then statics by concept: IBAN, cashback, dashboard, frozen card, receipt, spreadsheet, Black Friday. -->
+          <div class="incard-grid">
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-frozen-card-1-poster.jpg" aria-label="Incard motion ad. Card frozen mid-campaign? Never again.">
+              <source src="assets/project-incard/incard-frozen-card-1.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-frozen-card-6-poster.jpg" aria-label="Incard motion ad. Never get frozen, card in ice.">
+              <source src="assets/project-incard/incard-frozen-card-6.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-frozen-card-2-poster.jpg" aria-label="Incard motion ad. Never get frozen.">
+              <source src="assets/project-incard/incard-frozen-card-2.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-receipt-1-poster.jpg" aria-label="Incard motion ad. Running Black Friday ads?">
+              <source src="assets/project-incard/incard-receipt-1.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-receipt-1-light-poster.jpg" data-still="2" aria-label="Incard motion ad. Running Black Friday ads? Light version.">
+              <source src="assets/project-incard/incard-receipt-1-light.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-spreadsheet-2-poster.jpg" aria-label="Incard motion ad. Less spreadsheet. More clarity.">
+              <source src="assets/project-incard/incard-spreadsheet-2.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-spreadsheet-3-poster.jpg" aria-label="Incard motion ad. Less spreadsheet. More clarity, on a phone.">
+              <source src="assets/project-incard/incard-spreadsheet-3.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-dashboard-1-poster.jpg" data-still="1.5" aria-label="Incard motion ad. Every payment out. One screen.">
+              <source src="assets/project-incard/incard-dashboard-1.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-dashboard-3-poster.jpg" data-still="3" aria-label="Incard motion ad. Every account, one dashboard.">
+              <source src="assets/project-incard/incard-dashboard-3.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline preload="metadata" width="720" height="1280" poster="assets/project-incard/incard-dashboard-4-poster.jpg" data-still="3" aria-label="Incard motion ad. Every account, one dashboard, on a laptop.">
+              <source src="assets/project-incard/incard-dashboard-4.mp4" type="video/mp4">
+            </video>
+            <img src="assets/project-incard/incard-iban-2.jpg" width="1080" height="1920" alt="Incard ad. One account. Local IBANs, with US, EU and UK flags." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-iban-1.jpg" width="1080" height="1920" alt="Incard ad. One account. Local IBANs, currency coins." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-iban-6.jpg" width="1080" height="1920" alt="Incard ad. One account. Local IBANs, phone balance." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-iban-7.jpg" width="1080" height="1920" alt="Incard ad. One account. Local IBANs, on the Visa card." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-cashback-1.jpg" width="1080" height="1920" alt="Incard ad. 2%. Get paid to spend." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-cashback-ads-1.jpg" width="1080" height="1920" alt="Incard ad. Every ad click pays back." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-dashboard-2.jpg" width="1080" height="1920" alt="Incard ad. Every account, one dashboard. Connected banks." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-dashboard-5.jpg" width="1080" height="1920" alt="Incard ad. Every account, one dashboard. Balances." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-frozen-card-4.jpg" width="1080" height="1920" alt="Incard ad. Card frozen mid-campaign? Never again. Card held in ice." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-frozen-card-3.jpg" width="1080" height="1920" alt="Incard ad. Should have used Incard." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-receipt-3.jpg" width="1080" height="1920" alt="Incard ad. Running Black Friday ads? Card over a receipt." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-receipt-4.jpg" width="1080" height="1920" alt="Incard ad. Running Black Friday ads? 2% cashback." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-spreadsheet-1.jpg" width="1080" height="1920" alt="Incard ad. It's time to upgrade." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-spreadsheet-4.jpg" width="1080" height="1920" alt="Incard ad. Less spreadsheet. More clarity." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-blackfriday-2.jpg" width="1080" height="1920" alt="Incard ad. Running black friday ads? Hand holding the card." loading="lazy" decoding="async">
+            <img src="assets/project-incard/incard-blackfriday-1.jpg" width="1080" height="1920" alt="Incard ad. Running black friday ads? Stack of cards." loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile: same copy, smaller type. Visuals stay in the grid above. -->
+      <div class="project-body-mobile">
+        <div class="project-text-col-mobile">
+          <a class="link-button back-button" href="/">
+            <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            Go back
+          </a>
+          <div class="project-heading-row-mobile">
+            <span class="project-eyebrow-mobile">Incard</span>
+          </div>
+          <p class="project-description-mobile">Incard is a UK/EU business-finance platform for modern operators &mdash; e-commerce brands, agencies, AI startups and creators &mdash; with multi-currency accounts, corporate cards and uncapped cashback on ad spend. I worked on their paid social creative: motion design and static ads for performance campaigns, built as systems across 9:16, 4:5 and 1:1. Each concept turns one product promise into a hook &mdash; local IBANs in GBP, USD and EUR, one dashboard for every account, 2% cashback on every ad click, a card that never gets frozen mid-campaign &mdash; in a dark, premium, photographic look built around the black Incard Visa card.</p>
+          <div class="project-credits-mobile">
+            <span class="label">Credits</span>
+            <span class="names">
+              <span>Luc Ousmane</span>
+            </span>
+          </div>
+          <div class="project-meta-mobile">
+            <span class="tag">Motion Design &amp; Static Ads</span>
+            <a class="link" href="https://www.incard.com" target="_blank" rel="noopener">incard.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <button class="theme-switch" id="theme-switch" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <span class="theme-switch-icons" aria-hidden="true"><svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg><svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
+      </button>
+      <a class="footer-index" href="list">Index</a>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

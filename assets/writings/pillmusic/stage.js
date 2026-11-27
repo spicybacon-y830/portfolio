@@ -42,7 +42,7 @@
   // ── Morceaux (fictifs) ─────────────────────────────────────────────────
   const TRACKS = [
     {
-      title: 'Mélatonine', artist: 'Tinashe', dur: 186, start: 64,
+      title: 'Melatonin', artist: 'Tinashe', dur: 186, start: 64,
       art: `${BASE}melatonine.jpg`, artFallback: 0, disc: '#8f5560',
       tints: [[0.93, 0.6, 0.66, 0.85], [0.88, 0.62, 0.48, 0.3], [0.36, 0.28, 0.34, 0.16]],
       lyrics: ['♪'],

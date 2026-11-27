@@ -1,0 +1,466 @@
+/* PillMusic — scène de démonstration (faux UI animé, règles stageshow).
+   Tout est dessiné à la taille de conception de la scène puis mis à l'échelle
+   pour remplir la colonne de l'article. */
+
+@font-face {
+  font-family: 'Geist PM';
+  src: url('Geist-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: block;
+}
+
+.writing-media.pm-media {
+  background: none;
+  border: 0;
+  border-radius: 12px;
+  line-height: normal;
+}
+
+.pm-stage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  /* hauteur posée par stage.js (hauteur de conception × échelle) */
+  height: 420px;
+  isolation: isolate;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+.pm-scene {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  overflow: hidden;
+  font-family: 'Geist PM', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Fond d'écran ─────────────────────────────────────────── */
+.pm-wallpaper {
+  position: absolute;
+  inset: 0;
+  background-color: #6b6a55;
+  background-position: center;
+  background-size: cover;
+}
+
+/* ── Barre des menus ──────────────────────────────────────── */
+.pm-menubar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 14px;
+  background: rgba(255, 255, 255, .16);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  color: #fff;
+  font: 500 12px/1 -apple-system, BlinkMacSystemFont, 'Geist PM', sans-serif;
+  letter-spacing: .01em;
+  text-shadow: 0 0 6px rgba(0, 0, 0, .12);
+}
+.pm-menubar b { font-weight: 700; }
+.pm-menubar .pm-faint { opacity: .85; font-weight: 400; }
+.pm-menubar .pm-spacer { flex: 1; }
+.pm-menubar .pm-status {
+  width: 15px;
+  height: 15px;
+  background: url('MenuIcon.png') center / contain no-repeat;
+  filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(0, 0, 0, .15));
+}
+.pm-menubar .pm-clock { font-weight: 400; }
+.pm-stage[data-layout="compact"] .pm-menubar .pm-wide { display: none; }
+
+/* ── Fenêtre (éditeur de code, sombre) ───────────────────── */
+.pm-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 .5px rgba(0, 0, 0, .18),
+    0 30px 60px -12px rgba(20, 20, 10, .4),
+    0 18px 36px -18px rgba(0, 0, 0, .35);
+}
+.pm-window__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 38px;
+  flex-shrink: 0;
+  padding: 0 14.5px;
+  background: #f6f6f6;
+  border-bottom: 1px solid rgba(0, 0, 0, .08);
+}
+.pm-lights { display: flex; gap: 8px; }
+.pm-lights i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .2);
+}
+.pm-lights i:nth-child(1) { background: #ff5f57; }
+.pm-lights i:nth-child(2) { background: #febc2e; }
+.pm-lights i:nth-child(3) { background: #28c840; }
+.pm-window__title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font: 600 12.5px/1 -apple-system, BlinkMacSystemFont, 'Geist PM', sans-serif;
+  color: rgba(0, 0, 0, .78);
+  pointer-events: none;
+}
+.pm-window__body { display: flex; flex: 1; min-height: 0; }
+.pm-side {
+  width: 146px;
+  flex-shrink: 0;
+  padding: 12px 8px;
+  background: #f3f3f4;
+  border-right: 1px solid rgba(0, 0, 0, .07);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pm-side__group {
+  height: 6px;
+  width: 54px;
+  margin: 4px 8px 10px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .1);
+}
+.pm-file {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 6px;
+  font: 400 12px/1 -apple-system, BlinkMacSystemFont, 'Geist PM', sans-serif;
+  color: rgba(0, 0, 0, .66);
+  white-space: nowrap;
+}
+.pm-file svg { flex-shrink: 0; opacity: .7; }
+.pm-file[data-selected] { background: rgba(0, 0, 0, .07); color: rgba(0, 0, 0, .88); }
+.pm-code {
+  flex: 1;
+  padding: 14px 0 0;
+  overflow: hidden;
+}
+.pm-line {
+  display: flex;
+  align-items: center;
+  height: 21px;
+  gap: 7px;
+}
+.pm-line__n {
+  width: 34px;
+  flex-shrink: 0;
+  padding-right: 12px;
+  text-align: right;
+  font: 400 10.5px/1 ui-monospace, 'SF Mono', Menlo, monospace;
+  color: rgba(0, 0, 0, .26);
+}
+.pm-line[data-current] { background: rgba(40, 110, 230, .06); }
+.pm-line[data-current] .pm-line__n { color: rgba(0, 0, 0, .6); }
+.pm-tok {
+  height: 7px;
+  border-radius: 3.5px;
+  flex-shrink: 0;
+}
+.pm-tok--kw  { background: #b4309e; opacity: .55; }
+.pm-tok--ty  { background: #2f7fbd; opacity: .45; }
+.pm-tok--fn  { background: #3a8a7a; opacity: .5; }
+.pm-tok--st  { background: #d1362a; opacity: .45; }
+.pm-tok--nu  { background: #2b2fd8; opacity: .4; }
+.pm-tok--tx  { background: #262626; opacity: .16; }
+.pm-tok--cm  { background: #8a8a8a; opacity: .3; }
+
+/* ── Pilule (unités de conception de l'app : 777 × 208) ──── */
+.pm-pill-anchor {
+  position: absolute;
+  /* left / top / scale posés par stage.js ; ancrée à droite : elle s'ouvre vers la gauche */
+  transform-origin: 100% 50%;
+  will-change: transform, filter, opacity;
+}
+.pm-pill-scale {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform-origin: 100% 0;
+}
+.pm-pill-shadow,
+.pm-pill {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 208px;
+  border-radius: 104px;
+  background: #fff;
+}
+.pm-pill-shadow {
+  box-shadow: 0 12px 56px rgba(0, 0, 0, .16), 0 2px 10px rgba(0, 0, 0, .06);
+}
+.pm-pill {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, .05);
+  color: #5c5c5c;
+}
+
+.pm-art {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+  margin-right: 16px;
+  border-radius: 50%;
+}
+.pm-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pm-info {
+  position: relative;
+  width: 377px;
+  flex-shrink: 0;
+  height: 160px;
+  overflow: hidden;
+}
+.pm-meta {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  top: var(--pm-meta-top, 17px);
+}
+.pm-title,
+.pm-artist {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.pm-title { font-size: var(--pm-title, 40px); line-height: var(--pm-title-lh, 48px); color: #5c5c5c; }
+.pm-artist { margin-top: 4px; font-size: var(--pm-artist, 20px); line-height: var(--pm-artist-lh, 24px); color: #8c8c8c; }
+.pm-progress {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  top: var(--pm-prog-top, 107px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--pm-prog-h, 24px);
+  font-size: var(--pm-time, 16px);
+  line-height: 1;
+  color: #8c8c8c;
+  font-variant-numeric: tabular-nums;
+}
+.pm-bar {
+  position: relative;
+  flex: 1;
+  height: var(--pm-bar, 7px);
+  border-radius: 99px;
+  overflow: hidden;
+  background: #e5e5e5;
+}
+.pm-bar i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: #979797;
+}
+
+.pm-slot {
+  flex-shrink: 0;
+  height: 84px;
+  position: relative;
+}
+.pm-skip {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: #e5e5e5;
+  display: grid;
+  place-items: center;
+  transform-origin: 50% 50%;
+}
+.pm-skip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #5c5c5c;
+  opacity: 0;
+  transition: opacity .15s ease-out;
+}
+.pm-skip[data-hover]::before { opacity: .12; }
+.pm-skip[data-active]::before { opacity: .14; }
+.pm-skip[data-hover][data-active]::before { opacity: .24; }
+.pm-skip svg { position: relative; fill: #5c5c5c; }
+
+.pm-play {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+  margin-left: 16px;
+  border-radius: 50%;
+}
+.pm-play__disc,
+.pm-play canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.pm-play__disc { transition: background-color .6s ease-in-out; }
+.pm-play svg {
+  position: absolute;
+  left: 41px;
+  top: 41px;
+  width: 78px;
+  height: 78px;
+  fill: #fff;
+  filter: drop-shadow(0 1.6px 4.8px rgba(0, 0, 0, .18));
+}
+
+/* ── Paroles (blanches, ombre douce, alignées sur le bouton play) ─ */
+.pm-lyrics {
+  position: absolute;
+  pointer-events: none;
+}
+.pm-lyrics__mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: visible;
+}
+.pm-lyrics__col {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  will-change: transform;
+}
+.pm-lyric {
+  max-width: 100%;
+  color: #fff;
+  text-align: right;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .45s linear;
+}
+.pm-lyric[data-d="0"] { opacity: 1; }
+.pm-lyric[data-d="-1"] { opacity: .32; }
+
+/* ── Raccourci clavier ────────────────────────────────────── */
+.pm-keys {
+  position: absolute;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .25s ease, transform .35s cubic-bezier(.3, 1.3, .5, 1);
+}
+.pm-keys[data-shown] { opacity: 1; transform: none; }
+.pm-key {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .9);
+  color: #3a3a3c;
+  font: 500 14px/1 -apple-system, BlinkMacSystemFont, 'Geist PM', sans-serif;
+  box-shadow: 0 0 0 .5px rgba(0, 0, 0, .12), 0 2px 0 rgba(0, 0, 0, .14), 0 6px 14px -6px rgba(40, 0, 30, .35);
+  transition: transform .09s ease, box-shadow .09s ease;
+}
+.pm-keys[data-down] .pm-key {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 .5px rgba(0, 0, 0, .12), 0 0 0 rgba(0, 0, 0, .14), 0 3px 8px -4px rgba(40, 0, 30, .3);
+}
+
+/* ── Curseur macOS ────────────────────────────────────────── */
+.pm-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  margin: -7px 0 0 -10px; /* pointe de la flèche sur la position */
+  transform-origin: 10px 7px;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .25));
+  z-index: 10;
+}
+
+/* Scènes sans fenêtre : la pilule seule sur le bureau */
+.pm-stage:not([data-mode="hero"]) .pm-keys,
+.pm-stage:not([data-mode="hero"]) .pm-menubar { display: none; }
+
+/* Mode sombre (démo paroles) : fenêtre et pilule */
+.pm-stage[data-dark] .pm-window {
+  background: #1f2023;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .08) inset, 0 0 0 1px rgba(0, 0, 0, .35), 0 30px 60px -12px rgba(0, 0, 0, .5);
+}
+.pm-stage[data-dark] .pm-window__bar { background: #2a2b2f; border-bottom-color: rgba(0, 0, 0, .45); }
+.pm-stage[data-dark] .pm-window__title { color: rgba(255, 255, 255, .78); }
+.pm-stage[data-dark] .pm-side { background: #26272b; border-right-color: rgba(0, 0, 0, .4); }
+.pm-stage[data-dark] .pm-side__group { background: rgba(255, 255, 255, .16); }
+.pm-stage[data-dark] .pm-file { color: rgba(255, 255, 255, .62); }
+.pm-stage[data-dark] .pm-file[data-selected] { background: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .92); }
+.pm-stage[data-dark] .pm-line__n { color: rgba(255, 255, 255, .22); }
+.pm-stage[data-dark] .pm-line[data-current] { background: rgba(255, 255, 255, .035); }
+.pm-stage[data-dark] .pm-line[data-current] .pm-line__n { color: rgba(255, 255, 255, .6); }
+.pm-stage[data-dark] .pm-tok--kw { background: #fc5fa3; opacity: .75; }
+.pm-stage[data-dark] .pm-tok--ty { background: #5dd8ff; opacity: .6; }
+.pm-stage[data-dark] .pm-tok--fn { background: #67b7a4; opacity: .7; }
+.pm-stage[data-dark] .pm-tok--st { background: #fc6a5d; opacity: .65; }
+.pm-stage[data-dark] .pm-tok--nu { background: #d0bf69; opacity: .7; }
+.pm-stage[data-dark] .pm-tok--tx { background: #dfdfe0; opacity: .32; }
+.pm-stage[data-dark] .pm-tok--cm { background: #7f8c98; opacity: .38; }
+.pm-stage[data-dark] .pm-pill,
+.pm-stage[data-dark] .pm-pill-shadow { background: #1a1a1a; }
+.pm-stage[data-dark] .pm-pill { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .07); }
+.pm-stage[data-dark] .pm-pill-shadow { box-shadow: 0 12px 56px rgba(0, 0, 0, .45), 0 2px 10px rgba(0, 0, 0, .2); }
+.pm-stage[data-dark] .pm-title { color: #fff; }
+.pm-stage[data-dark] .pm-artist,
+.pm-stage[data-dark] .pm-progress { color: #b4b4b4; }
+.pm-stage[data-dark] .pm-bar { background: #3f3f3f; }
+.pm-stage[data-dark] .pm-skip { background: #3f3f3f; }
+.pm-stage[data-dark] .pm-skip::before { background: #fff; }
+.pm-stage[data-dark] .pm-skip svg { fill: #fff; }
+.pm-stage[data-mode="hero"] .pm-cursor,
+.pm-stage[data-mode="hero"] .pm-keys,
+.pm-stage[data-mode="still"] .pm-cursor,
+.pm-stage[data-mode="lyrics"] .pm-cursor { display: none; }
+.pm-stage[data-mode="lyrics"]:focus-visible { outline: 2px solid var(--color-text, #0b0b0b); outline-offset: 3px; }

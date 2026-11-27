@@ -249,13 +249,18 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const scrolled = window.scrollY > 24;
     toc.toggleAttribute('data-scrolled', scrolled);
 
-    const marker = HEADER_OFFSET + 8;
+    // A section becomes active once its heading reaches the upper third of
+    // the window; before the first heading, the article title is active, and
+    // at the very bottom the last heading wins (it may never reach the line).
+    const marker = Math.max(HEADER_OFFSET + 8, window.innerHeight * 0.33);
     const track = titleEl ? [titleEl, ...headings] : headings;
-    let current = null;
+    let current = track[0];
     for (const heading of track) {
       if (heading.getBoundingClientRect().top <= marker) current = heading;
     }
-    setActive(current || headings[0]);
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll > 0 && window.scrollY >= maxScroll - 2) current = track[track.length - 1];
+    setActive(current);
   }
 
   update();

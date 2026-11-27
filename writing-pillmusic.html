@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <title>A pill for my music — Luc Ousmane</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/writings/pillmusic/stage.css">
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <a class="header-home" href="/" aria-label="Home">
+          <img class="avatar" src="assets/avatar.jpg" alt="">
+          <span class="name">Luc Ousmane</span>
+        </a>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="/">Work</a>
+        <a href="about">About Me</a>
+        <a href="photos">Photography</a>
+        <a href="writings">Writings</a>
+        <a href="pricing">Pricing</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <span class="chat-link-label">Chat with me</span>
+          <svg class="chat-link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <a class="header-home" href="/" aria-label="Home">
+            <img class="avatar-sm" src="assets/avatar.jpg" alt="">
+            <span class="name-sm">Luc Ousmane</span>
+          </a>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <span class="menu-line"></span><span class="menu-line menu-line-indicator"></span>
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="/">Work</a>
+          <a href="about">About Me</a>
+          <a href="photos">Photography</a>
+          <a href="writings">Writings</a>
+          <a href="pricing">Pricing</a>
+          <a href="list">Index</a>
+        </nav>
+        <a class="mobile-menu-chat" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <main class="writing-page">
+      <a class="link-button back-button" href="writings">
+        <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        Writings
+      </a>
+      <article class="writing" lang="en">
+        <header class="writing-header">
+          <h1>A pill for my music</h1>
+          <time datetime="2026-11-27">27 November 2026</time>
+        </header>
+        <div class="writing-body">
+          <p>I listen to music all day while I work. Every time I wanted to skip a song, I had to leave what I was doing, find the Music window somewhere behind three others, click, and find my way back. It takes two seconds. It also breaks the thread every single time.</p>
+          <p>So I built a small floating pill that sits on my desktop, above everything, and does just that. It shows the artwork, the title and where you are in the song. Hover it and it opens like a Dynamic Island to reveal the controls. Press ⌃⌘M and it hides. That’s the whole product, and I wanted it to stay that small.</p>
+          <p>It started as a frame in Paper, and every value in the app comes from that file: the 777 by 208 capsule, the 160 pt discs, the 24 pt padding, the gray of the progress bar, the spring that opens it. Nothing was eyeballed in code. When something looked off on screen, I went back to the frame, not to a slider in Xcode.</p>
+          <p>The app itself is a native Mac app in SwiftUI. It talks to Apple Music, or to Spotify if that’s what you use, and listens for their playback notifications, so the pill changes the moment the song does instead of polling every second.</p>
+          <p>The way it opens took the longest. The whole pill stretches to the right on hover, background and all, in one spring, with a little bounce at the end. The three buttons it reveals grow at exactly the pace the space opens for them, so nothing ever overflows or gets clipped halfway. Move the mouse away and it folds back the same way. It sounds like nothing, and it’s the difference between something that feels alive and something that feels like a menu.</p>
+
+          <figure class="writing-figure">
+            <div class="writing-media pm-media">
+              <div class="pm-stage" data-pm-stage="hero" role="img" aria-label="Animated mock-up: the PillMusic pill appears next to a code editor, plays for a moment, then hides."></div>
+            </div>
+            <figcaption>Mock-up of the pill on a desktop. The play button runs the app’s own liquid metal shader.</figcaption>
+          </figure>
+
+          <h2>The play button</h2>
+          <p>The play button is the one place where the pill is allowed to show off. It’s a liquid metal shader, the same one I used in the Paper file, ported line by line to Metal so it runs natively on the Mac.</p>
+          <p>It takes its colors from the album artwork. The app reads the cover, keeps the dominant hue and up to two accents, and lets each one cover as much of the metal as it covers on the cover. A black and white cover gives you plain silver. A pink cover gives you a pink metal, not a vaguely purple one, because the tint is blended to keep the real hue rather than pushed through a filter.</p>
+          <p>It only moves while music is playing. Press play and it gets a small push, hover it and it speeds up a little, pause and it slows down until it stops. When nothing moves, nothing is drawn: the renderer goes to sleep, and it runs at a lower frame rate on battery. A toy that drains your laptop isn’t a nice toy.</p>
+          <p>Porting it meant reproducing more than the shader. The metal looks rounded because it reads a depth map of the button’s shape, computed once from the outline, so the bands of light bend near the edge the way they would on a real bead of metal. The app rebuilds that map exactly the way Paper does. The shader is then rendered off screen and handed to the interface as an image, which is why it follows every animation of the button, the press, the wobble, the hover, without lagging a frame behind.</p>
+
+          <figure class="writing-figure">
+            <div class="writing-media pm-media">
+              <div class="pm-stage" data-pm-stage="play" role="img" aria-label="Animated mock-up: play starts the liquid metal, pause lets it settle."></div>
+            </div>
+            <figcaption>Play gives the metal a push, pause lets it settle.</figcaption>
+          </figure>
+
+          <h2>Title and progress</h2>
+          <p>The middle of the pill is plain on purpose: a title, an artist, a bar. The care is in how they behave.</p>
+          <p>A title too long for the pill scrolls, but only while the song is playing, and only after a short pause on its first letter, so you can read the beginning before it starts moving. It fades out at the edge instead of being cut. When you pause, it stops where it is. The timings use tabular numbers, so the digits don’t shuffle every second.</p>
+          <p>The progress bar gets thicker when you hover it, which is the only hint that you can grab it. Drag it and the time follows the cursor, release it and the song jumps there. Changing songs slides the old title out and the new one in, in the direction you went, with a bit of blur, and the artwork arrives with a small spring of its own.</p>
+
+          <h2>Lyrics</h2>
+          <p>Lyrics were the feature I didn’t plan for and now use the most. Turn them on and synced lyrics float above the pill, two lines at a time: the current one in white, the previous one fading out above it. A soft, wide shadow keeps them readable on a white document as well as on a dark editor, without drawing a box around them.</p>
+          <p>They come from LRCLIB, an open database of synced lyrics. Instrumental passages show a small note instead of an empty line, long lines wrap onto a second line and shrink a little if they still don’t fit, and if the pill sits at the top of the screen the lyrics move underneath it. You can try it below: it loads the real lyrics, the same way the app does.</p>
+          <p>The motion is deliberately quiet. The column of lines only ever moves up, one line at a time, and each line fades in and out instead of zooming. The lyrics live in their own transparent window, separate from the pill, so they can appear and disappear on their own with a short slide, and so they never get in the way when you drag the pill around.</p>
+
+          <figure class="writing-figure">
+            <div class="writing-media pm-media">
+              <div class="pm-stage" data-pm-stage="lyrics" data-clip-start="27.5" aria-label="Interactive dark pill over a dark window: press play to hear a few seconds of Let It Happen by Tame Impala with synced lyrics."></div>
+            </div>
+            <figcaption>Press play, sound on. A few seconds of Let It Happen by Tame Impala.</figcaption>
+          </figure>
+
+          <h2>Small things</h2>
+          <p>Most of the work went into details you only notice when they’re missing.</p>
+          <p>You can drag the pill anywhere, and it squashes a little as it leaves and lands, like something with a bit of weight. A horizontal swipe on the trackpad changes the song. A double click on the artwork copies the song’s Apple Music link, but only when the match is exact, never a karaoke version or a cover that happens to share the title. If you unplug the external display it was sitting on, it comes back to your main screen instead of disappearing somewhere off the edge.</p>
+          <p>It also knows when there’s nothing to show. If no song is loaded, it says so and tells you where to start one. If Music is closed, the play button opens it. If macOS hasn’t allowed the pill to control Music yet, it tells you exactly which setting to change, instead of failing silently.</p>
+          <p>It comes in three sizes, light and dark, and follows the system by default. Everything else stays out of the way, in a small menu in the menu bar.</p>
+
+          <h2>Made with Claude</h2>
+          <p>I designed the pill. I didn’t write most of the code by hand. I built it in a long conversation with Claude, with the Paper file as the reference for every decision, the same way I described in <a href="writing-design-system" style="text-decoration: underline; text-underline-offset: 3px">an earlier post</a> about feeding it the design system instead of hoping it guesses.</p>
+          <p>That shaped the process more than I expected. When something felt wrong, I didn’t describe a fix, I described what I saw and pointed back at the frame. A line of lyrics too long and cut off. The pill vanishing after I unplugged a screen. A drag area too tall that blocked the window behind it. Each of those became a small round trip, and the app got better one detail at a time, without ever drifting from the design.</p>
+
+          <h2>Why bother</h2>
+          <p>None of this is complicated on its own. What I like about it is that it’s a tool made for exactly one person’s habit, designed the way I’d design anything else, and then built without losing the design on the way to code. It sits in the corner of my screen all day, and I still enjoy looking at it.</p>
+        </div>
+        <footer class="writing-notes">
+          <p>PillMusic is open source.</p>
+          <a class="link-button link-button-external" href="https://github.com/spicybacon-y830/PillMusic" target="_blank" rel="noopener">
+            See on GitHub
+            <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </footer>
+      </article>
+    </main>
+
+    <footer>
+      <button class="theme-switch" id="theme-switch" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <span class="theme-switch-icons" aria-hidden="true"><svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg><svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
+      </button>
+      <a class="footer-index" href="list">Index</a>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="assets/writings/pillmusic/shape.js"></script>
+  <script src="assets/writings/pillmusic/stage.js"></script>
+</body>
+</html>

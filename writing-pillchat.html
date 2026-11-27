@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <title>A pill for my messages — Luc Ousmane</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <!-- Desktop header -->
+    <header class="header-desktop">
+      <div class="header-col header-identity">
+        <a class="header-home" href="/" aria-label="Home">
+          <img class="avatar" src="assets/avatar.jpg" alt="">
+          <span class="name">Luc Ousmane</span>
+        </a>
+      </div>
+      <nav class="header-col header-nav">
+        <a href="/">Work</a>
+        <a href="about">About Me</a>
+        <a href="photos">Photography</a>
+        <a href="writings">Writings</a>
+        <a href="pricing">Pricing</a>
+      </nav>
+      <div class="header-col header-chat">
+        <a class="chat-link" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <span class="chat-link-label">Chat with me</span>
+          <svg class="chat-link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Mobile header + expandable menu -->
+    <div class="mobile-header-wrap">
+      <header class="header-mobile">
+        <div class="header-mobile-identity">
+          <a class="header-home" href="/" aria-label="Home">
+            <img class="avatar-sm" src="assets/avatar.jpg" alt="">
+            <span class="name-sm">Luc Ousmane</span>
+          </a>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <span class="menu-line"></span><span class="menu-line menu-line-indicator"></span>
+        </button>
+      </header>
+      <div class="mobile-menu-panel" id="mobile-menu-panel">
+        <nav class="mobile-menu-nav">
+          <a href="/">Work</a>
+          <a href="about">About Me</a>
+          <a href="photos">Photography</a>
+          <a href="writings">Writings</a>
+          <a href="pricing">Pricing</a>
+          <a href="list">Index</a>
+        </nav>
+        <a class="mobile-menu-chat" href="https://wa.me/qr/4KJXHOG2LYPFI1" target="_blank" rel="noopener">
+          <img src="assets/chat-icon-small.svg" alt="">
+          Chat with me
+        </a>
+      </div>
+    </div>
+
+    <main class="writing-page">
+      <a class="link-button back-button" href="writings">
+        <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        Writings
+      </a>
+      <article class="writing" lang="en">
+        <header class="writing-header">
+          <h1>A pill for my messages</h1>
+          <time datetime="2026-11-27">27 November 2026</time>
+        </header>
+        <div class="writing-body">
+          <p>After the music pill, I wanted the same thing for iMessage. Every time a text came in while I was working, I had to leave what I was doing, find the Messages window, answer, and find my way back.</p>
+          <p>So I built PillChat: a small floating pill in the top right corner of the screen that works like a notification you can actually reply to. It sits above every app, even in full screen, and gets out of the way as soon as I’m done.</p>
+
+          <h2>A notification you can answer</h2>
+          <p>A new message shows up as a compact pill with the name and the last two lines, cut short so it never takes over the screen. If I ignore it, it leaves after five seconds. If I hover it, the whole pill opens: the conversation, a field to answer, my emojis. The back button shows all my recent chats, so the pill is also the quickest way to write to anyone.</p>
+          <p>⌃⌘R opens it from any app, and @ closes it when I’m not typing. The Messages app can stay closed the whole time: PillChat reads the conversations straight from the Mac’s message history, and to send, it opens Messages hidden in the background and closes it again a few seconds later.</p>
+
+          <figure class="writing-figure">
+            <div class="writing-media">
+              <video autoplay muted loop playsinline preload="metadata" width="1164" height="886" poster="assets/writings/pillchat/hero-poster.jpg" aria-label="Recording of the top right corner of a Mac screen: a message arrives as a compact pill, the pill opens on hover, the back button shows all conversations, and another chat is opened." aria-describedby="pillchat-hero-caption">
+                <source src="assets/writings/pillchat/hero.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption id="pillchat-hero-caption">A message comes in, the pill opens on hover, and any other chat is one click away. Recorded from the app with made-up contacts.</figcaption>
+          </figure>
+
+          <h2>Drawn in Paper first</h2>
+          <p>Every screen started as a frame in Paper: the compact notification, the conversation, the home grid and the voice recorder. The app follows that file to the point: 727 wide, 590 tall, 76 pt round controls, a 72 pt corner radius, the same type sizes. Nothing was eyeballed in code.</p>
+          <p>On macOS 26 the pill and every control on it are Liquid Glass, so the wallpaper and the window behind bend through its edges. The springs that open and fold it come from PillMusic, so both pills move the same way. Small details carry over from the Mac itself: the emoji row magnifies under the pointer like the Dock, and the pill follows the system’s light or dark appearance.</p>
+
+          <figure class="writing-figure">
+            <div class="writing-media">
+              <img src="assets/writings/pillchat/still.jpg" width="1164" height="886" alt="The PillChat pill open in dark mode in the top right corner of the screen, over a dark window and a colorful wallpaper, with a short conversation, the message field and the emoji row." style="width:100%;height:auto;display:block">
+            </div>
+            <figcaption>The pill in dark mode: glass controls, the message field and nine emojis.</figcaption>
+          </figure>
+
+          <h2>Built by talking to Claude</h2>
+          <p>I don’t write Swift. I built PillChat with Claude Code, asking for each change in French the way I would brief a developer: “the notifications are too big, they show way too many messages”, “make the call button transparent liquid glass”, “when I click an emoji, put it in the message instead of sending it”. Claude read the values from the Paper file, edited the code, built the app, reinstalled it and relaunched it. I tried it and said what was off.</p>
+          <p>The bugs were the kind you only find by using the app every day: Messages jumping to the front each time I sent a message, paste not working in the field, the pill missing from some desktops. I described what I saw, and Claude found the cause: a race while Messages was launching, a missing Edit menu, windows that weren’t allowed on full screen spaces.</p>
+          <p>It also told me what wasn’t possible. I wanted to reply to a specific message by swiping it, like on the iPhone, but Messages only lets other apps send plain messages. We dropped the idea before writing a line of it.</p>
+
+          <figure class="writing-figure">
+            <div class="writing-media">
+              <video autoplay muted loop playsinline preload="metadata" width="1164" height="886" poster="assets/writings/pillchat/emoji-poster.jpg" aria-label="Recording: a reply is typed in the pill, two emojis from the row below are added to the text, and the message is sent." aria-describedby="pillchat-emoji-caption">
+                <source src="assets/writings/pillchat/emoji.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption id="pillchat-emoji-caption">One of those requests: emojis go into the message first, so I can add to it before sending.</figcaption>
+          </figure>
+
+          <h2>The small things</h2>
+          <p>The home grid shows my recent conversations, with the last message on each photo and a blue dot until I’ve read it. The nine emojis are my own picks, chosen in a small window from the menu. Files go in with the paperclip, ⌘V or a drag from the Finder, up to five at a time. The call button starts a FaceTime audio call.</p>
+          <p>Voice messages work in three clicks. One click on the mic turns the field into a red recorder with a live waveform, one click stops it so I can listen back, and one click sends it. It plays in the thread like on the iPhone.</p>
+
+          <figure class="writing-figure">
+            <div class="writing-media">
+              <video autoplay muted loop playsinline preload="metadata" width="1164" height="886" poster="assets/writings/pillchat/voice-poster.jpg" aria-label="Recording: a click on the mic turns the field into a red recording bar with a moving waveform, a click stops it, and the voice message is sent." aria-describedby="pillchat-voice-caption">
+                <source src="assets/writings/pillchat/voice.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption id="pillchat-voice-caption">A voice message in three clicks: record, stop, send.</figcaption>
+          </figure>
+        </div>
+        <footer class="writing-notes">
+          <p>PillChat is open source. It runs on any Mac with macOS 14 or later, and you can download it from the latest release.</p>
+          <a class="link-button link-button-external" href="https://github.com/spicybacon-y830/pillchat" target="_blank" rel="noopener">
+            See on GitHub
+            <svg class="link-button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </footer>
+      </article>
+    </main>
+
+    <footer>
+      <button class="theme-switch" id="theme-switch" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <span class="theme-switch-icons" aria-hidden="true"><svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg><svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
+      </button>
+      <a class="footer-index" href="list">Index</a>
+      <span class="location">Marseille, France</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

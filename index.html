@@ -320,7 +320,7 @@
 
     <!-- Desktop marquee: horizontal, driven by vertical scroll input -->
     <div class="marquee-desktop-wrap">
-      <div class="marquee-desktop-track" id="marquee-desktop-track" data-unique-count="10">
+      <div class="marquee-desktop-track" id="marquee-desktop-track" data-unique-count="11">
         <a class="marquee-card card-suma" href="project-suma">
           <img class="bg-cover" src="assets/home-marquee/v3-suma.jpg" alt="Suma">
         </a>
@@ -351,6 +351,9 @@
         <a class="marquee-card card-sobry" href="project-sobry">
           <img class="bg-cover" src="assets/home-marquee/v3-sobry.jpg" alt="Sobry">
         </a>
+        <a class="marquee-card card-incard" href="project-incard">
+          <img class="bg-cover" src="assets/home-marquee/v3-incard.jpg" alt="Incard">
+        </a>
         <a class="marquee-card card-suma" href="project-suma">
           <img class="bg-cover" src="assets/home-marquee/v3-suma.jpg" alt="Suma">
         </a>
@@ -380,11 +383,14 @@
         </a>
         <a class="marquee-card card-sobry" href="project-sobry">
           <img class="bg-cover" src="assets/home-marquee/v3-sobry.jpg" alt="Sobry">
+        </a>
+        <a class="marquee-card card-incard" href="project-incard">
+          <img class="bg-cover" src="assets/home-marquee/v3-incard.jpg" alt="Incard">
         </a>
       </div>
     </div>
 
-    <!-- Mobile marquee: same 10 cards as desktop, stacked in normal flow, native page scroll -->
+    <!-- Mobile marquee: same 11 cards as desktop, stacked in normal flow, native page scroll -->
     <div class="marquee-mobile">
       <a class="marquee-card card-suma" href="project-suma">
         <img class="bg-cover" src="assets/home-marquee/v3-suma.jpg" alt="Suma">
@@ -415,6 +421,9 @@
       </a>
       <a class="marquee-card card-sobry" href="project-sobry">
         <img class="bg-cover" src="assets/home-marquee/v3-sobry.jpg" alt="Sobry">
+      </a>
+      <a class="marquee-card card-incard" href="project-incard">
+        <img class="bg-cover" src="assets/home-marquee/v3-incard.jpg" alt="Incard">
       </a>
     </div>
 
@@ -517,10 +526,10 @@
     requestAnimationFrame(animateMarquee);
 
     // fade the cards in on arrival, staggered by their position among the
-    // 10 unique projects (desktop's duplicated second set reuses the same
+    // 11 unique projects (desktop's duplicated second set reuses the same
     // stagger so it doesn't read as a delayed straggler)
     document.querySelectorAll('.marquee-card').forEach((card, i) => {
-      card.style.transitionDelay = `${(i % 10) * 60}ms`;
+      card.style.transitionDelay = `${(i % 11) * 60}ms`;
     });
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
